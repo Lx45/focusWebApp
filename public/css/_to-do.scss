@@ -1,0 +1,187 @@
+.buttons {
+position: relative;
+top: 50px;
+grid-column: 1/3;
+grid-row: 1/3;
+
+    button {
+        @include btn(100%);
+    }
+
+    button:hover {
+        opacity: 0.7;
+    }
+}
+
+.all-tasks {
+    // background-color: red;
+    grid-column: 5/8;
+    grid-row: 2/5;
+    color: $light;
+
+    .task-list-title {
+        font-weight: 700;
+        font-size: 40px;
+    }
+
+    .task-list{
+        font-size: 1.2rem;
+        line-height: 1.7;
+        list-style: circle;
+        padding-left: 1.1em;
+        
+        .list-name {
+            cursor: pointer;
+        }
+        
+        .list-name:hover {
+            opacity: 0.7;
+        }
+
+        .active-list {
+            font-weight: 700;
+        }
+    }
+
+    form {
+        display: flex;
+
+        @include inputWithLabel();
+    
+    }
+}
+
+.todo-list {
+    $spacer: 2rem;
+    grid-column: 9/13;
+    grid-row: 2/5;
+    color: $light;
+
+    .todo-header {
+        padding: $spacer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: solid 1px grey;
+
+        .list-title {
+            margin: 0 1rem 0 0;
+            font-weight: 900;
+            font-size: 40px;
+        }
+
+        .task-count {
+            margin: 0;
+            font-size: 14px;
+        }
+    }
+
+    .todo-body {
+        padding: $spacer;
+        position: relative;
+        border: solid 1px grey;
+        border-top: none;
+        .task {
+            position: relative;
+            margin-bottom: 1.25em;
+
+            [type="checkbox"] {
+                opacity: 0;
+                position: absolute;
+            }
+
+            label {
+                display: inline-flex;
+                align-items: center;
+                position: relative;
+            }
+
+            label::after {
+                content: "";
+                position: absolute;
+                left: 1.5em;
+                right: 0;
+                height: 3px;
+                background: currentColor;
+                transform: scaleX(0);
+                transform-origin: right;
+                transition: transform 150ms ease-in-out;
+            }
+
+            .custom-checkbox {
+                $size: 0.75em;
+                display: inline-block;
+                width: $size;
+                height: $size;
+                margin-right: $size;
+                cursor: pointer;
+                border: 2px solid currentColor;
+                border-radius: 50%;
+                transform: scale(1);
+                transition: transform 200ms ease-in-out;
+            }
+        }
+
+        .task::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            left: 0;
+            bottom: -0.5em;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.1;
+        }
+
+        .task:hover .custom-checkbox,
+        [type="checkbox"]:focus + label .custom-checkbox {
+            transform: scale(1.2);
+            color: var(--clr-primary);
+        }
+
+        [type="checkbox"]:checked + label .custom-checkbox {
+            background: var(--clr-primary);
+            border-color: var(--clr-primary);
+            box-shadow: inset 0 0 0px 2px white;
+        }
+
+        [type="checkbox"]:checked + label {
+            opacity: 0.5;
+        }
+
+        [type="checkbox"]:checked + label::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .new-task-creator {
+            form {
+                display: flex;
+
+                @include inputWithLabel(); 
+            }
+        }
+
+        .delete-stuff {
+            display: flex;
+            justify-content: space-evenly;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: -35px;
+
+            .btn.delete{
+                opacity: 0.7;
+                font-size: 1rem;
+                transition: color 200ms;
+                background: none;
+                border: none;
+            }
+            
+            .btn.delete:hover {
+                color: red;
+                opacity: 1;
+            }
+        }
+    }
+}

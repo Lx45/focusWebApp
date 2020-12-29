@@ -1,0 +1,617 @@
+nav {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (fit-content(90px))[4] auto;
+      grid-template-columns: repeat(4, fit-content(90px)) auto;
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 20px;
+  max-width: 80%;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  -ms-grid-column-align: start;
+      justify-self: start;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+nav li a {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: #F2EDED;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+}
+
+nav li:last-child {
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+nav li:hover {
+  opacity: 0.7;
+}
+
+.buttons {
+  position: relative;
+  top: 50px;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1/3;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1/3;
+}
+
+.buttons button {
+  width: 100%;
+  height: 50px;
+  border: solid 1px grey;
+  background: none;
+  font-size: 20px;
+  color: #F2EDED;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  opacity: 0.7;
+}
+
+.all-tasks {
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 3;
+  grid-column: 5/8;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  grid-row: 2/5;
+  color: #F2EDED;
+}
+
+.all-tasks .task-list-title {
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.all-tasks .task-list {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  list-style: circle;
+  padding-left: 1.1em;
+}
+
+.all-tasks .task-list .list-name {
+  cursor: pointer;
+}
+
+.all-tasks .task-list .list-name:hover {
+  opacity: 0.7;
+}
+
+.all-tasks .task-list .active-list {
+  font-weight: 700;
+}
+
+.all-tasks form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.all-tasks form .btn {
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.all-tasks form .btn.create {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-right: 0.25em;
+  -webkit-transition: opacity 250ms ease-in;
+  transition: opacity 250ms ease-in;
+}
+
+.all-tasks form .btn.create:hover {
+  opacity: 0.7;
+}
+
+.all-tasks form .new {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  font-size: inherit;
+  outline: none;
+  padding: 0.25em;
+  -webkit-transition: border-bottom 150ms ease-in;
+  transition: border-bottom 150ms ease-in;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+.all-tasks form .new::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.all-tasks form .new:-ms-input-placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.all-tasks form .new::-ms-input-placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.all-tasks form .new::placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.all-tasks form .new.list {
+  font-size: 1.1rem;
+}
+
+.all-tasks form .new:focus {
+  border-bottom-width: 3px;
+}
+
+.all-tasks form .new:focus::-webkit-input-placeholder {
+  opacity: 0.2;
+}
+
+.all-tasks form .new:focus:-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.all-tasks form .new:focus::-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.all-tasks form .new:focus::placeholder {
+  opacity: 0.2;
+}
+
+.todo-list {
+  -ms-grid-column: 9;
+  -ms-grid-column-span: 4;
+  grid-column: 9/13;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  grid-row: 2/5;
+  color: #F2EDED;
+}
+
+.todo-list .todo-header {
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border: solid 1px grey;
+}
+
+.todo-list .todo-header .list-title {
+  margin: 0 1rem 0 0;
+  font-weight: 900;
+  font-size: 40px;
+}
+
+.todo-list .todo-header .task-count {
+  margin: 0;
+  font-size: 14px;
+}
+
+.todo-list .todo-body {
+  padding: 2rem;
+  position: relative;
+  border: solid 1px grey;
+  border-top: none;
+}
+
+.todo-list .todo-body .task {
+  position: relative;
+  margin-bottom: 1.25em;
+}
+
+.todo-list .todo-body .task [type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.todo-list .todo-body .task label {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.todo-list .todo-body .task label::after {
+  content: "";
+  position: absolute;
+  left: 1.5em;
+  right: 0;
+  height: 3px;
+  background: currentColor;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+}
+
+.todo-list .todo-body .task .custom-checkbox {
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 0.75em;
+  cursor: pointer;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: -webkit-transform 200ms ease-in-out;
+  transition: -webkit-transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out;
+}
+
+.todo-list .todo-body .task::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -0.5em;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.1;
+}
+
+.todo-list .todo-body .task:hover .custom-checkbox,
+.todo-list .todo-body [type="checkbox"]:focus + label .custom-checkbox {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  color: var(--clr-primary);
+}
+
+.todo-list .todo-body [type="checkbox"]:checked + label .custom-checkbox {
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
+  -webkit-box-shadow: inset 0 0 0px 2px white;
+          box-shadow: inset 0 0 0px 2px white;
+}
+
+.todo-list .todo-body [type="checkbox"]:checked + label {
+  opacity: 0.5;
+}
+
+.todo-list .todo-body [type="checkbox"]:checked + label::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+.todo-list .todo-body .new-task-creator form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.todo-list .todo-body .new-task-creator form .btn {
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.todo-list .todo-body .new-task-creator form .btn.create {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-right: 0.25em;
+  -webkit-transition: opacity 250ms ease-in;
+  transition: opacity 250ms ease-in;
+}
+
+.todo-list .todo-body .new-task-creator form .btn.create:hover {
+  opacity: 0.7;
+}
+
+.todo-list .todo-body .new-task-creator form .new {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  font-size: inherit;
+  outline: none;
+  padding: 0.25em;
+  -webkit-transition: border-bottom 150ms ease-in;
+  transition: border-bottom 150ms ease-in;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+.todo-list .todo-body .new-task-creator form .new::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.todo-list .todo-body .new-task-creator form .new:-ms-input-placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.todo-list .todo-body .new-task-creator form .new::-ms-input-placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.todo-list .todo-body .new-task-creator form .new::placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.todo-list .todo-body .new-task-creator form .new.list {
+  font-size: 1.1rem;
+}
+
+.todo-list .todo-body .new-task-creator form .new:focus {
+  border-bottom-width: 3px;
+}
+
+.todo-list .todo-body .new-task-creator form .new:focus::-webkit-input-placeholder {
+  opacity: 0.2;
+}
+
+.todo-list .todo-body .new-task-creator form .new:focus:-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.todo-list .todo-body .new-task-creator form .new:focus::-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.todo-list .todo-body .new-task-creator form .new:focus::placeholder {
+  opacity: 0.2;
+}
+
+.todo-list .todo-body .delete-stuff {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -35px;
+}
+
+.todo-list .todo-body .delete-stuff .btn.delete {
+  opacity: 0.7;
+  font-size: 1rem;
+  -webkit-transition: color 200ms;
+  transition: color 200ms;
+  background: none;
+  border: none;
+}
+
+.todo-list .todo-body .delete-stuff .btn.delete:hover {
+  color: red;
+  opacity: 1;
+}
+
+.statistic {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-column: 1/5;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  grid-row: 2/4;
+  background-color: rosybrown;
+  height: 250px;
+}
+
+.information {
+  -ms-grid-column: 7;
+  -ms-grid-column-span: 6;
+  grid-column: 7/13;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  grid-row: 2/4;
+}
+
+.information p {
+  font-size: 25px;
+  color: #F2EDED;
+  padding-bottom: 20px;
+}
+
+.sidebar {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1/4;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+}
+
+.sidebar p {
+  font-size: 25px;
+  color: #F2EDED;
+}
+
+.sidebar .sidebar-active {
+  font-weight: 700;
+}
+
+.profile-content {
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 8;
+  grid-column: 5/13;
+  -ms-grid-row: 2;
+  grid-row: 2;
+}
+
+.profile-content .profile-div {
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  height: 200px;
+  border-bottom: solid grey 2px;
+  -ms-grid-columns: (1fr)[9];
+      grid-template-columns: repeat(9, 1fr);
+  grid-gap: 10px;
+  color: #F2EDED;
+}
+
+.profile-content .profile-div img {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  height: 150px;
+  width: 100px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.profile-content .profile-div .profile-div-small {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.profile-content .profile-div .profile-div-small p {
+  font-size: 20px;
+  margin-top: -10px;
+}
+
+.profile-content .profile-div #first-div {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 2;
+  grid-column: 3/5;
+}
+
+.profile-content .profile-div #second-div {
+  -ms-grid-column: 6;
+  -ms-grid-column-span: 2;
+  grid-column: 6/8;
+}
+
+.profile-content .profile-div #email-div, .profile-content .profile-div #pw-div {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 5;
+  grid-column: 3/8;
+}
+
+.profile-content .profile-div button {
+  -ms-grid-column: 8;
+  -ms-grid-column-span: 2;
+  grid-column: 8/10;
+  width: 100%;
+  height: 50px;
+  border: solid 1px grey;
+  background: none;
+  font-size: 20px;
+  color: #F2EDED;
+  cursor: pointer;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.profile-content .profile-div button:hover {
+  opacity: 0.7;
+}
+
+.profile-content .profile-div:last-child {
+  border-bottom: none;
+}
+
+.background-homepage {
+  background: url(/focusWebApp/public/img/background.png);
+  background-size: cover;
+  height: 100vh;
+  height: 100vh;
+  width: 100vw;
+}
+
+html, body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #414141;
+  font-family: 'Inter', sans-serif;
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[12];
+      grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 10px;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.homepage-p {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 6;
+  grid-column: 4/10;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.homepage-p p {
+  font-size: 25px;
+  text-align: center;
+  color: #F2EDED;
+}
+
+.homepage-p p span {
+  opacity: 0.5;
+}
+
+.homepage-p p span:last-child {
+  font-size: 20px;
+}
+/*# sourceMappingURL=style.css.map */

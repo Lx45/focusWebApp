@@ -7,7 +7,7 @@
 
 		public function index(){
 			$data = [
-				'title' => 'MVC Framework',
+				'title' => 'Homepage',
 			];
 
 			

@@ -1,4 +1,17 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
-<h1><?php echo $data['title']; ?></h1>
-<p>Welcome to the MVC framework.</p>
+<?php 
+require APPROOT . '/views/inc/header.php';
+?>
+<div class="background-homepage">
+<?php
+require APPROOT . '/views/inc/navigation.php';
+?>
+
+    <div class="grid">
+        <div class="homepage-p">
+            <p>Our focus is our future and what we focus on <br><span>will multiply in our life</span><span>  - David DeNotaris</span></p>
+            
+        </div>
+    </div>
+</div>
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>
