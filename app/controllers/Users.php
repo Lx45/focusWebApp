@@ -1,38 +1,117 @@
-<?php 
-	//Default controller 
-	class Users extends Controller {
-		public function __construct(){	
-		}
+<?php
+//Default controller
+class Users extends Controller
+{
+    public function __construct()
+    {
+		//Load model through model function, created in Controller.php
+		$this->userModel = $this->model('User');
+    }
 
-		public function profile(){
-			$data = [
-				'title' => 'Profile',
-			];
+    public function register()
+    {
+        if (isAjaxCall()) {
+            // Init data
+            $data = [
+                'name' => trim(htmlspecialchars($_POST['name'])),
+                'lastname' => trim(htmlspecialchars($_POST['lastname'])),
+                'username' => trim(htmlspecialchars($_POST['username'])),
+                'birthdate' => trim(htmlspecialchars($_POST['birthdate'])),
+                'email' => filter_var($_POST['email'], FILTER_VALIDATE_EMAIL),
+                'password' => trim(htmlspecialchars($_POST['password'])),
+                'passwordConf' => trim(htmlspecialchars($_POST['passwordConf'])),
+            ];
+            $errorsArray = array();
 
+            // Validate data
+            if (empty($data['name'])) {
+                $tmp_name = array(1, "*Please enter your name");
+                array_push($errorsArray, $tmp_name);
+            }
+
+            if (empty($data['lastname'])) {
+                $tmp_lastname = array(2, "*Please enter your lastname");
+                array_push($errorsArray, $tmp_lastname);
+            }
+
+            if (empty($data['username'])) {
+                $tmp_username = array(3, "*Please enter yourusername");
+                array_push($errorsArray, $tmp_username);
+            }
+
+            if (empty($data['birthdate'])) {
+                $tmp_birthdate = array(4, "*Please enter yourbirthdate");
+                array_push($errorsArray, $tmp_birthdate);
+            }
+
+            if (empty($data['email'])) {
+                $tmp_email = array(5, "*Please enter your email");
+                array_push($errorsArray, $tmp_email);
+                // }elseif ($this->userModel->findUserByEmail($data['email'])) {
+                //     // User found
+                //     $tmp_email = array(1, "*Email already registered");
+                //     array_push($errorsArray, $tmp_email);
+                // } else {
+                //     // User not found
+            }
+
+            if (empty($data['password'])) {
+                $tmp_password = array(6, "*Please enter password");
+                array_push($errorsArray, $tmp_password);
+			}
 			
+			if (empty($data['passwordConf'])) {
+                $tmp_passwordConf = array(7, "*Please enter password");
+                array_push($errorsArray, $tmp_passwordConf);
+            } elseif ($data['password'] !== $data['passwordConf']) {
+				$tmp_passwordConf = array(7, "* The passwords doesn't match");
+                array_push($errorsArray, $tmp_passwordConf);
+			}
 
-			$this->view('users/profile', $data);
+            // Check for errors
+            if (count($errorsArray) === 0) {
+                // Hash Password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                // Call model function
+                if ($this->userModel->user_add($data)) {
+                    // user add success
+                    http_response_code(200);
+                } else {
+                    // model function failed
+                    http_response_code(422);
+                }
+            } else {
+                // data validation failed
+                $this->json($errorsArray, 422);
+            }
+        } else {
+            $data = [
+                'title' => 'Sign Up',
+            ];
+
+            $this->view('users/register', $data);
         }
-        
-        public function register(){
-			$data = [
-				'title' => 'Registration',
-			];
+    }
 
-			
+    public function profile()
+    {
+		$data = [
+			'title' => 'Profile',
+		];
 
-			$this->view('users/register', $data);
-        }
+		
 
-        public function login(){
-			$data = [
-				'title' => 'Sign In',
-			];
+		$this->view('users/profile', $data);
+    }
 
-			
+    public function login()
+    {
+        $data = [
+            'title' => 'Sign In',
+        ];
 
-			$this->view('users/login', $data);
-        }
+        $this->view('users/login', $data);
+    }
 
-
-	} 
+}

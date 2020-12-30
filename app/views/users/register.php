@@ -42,7 +42,7 @@ require APPROOT . '/views/inc/navigation.php';
                 <div class="inputfield">
                     <label for="lastname">Last name</label>
                     <div>
-                        <input type="text" name="lastname" class="input input2" id="hurensohn">
+                        <input type="text" name="lastname" class="input input2" id="lastname-su">
                         <p class="error alert2"></p>
                     </div>
                 </div>

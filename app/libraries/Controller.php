@@ -25,4 +25,11 @@ class Controller {
 			die('View does not exist');
 		}
 	}
+
+		// Function to encode json and set status code
+		public function json($data = [], $statuscode = 200) {
+			http_response_code($statuscode);
+			header('Content-Type: application/json');
+			die(json_encode($data));
+		}
 }
