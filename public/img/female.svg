@@ -1,0 +1,8 @@
+<svg id="Komponente_1_1" data-name="Komponente 1 – 1" xmlns="http://www.w3.org/2000/svg" width="83" height="123.5" viewBox="0 0 83 123.5">
+  <g id="Ellipse_5" data-name="Ellipse 5" fill="none" stroke="#707070" stroke-width="4">
+    <circle cx="41.5" cy="41.5" r="41.5" stroke="none"/>
+    <circle cx="41.5" cy="41.5" r="39.5" fill="none"/>
+  </g>
+  <line id="Linie_40" data-name="Linie 40" y1="43" transform="translate(41.5 80.5)" fill="none" stroke="#707070" stroke-width="4"/>
+  <line id="Linie_41" data-name="Linie 41" x2="42" transform="translate(20.5 98.5)" fill="none" stroke="#707070" stroke-width="4"/>
+</svg>

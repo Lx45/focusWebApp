@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="116.5" height="138" viewBox="0 0 116.5 138">
+  <g id="Komponente_2_1" data-name="Komponente 2 – 1" transform="translate(0 2)">
+    <g id="Ellipse_6" data-name="Ellipse 6" transform="translate(0 12.5)" fill="none" stroke="#707070" stroke-width="4">
+      <circle cx="41.5" cy="41.5" r="41.5" stroke="none"/>
+      <circle cx="41.5" cy="41.5" r="39.5" fill="none"/>
+    </g>
+    <line id="Linie_49" data-name="Linie 49" y1="31" x2="43" transform="translate(71.5)" fill="none" stroke="#707070" stroke-width="4"/>
+    <line id="Linie_50" data-name="Linie 50" y1="31" x2="43" transform="translate(71.5)" fill="none" stroke="#707070" stroke-width="4"/>
+    <line id="Linie_51" data-name="Linie 51" y1="34" transform="translate(114.5)" fill="none" stroke="#707070" stroke-width="4"/>
+    <line id="Linie_52" data-name="Linie 52" y1="34" transform="translate(114.5)" fill="none" stroke="#707070" stroke-width="4"/>
+    <line id="Linie_43" data-name="Linie 43" y1="43" transform="translate(41.5 93)" fill="none" stroke="#707070" stroke-width="4"/>
+    <line id="Linie_42" data-name="Linie 42" x2="42" transform="translate(20.5 111)" fill="none" stroke="#707070" stroke-width="4"/>
+    <line id="Linie_48" data-name="Linie 48" x2="43" transform="translate(71.5)" fill="none" stroke="#707070" stroke-width="4"/>
+  </g>
+</svg>

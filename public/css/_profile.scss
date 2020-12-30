@@ -5,6 +5,7 @@
     p{
         font-size: 25px;
         color: $light;
+        cursor: pointer;
     }
 
     .sidebar-active {
@@ -54,7 +55,7 @@
 
         button{
             grid-column: 8/10;
-            @include btn(100%);
+            @include customButton(100%);
             align-self: center;
         }
 

@@ -1,0 +1,191 @@
+//Register
+
+.input-section {
+    grid-column: 1/8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .gender-card {
+        @include formCard();
+        grid-row: 1/2;
+
+        .card-header {
+            @include formCardHeader();
+        }
+
+        .card-body {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding-bottom: 10px;
+
+            div {
+                width: 30%;
+                height: 180px;
+                border: 0px;
+                cursor: pointer;
+                margin-top: 20px;
+
+                img {
+                    height: 150px;
+                    width: 150px; 
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: 10px;
+                    filter: invert(100%) sepia(0%) saturate(7486%) hue-rotate(54deg) brightness(123%) contrast(65%);
+                }
+            }
+        }
+
+    }
+
+
+    .personal-info-card {
+        @include formCard();
+
+        .card-header {
+            @include formCardHeader();
+        }
+
+        .card-body {
+
+            .inputfield{
+                @include inputField();
+            }
+
+            .inputfield:last-child{
+                margin-bottom: 20px;
+            }
+
+        }
+
+    }
+
+
+    .contact-card {
+        @include formCard();
+
+        .card-header {
+            @include formCardHeader();
+        }
+
+        .card-body {
+
+            .inputfield{
+                @include inputField();
+            }
+
+            .inputfield:last-child{
+                margin-bottom: 20px;
+            }
+
+        }
+
+    }
+
+    button {
+        @include customButton(25%);
+    }
+
+    button:hover {
+        opacity: 0.7;
+    }
+}
+
+.info-section {
+    grid-column: 9/13;
+
+
+    .circle-flex {
+     display: flex;
+	flex-direction: row;
+    margin-top: 50px;
+    
+        .circle {
+            background-color: $purple;
+            height: 70px;
+            border-radius:70%;
+            width: 70px;
+            
+            p {
+                color: $light;
+                font-size: 40px;
+                font-weight: 700;
+                text-align: center;
+                margin: 10px auto 0 5px;
+            }
+        }
+
+        p:nth-child(2) {
+            color: $light;
+            font-size: 30px;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-left: 10px;
+        }
+    }
+
+    .circle-flex:nth-child(2) {
+        margin-top: 255px;
+    }
+
+    .circle-flex:last-child {
+        margin-top: 310px;
+    }
+}
+
+//Login
+.sign-in-card {
+    @include formCard();
+    grid-column: 3/11;
+    grid-row: 2/4;
+    width: 100%;
+    
+    .card-header {
+        @include formCardHeader();
+    }
+
+    .card-body {
+
+        .inputfield{
+            @include inputField();
+        }
+
+        .inputfield:last-child{
+            margin-bottom: 20px;
+        }
+        
+
+    }
+
+    .card-footer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        a {
+            text-decoration: none;
+            color: $light;
+            padding-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        a:hover {
+            opacity: 1;
+        }
+    }
+
+
+
+}
+
+#btn-si {
+    @include customButton(25%);
+    grid-row: 4/5;
+    grid-column: 3/11;
+    justify-self: center;
+    margin-top: 10px;
+}
