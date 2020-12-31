@@ -28,7 +28,7 @@ class User {
         };
     }
 
-    public function sign_in($email, $password) {
+    public function login($email, $password) {
          		//PDO statement
  		$this->db->query('SELECT * FROM users WHERE email = :email');
  		

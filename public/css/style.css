@@ -784,6 +784,7 @@ nav li:hover {
   font-size: 20px;
   color: #F2EDED;
   cursor: pointer;
+  margin: 25px 0;
 }
 
 .input-section button:hover {

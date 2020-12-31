@@ -4,6 +4,6 @@
     <li><a href="<?php echo URLROOT; ?>/application/to_do">To-Do</a></li>
     <li><a href="<?php echo URLROOT; ?>/application/statistic">Statistic</a></li>
     <li><a href="<?php echo URLROOT; ?>/users/profile">Profil</a></li>
-    <li><a href="<?php echo URLROOT; ?>/users/login">Login</a></li>
+    <li><a href="<?php echo URLROOT; ?>/users/profile">Login</a></li>
     </ul>
 </nav>

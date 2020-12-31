@@ -4,6 +4,7 @@ require APPROOT . '/views/inc/header.php';
 <div class="background-homepage">
 <?php
 require APPROOT . '/views/inc/navigation.php';
+print_r($_SESSION);
 ?>
 
     <div class="grid">

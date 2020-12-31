@@ -107,11 +107,81 @@ class Users extends Controller
 
     public function login()
     {
-        $data = [
-            'title' => 'Sign In',
-        ];
+        if (isAjaxCall()) {
 
-        $this->view('users/login', $data);
+            //Init Data
+            $errorsArray = array();
+            $data = [
+                'email' => filter_var($_POST['email'], FILTER_VALIDATE_EMAIL),
+                'password' => trim(htmlspecialchars($_POST['password'])),
+            ];
+
+            //Validation
+            if (empty($data['email'])) {
+                $tmp_email = array(1, "*Please enter email");
+                array_push($errorsArray, $tmp_email);
+                // }elseif ($this->userModel->findUserByEmail($data['email'])) {
+                //     // User found
+                // } else {
+                //     // User not found
+                //     $tmp_email = array(1, "*No user found");
+                //     array_push($errorsArray, $tmp_email);
+            }
+
+            if (empty($data['password'])) {
+                $tmp_password = array(2, "*Please enter password");
+                array_push($errorsArray, $tmp_password);
+            }
+
+            if (count($errorsArray) === 0) {
+                // validation success
+
+                //Call model function
+                $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+
+                if ($loggedInUser) {
+                    // login successfull
+                    // Create session
+                    error_log($loggedInUser[email]);
+                    $this->createUserSession($loggedInUser);
+
+                    //Stauts code success
+                    http_response_code(200);
+                } else {
+                    //If password is incorrect
+                    //Push error into array
+                    $tmp_daten = array(2, "*Password incorrect");
+                    array_push($errorsArray, $tmp_daten);
+
+                    //send json data back with errors
+                    $this->json($errorsArray, 422);
+                }
+            } else {
+                // Validation failed
+                // Load View with errors
+                $this->json($errorsArray, 422);
+            }
+
+        } else {
+            $data = [
+                'title' => 'Sign In',
+            ];
+
+            $this->view('users/login', $data);
+        }
     }
 
+    public function createUserSession($user)
+    {
+        //Push data into Session
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_email'] = $user['email'];
+    }
+
+    public function logout() {
+        //Destory session
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        session_destroy();
+    }
 }
