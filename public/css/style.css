@@ -43,6 +43,15 @@ nav li:hover {
   opacity: 0.7;
 }
 
+nav .btn-lo-active {
+  color: red;
+}
+
+nav .disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
 .buttons {
   position: relative;
   top: 50px;

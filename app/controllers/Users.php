@@ -183,5 +183,12 @@ class Users extends Controller
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         session_destroy();
+
+        // Check if session got destroyed
+        if(!isset($_SESSION['user_id'])) {
+            http_response_code(200);
+        } else {
+            http_response_code(422);
+        }
     }
 }

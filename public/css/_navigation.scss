@@ -35,4 +35,13 @@ nav {
         li:hover {
             opacity: 0.7;
         }
+
+        .btn-lo-active {
+            color: red;
+        }
+
+        .disabled{
+            pointer-events:none;
+            opacity:0.4;
+        }
 }

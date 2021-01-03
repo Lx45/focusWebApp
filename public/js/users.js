@@ -1,6 +1,8 @@
 $('#btn-su').on('click', userAdd);
 $('#btn-si').on('click', userLogin);
-$('#logout').on('click', logout);
+$('#btn-lo').on('click', logout);
+
+checkSessionState();
 
 function userAdd() {
     // Init data
@@ -78,8 +80,8 @@ function logout() {
         async: true,
         statusCode: {
             200: function() {
-                //userLogin success
-
+                //logout successfull
+                redirect('pages/index');
             },
             422: function(errors) {
                 //userLogin failed
@@ -87,4 +89,12 @@ function logout() {
             }
         }
     });
+}
+
+// Shows the navigation according to logged out or logged in user
+function checkSessionState() {
+    let logoutBtn = $('#btn-lo');
+    if (logoutBtn.hasClass('active')) {
+       $("li a").removeClass('disabled');
+    }
 }
