@@ -16,16 +16,18 @@ require APPROOT . '/views/inc/navigation.php';
 
     <div class="all-tasks">
         <h2 class="task-list-title">My lists</h2>
-        <ul class="task-list" data-lists>
-            <li class="list-name active-list">Youtube</li>
-            <li class="list-name">Work</li>
-            <li class="list-name">Grocery</li>
+        <ul class="task-list">
+            <?php foreach($data['taskListOverview'] as $taskOverview) : ?>
+            <li class="list-name" data-listid="<?php echo $taskOverview['listid'] ?>"><?php echo $taskOverview['listname']?></li>
+            <?php endforeach; ?>
+            <!-- <li class="list-name">Work</li>
+            <li class="list-name">Grocery</li> -->
         </ul>
 
-        <form action="" data-new-list-form>
-            <input type="text" class="new list" data-new-list-input placeholder="new list name"
+        <form action="">
+            <input id="new-list-input" type="text" class="new list" placeholder="new list name"
                 aria-label="new list name">
-            <button class="btn create" aria-label="create new list">+</button>
+            <button id="new-list-btn" class="btn create" data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new list">+</button>
         </form>
     </div>
 
@@ -38,39 +40,41 @@ require APPROOT . '/views/inc/navigation.php';
 
         <div class="todo-body">
             <div class="tasks">
+            <?php foreach($data['toDoListOverview'] as $toDoOverview) : ?>
                 <div class="task">
                     <input type="checkbox" id="task-1">
                     <label for="task-1">
                         <span class="custom-checkbox"></span>
-                        record todo list video
+                        <?php echo $toDoOverview['taskname']?>
                     </label>
                 </div>
+            <?php endforeach; ?>
                 <!-- /task-1 -->
 
-                <div class="task">
+                <!-- <div class="task">
                     <input type="checkbox" id="task-2">
                     <label for="task-2">
                         <span class="custom-checkbox"></span>
                         another task
                     </label>
-                </div>
+                </div> -->
                 <!-- /task-2 -->
 
-                <div class="task">
+                <!-- <div class="task">
                     <input type="checkbox" id="task-3">
                     <label for="task-3">
                         <span class="custom-checkbox"></span>
                         a third task
                     </label>
-                </div>
+                </div> -->
                 <!-- /task-3 -->
             </div>
 
             <div class="new-task-creator">
                 <form action="">
-                    <input type="text" class="new list" data-new-list-input placeholder="new list name"
-                        aria-label="new list name">
-                    <button class="btn create" aria-label="create new list">+</button>
+                    <input id="new-task-input" type="text" class="new task" placeholder="new task name"
+                        aria-label="new task name">
+                    <button id="new-task-btn" class="btn create" data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new task">+</button>
                 </form>
             </div>
             <div class="delete-stuff">
