@@ -2,6 +2,7 @@
 let newListInput = $('#new-list-input');
 let newListBtn = $('#new-list-btn');
 let li = $('li');
+let firstTaskList = $('.task-list .list-name:first');
 
 let newTaskInput = $('#new-task-input');
 let newTaskBtn = $('#new-task-btn');
@@ -9,19 +10,34 @@ let newTaskBtn = $('#new-task-btn');
 
 //Eventhandler
 newListBtn.on('click', addNewList);
-li.on('click', activeList);
+li.on('click', activeList)
 
 newTaskBtn.on('click', addNewTask);
 
 
+// function get called by default on the first task list of the user
+activeList(firstTaskList);
+
+
 //Choose active Tasklist
 function activeList(event) {
-
     //Init data
-    let activeLi = $(event.target);
-    let activeLiId = activeLi[0].dataset.listid
+    let activeLi;
+    // Check if function was called by onclick or by default
+        if(event == firstTaskList) {
+            activeLi = $(event);
+        } else {
+            activeLi = $(event.target);
+        }
+    let activeLiId = activeLi[0].dataset.listid;
+    let toDoList = $('.tasks');
 
     console.log(activeLiId);
+    // Empty To-Do-List 
+    toDoList.html('');
+
+    //Unset active class
+    $('.task-list .list-name').removeClass('active-list');
 
     // Set active class
     activeLi.addClass('active-list');
@@ -37,21 +53,29 @@ function activeList(event) {
 		statusCode: {
 			200: function(tasks){
                 console.log(tasks);
-                
-                let taskDiv = $('<div class="task"></div>');
+                // Check if there are tasks in the list
+                if(tasks.length > 0){
+                    // Tasks found
+                    let tasksDiv = $('<div class="tasks"></div>');
 
-                tasks.forEach(function(task){
+                    tasks.forEach(function(task){
 
-                    let toDo = `<input type="checkbox" id="task-${task.taskid}">
-                    <label for="task-${task.taskid}">
-                        <span class="custom-checkbox"></span>
-                        ${task.taskname}
-                    </label>`
+                        let toDo = `
+                        <div class="task">
+                        <input type="checkbox" id="task-${task.taskid}">
+                        <label for="task-${task.taskid}">
+                            <span class="custom-checkbox"></span>
+                            ${task.taskname}
+                        </label>
+                        </div>`
 
-                    taskDiv.append(toDo);
-                })
+                        tasksDiv.append(toDo);
+                    })
 
-                $('.task').replaceWith(taskDiv);
+                    $('.to-do-list-tasks').append(tasksDiv);
+                } else {
+                // No Task found
+                }
 			},
 			422: function(){
                 alert('To-Do-list can not be reloaded');
@@ -66,6 +90,8 @@ function addNewTask(e) {
     // Init data
     let newTask = newTaskInput.val();
     let userId = newTaskBtn[0].dataset.userid;
+    let activeLi = $('.active-list');
+    let activeLiId = activeLi[0].dataset.listid;
 
     console.log(userId);
 
@@ -75,10 +101,12 @@ function addNewTask(e) {
 		async: true,
 		data: {
             "newTask": newTask,
-            "userId": userId
+            "userId": userId,
+            "activeLiId": activeLiId
 		},
 		statusCode: {
 			200: function(feedback){
+                newTaskInput.val('');
 				alert('success');
 			},
 			422: function(feedback){

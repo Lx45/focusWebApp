@@ -11,7 +11,7 @@
 			$userId = $_SESSION['user_id'];
 			$data = [
 				'userId' => $_SESSION['user_id'],
-				'listId' => trim(htmlspecialchars($_POST['activeLiId'])) 
+				// 'listId' => trim(htmlspecialchars($_POST['activeLiId'])) 
 			];
 			//call model function
 			$taskListOverview = $this->applicationModel->taskListOverview($userId);
@@ -102,7 +102,8 @@
 
 				$data = [
 					'newTask' => trim(htmlspecialchars($_POST['newTask'])),
-					'userId' => trim(htmlspecialchars($_POST['userId'])) 
+					'userId' => trim(htmlspecialchars($_POST['userId'])),
+					'activeLiId' => trim(htmlspecialchars($_POST['activeLiId']))  
 				];
 
 				// Validate data

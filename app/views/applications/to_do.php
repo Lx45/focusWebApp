@@ -39,35 +39,37 @@ require APPROOT . '/views/inc/navigation.php';
         </div>
 
         <div class="todo-body">
-            <div class="tasks">
-            <?php foreach($data['toDoListOverview'] as $toDoOverview) : ?>
-                <div class="task">
-                    <input type="checkbox" id="task-1">
-                    <label for="task-1">
-                        <span class="custom-checkbox"></span>
-                        <?php echo $toDoOverview['taskname']?>
-                    </label>
+            <div class="to-do-list-tasks">
+                <div class="tasks">
+                    <?php foreach($data['toDoListOverview'] as $toDoOverview) : ?>
+                    <div class="task">
+                        <input type="checkbox" id="task-1">
+                        <label for="task-1">
+                            <span class="custom-checkbox"></span>
+                            <?php echo $toDoOverview['taskname']?>
+                        </label>
+                    </div>
+                    <?php endforeach; ?>
+                    <!-- /task-1 -->
+
+                    <!-- <div class="task">
+                        <input type="checkbox" id="task-2">
+                        <label for="task-2">
+                            <span class="custom-checkbox"></span>
+                            another task
+                        </label>
+                    </div>  -->
+                    <!-- /task-2 -->
+
+                    <!-- <div class="task">
+                        <input type="checkbox" id="task-3">
+                        <label for="task-3">
+                            <span class="custom-checkbox"></span>
+                            a third task
+                        </label>
+                    </div>  -->
+                    <!-- /task-3 -->
                 </div>
-            <?php endforeach; ?>
-                <!-- /task-1 -->
-
-                <!-- <div class="task">
-                    <input type="checkbox" id="task-2">
-                    <label for="task-2">
-                        <span class="custom-checkbox"></span>
-                        another task
-                    </label>
-                </div> -->
-                <!-- /task-2 -->
-
-                <!-- <div class="task">
-                    <input type="checkbox" id="task-3">
-                    <label for="task-3">
-                        <span class="custom-checkbox"></span>
-                        a third task
-                    </label>
-                </div> -->
-                <!-- /task-3 -->
             </div>
 
             <div class="new-task-creator">

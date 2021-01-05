@@ -27,11 +27,12 @@ class Application {
 
     public function addNewTask($data){
         //PDO statement
-        $this->db->query('INSERT INTO tasks (taskname, userid) VALUES (:taskname, :userid)');
+        $this->db->query('INSERT INTO tasks (taskname, userid, listid) VALUES (:taskname, :userid, :listid)');
 
         //Bind Values
         $this->db->bind(':taskname', $data['newTask']);
         $this->db->bind(':userid', $data['userId']);
+        $this->db->bind(':listid', $data['activeLiId']);
 
         // Execute
         if($this->db->execute()) {
