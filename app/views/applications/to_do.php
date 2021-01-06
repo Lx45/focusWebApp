@@ -16,13 +16,13 @@ require APPROOT . '/views/inc/navigation.php';
 
     <div class="all-tasks">
         <h2 class="task-list-title">My lists</h2>
-        <ul class="task-list">
-            <?php foreach($data['taskListOverview'] as $taskOverview) : ?>
-            <li class="list-name" data-listid="<?php echo $taskOverview['listid'] ?>"><?php echo $taskOverview['listname']?></li>
-            <?php endforeach; ?>
-            <!-- <li class="list-name">Work</li>
-            <li class="list-name">Grocery</li> -->
-        </ul>
+        <div class="all-tasks-list">
+            <ul class="task-list">
+                <?php foreach($data['taskListOverview'] as $taskOverview) : ?>
+                <li class="list-name" data-listid="<?php echo $taskOverview['listid'] ?>"><?php echo $taskOverview['listname']?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
 
         <form action="">
             <input id="new-list-input" type="text" class="new list" placeholder="new list name"
@@ -34,41 +34,22 @@ require APPROOT . '/views/inc/navigation.php';
 
     <div class="todo-list">
         <div class="todo-header">
-            <h2 class="list-title">YouTube</h2>
-            <p class="task-count">3 tasks remaining</p>
+            <h2 class="list-title"></h2>
+            <p class="task-count"></p>
         </div>
 
         <div class="todo-body">
             <div class="to-do-list-tasks">
                 <div class="tasks">
                     <?php foreach($data['toDoListOverview'] as $toDoOverview) : ?>
-                    <div class="task">
-                        <input type="checkbox" id="task-1">
+                    <div class="task" id="task-div">
+                        <input type="checkbox" class="task-checkbox" id="task-1">
                         <label for="task-1">
                             <span class="custom-checkbox"></span>
                             <?php echo $toDoOverview['taskname']?>
                         </label>
                     </div>
                     <?php endforeach; ?>
-                    <!-- /task-1 -->
-
-                    <!-- <div class="task">
-                        <input type="checkbox" id="task-2">
-                        <label for="task-2">
-                            <span class="custom-checkbox"></span>
-                            another task
-                        </label>
-                    </div>  -->
-                    <!-- /task-2 -->
-
-                    <!-- <div class="task">
-                        <input type="checkbox" id="task-3">
-                        <label for="task-3">
-                            <span class="custom-checkbox"></span>
-                            a third task
-                        </label>
-                    </div>  -->
-                    <!-- /task-3 -->
                 </div>
             </div>
 
@@ -81,7 +62,7 @@ require APPROOT . '/views/inc/navigation.php';
             </div>
             <div class="delete-stuff">
                 <button class="btn delete">Cleat completed tasks</button>
-                <button class="btn delete">Delete List</button>
+                <button id="delete-btn" class="btn delete">Delete List</button>
             </div>
         </div>
     </div>

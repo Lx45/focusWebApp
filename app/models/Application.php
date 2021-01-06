@@ -57,7 +57,7 @@ class Application {
 
     public function toDoListOverview($data) {
         // PDO statement
-        $this->db->query('SELECT * FROM tasks WHERE status = 1 AND userid = :userid AND listid = :listid');
+        $this->db->query('SELECT * FROM tasks WHERE status != 3 AND userid = :userid AND listid = :listid');
 
         //Bind values
         $this->db->bind(':userid', $data['userId']);
@@ -68,5 +68,20 @@ class Application {
         //return data 
         return $results;
     }
+
+    public function deleteList($listId) {
+		//PDO statement
+		$this->db->query('UPDATE tasklists SET status = :status WHERE listid = :listId');
+ 		$this->db->bind(':status', 2);
+ 		$this->db->bind(':listId', $listId);
+ 		// $this->db->bind(':deletedOn', $timestamp);
+
+ 		//Execute
+		if ($this->db->execute()) {
+			return true;
+		} else {
+			return false;
+		};
+ 	}
 
 }

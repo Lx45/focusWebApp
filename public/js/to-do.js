@@ -2,6 +2,7 @@
 let newListInput = $('#new-list-input');
 let newListBtn = $('#new-list-btn');
 let li = $('li');
+
 let firstTaskList = $('.task-list .list-name:first');
 
 let newTaskInput = $('#new-task-input');
@@ -10,7 +11,7 @@ let newTaskBtn = $('#new-task-btn');
 
 //Eventhandler
 newListBtn.on('click', addNewList);
-li.on('click', activeList)
+li.on('click',activeList);
 
 newTaskBtn.on('click', addNewTask);
 
@@ -23,12 +24,14 @@ activeList(firstTaskList);
 function activeList(event) {
     //Init data
     let activeLi;
+
     // Check if function was called by onclick or by default
         if(event == firstTaskList) {
             activeLi = $(event);
         } else {
             activeLi = $(event.target);
         }
+
     let activeLiId = activeLi[0].dataset.listid;
     let toDoList = $('.tasks');
 
@@ -107,6 +110,7 @@ function addNewTask(e) {
 		statusCode: {
 			200: function(feedback){
                 newTaskInput.val('');
+
 				alert('success');
 			},
 			422: function(feedback){
@@ -149,6 +153,26 @@ function addNewList(e) {
     // Prevent the default behavior of refreshing the page
     e.preventDefault();
 }
+
+
+// Reload to do-list
+// function loadToDoList() {
+
+//     $.ajax({
+//         url: '/focusWebApp/Applications/',
+//         type: 'post',
+//         async: true,
+
+//         statusCode: {
+//             200: function(tasks){
+
+//             },
+//             422: function(tasks){
+                
+//             }
+//         }
+//     })    
+// }
 
 
 

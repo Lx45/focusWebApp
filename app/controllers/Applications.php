@@ -9,19 +9,19 @@
 
 		public function to_do(){
 			$userId = $_SESSION['user_id'];
-			$data = [
-				'userId' => $_SESSION['user_id'],
-				// 'listId' => trim(htmlspecialchars($_POST['activeLiId'])) 
-			];
-			//call model function
+			// $data = [
+			// 	'userId' => $_SESSION['user_id'],
+			// 	// 'listId' => trim(htmlspecialchars($_POST['activeLiId'])) 
+			// ];
+			// //call model function
 			$taskListOverview = $this->applicationModel->taskListOverview($userId);
 
-			$toDoListOverview = $this->applicationModel->toDoListOverview($data);
+			// $toDoListOverview = $this->applicationModel->toDoListOverview($data);
 
 			$data = [
 				'title' => 'To-Do-List',
 				'taskListOverview' => $taskListOverview,
-				'toDoListOverview' => $toDoListOverview
+				// 'toDoListOverview' => $toDoListOverview
 			];
 
 		
@@ -40,6 +40,18 @@
 
 			if(isAjaxCall()){
 				$this->json($toDoListOverview);
+			}
+		}
+
+		public function loadLists(){
+
+			$userId = $_SESSION['user_id'];
+
+			//call model function
+			$taskListOverview = $this->applicationModel->taskListOverview($userId);
+
+			if(isAjaxCall()){
+				$this->json($taskListOverview);
 			}
 		}
 
@@ -133,6 +145,25 @@
 				$this->view('applications/to_do', $data);
 			}
 
+		}
+
+		public function deleteList() {
+
+			if (isAjaxCall()) {
+				//Push current productId into a variable
+				$listId = htmlspecialchars($_POST['activeLiId']);
+
+				//save time of delete
+    			// $deletedOn = time();
+
+    			if ($this->applicationModel->deleteList($listId)) {
+    				//Product succsefully deleted
+    				http_response_code(200);
+    			} else {
+    				//failed 
+   					http_response_code(422);
+   				}
+			}
 		}
 
 	} 
