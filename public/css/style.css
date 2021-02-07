@@ -439,6 +439,203 @@ nav .disabled {
   opacity: 1;
 }
 
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  visibility: hidden;
+}
+
+.modal-bg .modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px solid white;
+  background-color: #414141;
+}
+
+.modal-bg .modal .modal-head .modal-close-btn {
+  cursor: pointer;
+}
+
+.modal-bg .modal .modal-body {
+  width: auto;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.modal-bg button {
+  width: 75px;
+  height: 50px;
+  border: solid 1px grey;
+  background: none;
+  font-size: 20px;
+  color: #F2EDED;
+  cursor: pointer;
+  height: 30px;
+}
+
+.modal-bg #header {
+  padding: 10px;
+  color: #F2EDED;
+  font-size: 26px;
+  font-family: sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.modal-bg #container {
+  width: 370px;
+}
+
+.modal-bg #weekdays {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #1C2126;
+}
+
+.modal-bg #weekdays div {
+  width: 42px;
+  padding: 10px;
+}
+
+.modal-bg #calendar {
+  width: 100%;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.modal-bg .day {
+  width: 40px;
+  padding: 10px;
+  height: 50px;
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #F2EDED;
+  margin: 6.2px;
+  -webkit-box-shadow: 0px 0px 3px #CBD4C2;
+          box-shadow: 0px 0px 3px #CBD4C2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.modal-bg .day:hover {
+  background-color: #e8faed;
+}
+
+.modal-bg .day + #currentDay {
+  background-color: #e8f4fa;
+}
+
+.modal-bg .event {
+  font-size: 10px;
+  padding: 3px;
+  background-color: #58bae4;
+  color: white;
+  border-radius: 5px;
+  max-height: 55px;
+  overflow: hidden;
+}
+
+.modal-bg .padding {
+  cursor: default !important;
+  background-color: #FFFCFF !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.modal-bg #newEventModal, .modal-bg #deleteEventModal {
+  display: none;
+  z-index: 20;
+  padding: 25px;
+  background-color: #e8f4fa;
+  -webkit-box-shadow: 0px 0px 3px black;
+          box-shadow: 0px 0px 3px black;
+  border-radius: 5px;
+  width: 350px;
+  top: 100px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+}
+
+.modal-bg #eventTitleInput {
+  padding: 10px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-bottom: 25px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  -webkit-box-shadow: 0px 0px 3px gray;
+          box-shadow: 0px 0px 3px gray;
+}
+
+.modal-bg #eventTitleInput.error {
+  border: 2px solid red;
+}
+
+.modal-bg #cancelButton, .modal-bg #deleteButton {
+  background-color: #d36c6c;
+}
+
+.modal-bg #saveButton, .modal-bg #closeButton {
+  background-color: #92a1d1;
+}
+
+.modal-bg #eventText {
+  font-size: 14px;
+}
+
+.modal-bg #modalBackDrop {
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .statistic {
   -ms-grid-column: 1;
   -ms-grid-column-span: 4;

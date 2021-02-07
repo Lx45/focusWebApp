@@ -1,16 +1,18 @@
 <?php 
 require APPROOT . '/views/inc/header.php';
+?>
 
+<?php
 require APPROOT . '/views/inc/navigation.php';
 ?>
 
 <div class="grid">
 
     <div class="buttons">
-        <button>Day</button>
-        <button>Week</button>
-        <button>Month</button>
-        <button>Year</button>
+        <button class="calendar-buttons">Day</button>
+        <button class="calendar-buttons">Week</button>
+        <button class="calendar-buttons">Month</button>
+        <button class="calendar-buttons">Year</button>
     </div>
 
 
@@ -61,7 +63,7 @@ require APPROOT . '/views/inc/navigation.php';
                 </form>
             </div>
             <div class="delete-stuff">
-                <button class="btn delete">Cleat completed tasks</button>
+                <button class="btn delete">Clear completed tasks</button>
                 <button id="delete-btn" class="btn delete">Delete List</button>
             </div>
         </div>
@@ -69,6 +71,43 @@ require APPROOT . '/views/inc/navigation.php';
 
 
 </div>
+
+<div class="modal-bg">
+
+    <div class="modal">
+        <div class="modal-head">
+            <i class="modal-close-btn">X</i>
+        </div>
+        <div class="modal-body">
+        <div id="container">
+        <div id="header">
+            <div id="monthDisplay"></div>
+            <div>
+                <button id="backButton">Back</button>
+                <button id="nextButton">Next</button>
+            </div>
+        </div>
+        <div id="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+
+        <div id="calendar"></div>
+    </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>
+
+
+
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
