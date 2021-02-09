@@ -1,4 +1,5 @@
 /*!!!Init Variables!!!*/
+let selectedDate = $('.calendar-buttons');
 let newListInput = $('#new-list-input');
 let newListBtn = $('#new-list-btn');
 let firstTaskList = $('.task-list .list-name:first');
@@ -12,7 +13,9 @@ let checkbox = $('.task-checkbox');
 let task = $('#task.div')
 
 
+
 /*!!!Eventhandler!!!*/
+selectedDate.bind('DOMSubtreeModified', checkForNewDate)
 newListBtn.on('click', addNewList);
 getActiveList();
     // function get called by default on the first task list of the user
@@ -100,6 +103,8 @@ function addNewTask(e) {
     let userId = newTaskBtn[0].dataset.userid;
     let activeLi = $('.active-list');
     let activeLiId = activeLi[0].dataset.listid;
+    let date = $('.calendar-buttons').text();
+    console.log(date);
 
     console.log(userId);
 
@@ -110,7 +115,8 @@ function addNewTask(e) {
 		data: {
             "newTask": newTask,
             "userId": userId,
-            "activeLiId": activeLiId
+            "activeLiId": activeLiId,
+            "date": date
 		},
 		statusCode: {
 			200: function(feedback){
@@ -182,6 +188,8 @@ function loadTasks(activeLiId) {
     // Init data 
     let toDoList = $('.tasks');
     let taskCount = $('.task-count');
+    let date = $('.calendar-buttons').text();
+    console.log(date);
 
     // Empty To-Do-List 
     toDoList.html('');
@@ -192,6 +200,7 @@ function loadTasks(activeLiId) {
 		async: true,
 		data: {
             "activeLiId": activeLiId,
+            "date": date
             // "userId": userId
 		},
 		statusCode: {
@@ -274,4 +283,9 @@ function finishedTask() {
     } else {
         console.log('unchecked');
     }
+}
+
+/*!!! If date changed reload content!!!*/
+function checkForNewDate(){
+    activeList(firstTaskList);
 }

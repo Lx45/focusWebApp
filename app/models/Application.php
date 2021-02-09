@@ -27,12 +27,13 @@ class Application {
 
     public function addNewTask($data){
         //PDO statement
-        $this->db->query('INSERT INTO tasks (taskname, userid, listid) VALUES (:taskname, :userid, :listid)');
+        $this->db->query('INSERT INTO tasks (taskname, userid, listid, date) VALUES (:taskname, :userid, :listid, :date)');
 
         //Bind Values
         $this->db->bind(':taskname', $data['newTask']);
         $this->db->bind(':userid', $data['userId']);
         $this->db->bind(':listid', $data['activeLiId']);
+        $this->db->bind(':date', $data['date']);
 
         // Execute
         if($this->db->execute()) {
@@ -57,11 +58,12 @@ class Application {
 
     public function toDoListOverview($data) {
         // PDO statement
-        $this->db->query('SELECT * FROM tasks WHERE status != 3 AND userid = :userid AND listid = :listid');
+        $this->db->query('SELECT * FROM tasks WHERE status != 3 AND userid = :userid AND listid = :listid AND date = :date' );
 
         //Bind values
         $this->db->bind(':userid', $data['userId']);
         $this->db->bind(':listid', $data['listId']);
+        $this->db->bind(':date', $data['date']);
 
         $results = $this->db->resultSet();
 

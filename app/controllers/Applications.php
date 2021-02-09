@@ -32,7 +32,8 @@
 
 			$data = [
 				'userId' => $_SESSION['user_id'],
-				'listId' => trim(htmlspecialchars($_POST['activeLiId'])) 
+				'listId' => trim(htmlspecialchars($_POST['activeLiId'])), 
+				'date' => trim(htmlspecialchars($_POST['date'])) 
 			];
 
 			//call model function
@@ -115,7 +116,8 @@
 				$data = [
 					'newTask' => trim(htmlspecialchars($_POST['newTask'])),
 					'userId' => trim(htmlspecialchars($_POST['userId'])),
-					'activeLiId' => trim(htmlspecialchars($_POST['activeLiId']))  
+					'activeLiId' => trim(htmlspecialchars($_POST['activeLiId'])),
+					'date' => trim(htmlspecialchars($_POST['date']))
 				];
 
 				// Validate data
