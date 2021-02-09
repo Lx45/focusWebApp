@@ -42,8 +42,8 @@ function activeList(event) {
     let listname = activeLi.html();
     let listTitle = $('.list-title');
 
-    console.log(listname);
-    console.log(activeLiId);
+    // console.log(listname);
+    // console.log(activeLiId);
 
     //Set list-title
     listTitle.html(listname);
@@ -196,10 +196,10 @@ function loadTasks(activeLiId) {
 		},
 		statusCode: {
 			200: function(tasks){
-                console.log(tasks);
-                console.log(tasks.status);
+                // console.log(tasks);
+                // console.log(tasks.status);
                 let tasksRemaining = tasks.length;
-                console.log(tasksRemaining);
+                // console.log(tasksRemaining);
                 taskCount.text(tasksRemaining + ' tasks remaining');
                 // Check if there are tasks in the list
                 if(tasks.length > 0){
@@ -216,9 +216,9 @@ function loadTasks(activeLiId) {
                             ${task.taskname}
                         </label>
                         </div>`
-                        console.log(task.status);
+                        // console.log(task.status);
                         let status = task.status;
-                        console.log(status);
+                        // console.log(status);
                         tasksDiv.append(toDo);
                     })
 
