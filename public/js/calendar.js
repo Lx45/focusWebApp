@@ -1,3 +1,5 @@
+
+
 // Init var
 const modal = $('.modal-bg');
 const calendarButtons = $('.calendar-buttons');
@@ -130,3 +132,8 @@ function initButtons() {
 function getClickedDate(month, clickedDay, year) {
     setDateButton(month, clickedDay, year);
 }
+
+
+
+  let test = new Date();
+console.log(test.getWeek());
