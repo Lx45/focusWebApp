@@ -1,5 +1,5 @@
 /*!!!Init Variables!!!*/
-let selectedDate = $('.calendar-buttons');
+let selectedDate = $('.date-button');
 let newListInput = $('#new-list-input');
 let newListBtn = $('#new-list-btn');
 let firstTaskList = $('.task-list .list-name:first');
@@ -103,7 +103,7 @@ function addNewTask(e) {
     let userId = newTaskBtn[0].dataset.userid;
     let activeLi = $('.active-list');
     let activeLiId = activeLi[0].dataset.listid;
-    let date = $('.calendar-buttons').text();
+    let date = $('.date-button').text();
     console.log(date);
 
     console.log(userId);
@@ -188,8 +188,9 @@ function loadTasks(activeLiId) {
     // Init data 
     let toDoList = $('.tasks');
     let taskCount = $('.task-count');
-    let date = $('.calendar-buttons').text();
+    let date = $('.date-button').text();
     console.log(date);
+    console.log('fix this')
 
     // Empty To-Do-List 
     toDoList.html('');

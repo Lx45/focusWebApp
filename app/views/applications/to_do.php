@@ -9,9 +9,9 @@ require APPROOT . '/views/inc/navigation.php';
 <div class="grid">
 
     <div class="buttons">
-        <button class="calendar-buttons"></button>
-        <!-- <button class="calendar-buttons">Week</button>
-        <button class="calendar-buttons">Month</button>
+        <button class="calendar-buttons date-button"></button>
+        <button class="calendar-buttons week-button"></button>
+        <!--<button class="calendar-buttons">Month</button>
         <button class="calendar-buttons">Year</button> -->
     </div>
 

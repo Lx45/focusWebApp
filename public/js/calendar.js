@@ -3,6 +3,8 @@
 // Init var
 const modal = $('.modal-bg');
 const calendarButtons = $('.calendar-buttons');
+const dateBtn = $('.date-button');
+const weekBtn = $('.week-button');
 const modalCloseBtn = $('.modal-close-btn');
 
 let nav = 0;
@@ -28,9 +30,28 @@ function closeModal() {
 }
 
 // Set the date button to current or choosen Date
-function setDateButton(currentMonth = new Date().getMonth(),
-                        currentDay = new Date().getDate(),
-                        currentYear = new Date().getFullYear()) {
+function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Date().getDate(), currentYear = new Date().getFullYear(),) {
+    
+    let choosenDate = new Date();
+    choosenDate.setDate(currentDay);
+    choosenDate.setMonth(currentMonth);
+    choosenDate.setYear(currentYear);
+
+    // Get Week
+    let currentWeek = choosenDate.getWeek();
+    console.log('hier '+choosenDate);
+
+    // Get Weekdays // Stackoverflow
+    let first = choosenDate.getDate() - choosenDate.getDay();
+    let firstDay = (new Date(choosenDate.setDate(first+1))).toString();
+    for(let i = 1; i < 8; i++) {
+        let next = new Date(choosenDate.getTime());
+        next.setDate(first+i);
+        // console.log(next);
+        // console.log(next.toString());
+    }
+    console.log(first);
+    console.log(firstDay);
 
     //Set zero in front of day/month if 1 digit
     if (currentDay < 10) {
@@ -41,7 +62,15 @@ function setDateButton(currentMonth = new Date().getMonth(),
     if (currentMonth < 10){
         currentMonth = '0' + currentMonth;
     }
-    calendarButtons.text(`${currentMonth}.${currentDay}.${currentYear}`);
+
+    // 
+    if (currentWeek < 10){
+        currentWeek = '0' + currentWeek;
+    }
+
+
+    dateBtn.text(`${currentMonth}.${currentDay}.${currentYear}`);
+    weekBtn.text(`${currentWeek}`);
 
     closeModal();
 };
@@ -59,6 +88,7 @@ function load() {
     let day = dt.getDate();
     let month = dt.getMonth();
     let year = dt.getFullYear();
+    
 
 
     // Get first day of month
@@ -75,8 +105,6 @@ function load() {
         day: 'numeric',
     })
 
-    console.log(firstDayofMonth);
-    console.log(dateString);
 
     // amount of blank days at the beginning of calendar
     const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
@@ -92,7 +120,7 @@ function load() {
         daySquare.classList.add('day');
 
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-        // console.log(dayString);
+         console.log('daystring ' + dayString);
 
         if (i > paddingDays) {
             daySquare.innerText = i - paddingDays;
@@ -101,6 +129,7 @@ function load() {
             if(i - paddingDays === day && nav === 0){
                 daySquare.id = 'currentDay';
             }
+            
             
 
             daySquare.addEventListener('click', (e) => {
