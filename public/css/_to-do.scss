@@ -337,3 +337,39 @@ button {
     background-color: rgba(0,0,0,0.8);
   }
 }
+
+#monday{
+  grid-column: 4/7;
+  grid-row: 1/5;
+}
+
+#tuesday{
+  grid-column: 7/10;
+  grid-row: 1/5;
+}
+
+#wednesday{
+  grid-column: 10/13;
+  grid-row: 1/5;
+}
+
+#thursday{
+  grid-column: 1/4;
+  grid-row: 5/10;
+}
+
+#friday{
+  grid-column: 4/7;
+  grid-row: 5/10;
+}
+
+#saturday{
+  grid-column: 7/10;
+  grid-row: 5/10;
+}
+
+#sunday{
+  grid-column: 10/13;
+  grid-row: 5/10;
+}
+

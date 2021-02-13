@@ -6,6 +6,7 @@ const calendarButtons = $('.calendar-buttons');
 const dateBtn = $('.date-button');
 const weekBtn = $('.week-button');
 const modalCloseBtn = $('.modal-close-btn');
+let currentWeekDays = [];
 
 let nav = 0;
 let clicked = null;
@@ -17,7 +18,7 @@ const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 initButtons();
 load();
 setDateButton();
-calendarButtons.click(openModal);
+dateBtn.click(openModal);
 modalCloseBtn.click(closeModal);
 
 function openModal() {
@@ -41,17 +42,20 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
     let currentWeek = choosenDate.getWeek();
     console.log('hier '+choosenDate);
 
+    
     // Get Weekdays // Stackoverflow
     let first = choosenDate.getDate() - choosenDate.getDay();
     let firstDay = (new Date(choosenDate.setDate(first+1))).toString();
     for(let i = 1; i < 8; i++) {
         let next = new Date(choosenDate.getTime());
         next.setDate(first+i);
-        // console.log(next);
+        currentWeekDays.push(next);
+        console.log(next);
         // console.log(next.toString());
     }
-    console.log(first);
-    console.log(firstDay);
+    // console.log(first);
+    // console.log(firstDay);
+    
 
     //Set zero in front of day/month if 1 digit
     if (currentDay < 10) {
@@ -74,7 +78,7 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
 
     closeModal();
 };
-
+// console.log(currentWeekDays);
 
 function load() {
     //Current date

@@ -6,6 +6,7 @@ let firstTaskList = $('.task-list .list-name:first');
 let lastTaskList = $('.task-list .list-name:last');
 let deleteListBtn = $('#delete-btn');
 
+// const weekBtn = $('.week-button');
 
 let newTaskInput = $('#new-task-input');
 let newTaskBtn = $('#new-task-btn');
@@ -21,6 +22,8 @@ getActiveList();
     // function get called by default on the first task list of the user
 activeList(firstTaskList);
 deleteListBtn.on('click', deleteList);
+
+weekBtn.click(weekOverview);
 
 newTaskBtn.on('click', addNewTask);
 checkbox.on('click', finishedTask);
@@ -290,3 +293,81 @@ function finishedTask() {
 function checkForNewDate(){
     activeList(firstTaskList);
 }
+
+
+/*!!! Week overview !!!*/
+function weekOverview(){
+    const toDoDayView = $('#to-do-day-view');
+    const taskListDayView = $('#all-tasks-day-view');
+
+    toDoDayView.hide();
+
+    taskListDayView.css({'grid-column': '1/3', 'margin-top': '30px'});
+
+    createWeekLists();
+
+    activeList(firstTaskList);
+
+
+
+}
+console.log(currentWeekDays[0].getDate());
+
+function createWeekLists() {
+    //Init var
+    const originalToDoList = $('#to-do-day-view');
+
+    let Test = currentWeekDays[0];
+
+    //Create to-do-list for monday
+    let monday = `<div class="todo-list week-view" id="monday">
+    <div class="todo-header">
+        <p>${Test}</p>
+        <h2 class="list-title"></h2>
+        <p class="task-count"></p>
+    </div>
+
+    <div class="todo-body">
+        <div class="to-do-list-tasks">
+            <div class="tasks">
+                <div class="task" id="task-div">
+                    <input type="checkbox" class="task-checkbox" id="task-1">
+                    <label for="task-1">
+                        <span class="custom-checkbox"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="new-task-creator">
+            <form action="">
+                <input id="new-task-input" type="text" class="new task" placeholder="new task name"
+                    aria-label="new task name">
+                <button id="new-task-btn" class="btn create" data-userid=" aria-label="create new task">+</button>
+            </form>
+        </div>
+    </div>
+</div>`
+
+    // Clone the weekdays
+    let tuesday = $(monday).clone();
+    let wednesday = $(monday).clone();
+    let thursday = $(monday).clone();
+    let friday = $(monday).clone();
+    let saturday = $(monday).clone();
+    let sunday = $(monday).clone();
+
+    // Set the ID's
+    tuesday.attr('id', 'tuesday');
+    wednesday.attr('id', 'wednesday');
+    thursday.attr('id', 'thursday');
+    friday.attr('id', 'friday');
+    saturday.attr('id', 'saturday');
+    sunday.attr('id', 'sunday');
+
+    // Insert the elment in the DOM
+    originalToDoList.after(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+
+    
+}
+

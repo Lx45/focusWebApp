@@ -16,7 +16,7 @@ require APPROOT . '/views/inc/navigation.php';
     </div>
 
 
-    <div class="all-tasks">
+    <div class="all-tasks" id="all-tasks-day-view">
         <h2 class="task-list-title">My lists</h2>
         <div class="all-tasks-list">
             <ul class="task-list">
@@ -34,7 +34,7 @@ require APPROOT . '/views/inc/navigation.php';
     </div>
 
 
-    <div class="todo-list">
+    <div class="todo-list" id="to-do-day-view">
         <div class="todo-header">
             <h2 class="list-title"></h2>
             <p class="task-count"></p>
