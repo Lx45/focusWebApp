@@ -291,39 +291,47 @@ function finishedTask() {
 
 /*!!! If date changed reload content!!!*/
 function checkForNewDate(){
+    //Init Var
+    const toDoDayView = $('#to-do-day-view');
+    const taskListDayView = $('#all-tasks-day-view');
+    let weekView = $('.week-view')
+
+    // Set back to initial location
+    taskListDayView.css({'grid-column': '5/8', 'margin-top': '30px'});
+    // Display dayview
+    toDoDayView.show();
+    // remove weekview
+    weekView.remove();
+    //refresh list
     activeList(firstTaskList);
 }
 
 
 /*!!! Week overview !!!*/
 function weekOverview(){
+    // Init var
     const toDoDayView = $('#to-do-day-view');
     const taskListDayView = $('#all-tasks-day-view');
-
+    // hide dayview
     toDoDayView.hide();
-
+    // move tasklist
     taskListDayView.css({'grid-column': '1/3', 'margin-top': '30px'});
-
+    // Create WeekOverview
     createWeekLists();
-
+    // refresh List
     activeList(firstTaskList);
 
-
-
 }
-console.log(currentWeekDays[0].toLocaleString('en-us', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-}));
+
 
 function createWeekLists() {
     //Init var
     const originalToDoList = $('#to-do-day-view');
+    let weekView = $('.week-view')
     let currentWeekDayDates = [];
     let DomDay = [];
 
+    
     // Change the display of the dates
     for(let i = 0; i< currentWeekDays.length; i++){
         let changedDays = currentWeekDays[i].toLocaleString('en-us', {
@@ -334,7 +342,9 @@ function createWeekLists() {
     })
     currentWeekDayDates.push(changedDays);
 }
-
+    
+    // Clear view if another week is already displayed
+    weekView.remove();
 
     //Create to-do-list for weekoverview
     let dayProtoTyp = `<div class="todo-list week-view" id="monday">
@@ -390,9 +400,14 @@ function createWeekLists() {
 
     // Set the date and day to correct lists
     function setDayText(day, index){
+        // $(day).find('.day').text('');
         $(day).find('.day').text(currentWeekDayDates[index]); 
     }
     DomDay.forEach(setDayText);
+
+    // Clear arrays
+    currentWeekDays= [];
+    currentWeekDayDates = [];
     
 }
 
