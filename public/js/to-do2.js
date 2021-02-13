@@ -311,19 +311,35 @@ function weekOverview(){
 
 
 }
-console.log(currentWeekDays[0].getDate());
+console.log(currentWeekDays[0].toLocaleString('en-us', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+}));
 
 function createWeekLists() {
     //Init var
     const originalToDoList = $('#to-do-day-view');
+    let currentWeekDayDates = [];
+    let DomDay = [];
 
-    let Test = currentWeekDays[0];
+    // Change the display of the dates
+    for(let i = 0; i< currentWeekDays.length; i++){
+        let changedDays = currentWeekDays[i].toLocaleString('en-us', {
+                      month: 'numeric',
+                 day: 'numeric',
+            weekday: 'long',
+                year: 'numeric',
+    })
+    currentWeekDayDates.push(changedDays);
+}
 
-    //Create to-do-list for monday
-    let monday = `<div class="todo-list week-view" id="monday">
-    <div class="todo-header">
-        <p>${Test}</p>
-        <h2 class="list-title"></h2>
+
+    //Create to-do-list for weekoverview
+    let dayProtoTyp = `<div class="todo-list week-view" id="monday">
+    <div class="todo-header header-weekview">
+        <p class="day"></p>
         <p class="task-count"></p>
     </div>
 
@@ -350,12 +366,13 @@ function createWeekLists() {
 </div>`
 
     // Clone the weekdays
-    let tuesday = $(monday).clone();
-    let wednesday = $(monday).clone();
-    let thursday = $(monday).clone();
-    let friday = $(monday).clone();
-    let saturday = $(monday).clone();
-    let sunday = $(monday).clone();
+    let monday = $(dayProtoTyp).clone();
+    let tuesday = $(dayProtoTyp).clone();
+    let wednesday = $(dayProtoTyp).clone();
+    let thursday = $(dayProtoTyp).clone();
+    let friday = $(dayProtoTyp).clone();
+    let saturday = $(dayProtoTyp).clone();
+    let sunday = $(dayProtoTyp).clone();
 
     // Set the ID's
     tuesday.attr('id', 'tuesday');
@@ -368,6 +385,14 @@ function createWeekLists() {
     // Insert the elment in the DOM
     originalToDoList.after(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
 
+    // Push to-do-list elements in array
+    DomDay.push(monday, tuesday, wednesday, thursday, friday, saturday, sunday)
+
+    // Set the date and day to correct lists
+    function setDayText(day, index){
+        $(day).find('.day').text(currentWeekDayDates[index]); 
+    }
+    DomDay.forEach(setDayText);
     
 }
 

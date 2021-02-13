@@ -231,6 +231,24 @@ nav .disabled {
   font-size: 14px;
 }
 
+.todo-list .header-weekview {
+  padding: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.todo-list .header-weekview .day {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 0;
+  padding-top: 0;
+}
+
 .todo-list .todo-body {
   padding: 2rem;
   position: relative;
