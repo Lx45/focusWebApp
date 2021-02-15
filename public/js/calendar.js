@@ -40,7 +40,7 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
 
     // Get Week
     let currentWeek = choosenDate.getWeek();
-    console.log('hier '+choosenDate);
+    // console.log('hier '+choosenDate);
 
     
     // Get Weekdays // Stackoverflow
@@ -49,10 +49,18 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
     for(let i = 1; i < 8; i++) {
         let next = new Date(choosenDate.getTime());
         next.setDate(first+i);
+
+        // let day = next.getDate();
+        // let month = next.getMonth();
+        // let year = next.getFullYear();
+        
+
         currentWeekDays.push(next);
-        console.log(next);
+        
+        // console.log(next);
         // console.log(next.toString());
     }
+    console.log(currentWeekDays);
     // console.log(first);
     // console.log(firstDay);
     
@@ -112,7 +120,7 @@ function load() {
 
     // amount of blank days at the beginning of calendar
     const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
-    console.log(paddingDays);
+    // console.log(paddingDays);
     // Set name of viewed month on top of calendar
     document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
 
@@ -124,7 +132,7 @@ function load() {
         daySquare.classList.add('day');
 
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-         console.log('daystring ' + dayString);
+        //  console.log('daystring ' + dayString);
 
         if (i > paddingDays) {
             daySquare.innerText = i - paddingDays;
@@ -138,7 +146,7 @@ function load() {
 
             daySquare.addEventListener('click', (e) => {
                 clickedDay = e.target.innerText;
-                console.log(day);
+                // console.log(day);
                 getClickedDate(month, clickedDay, year)
             })
         } else {
@@ -148,7 +156,7 @@ function load() {
 
         calendar.appendChild(daySquare);
     }
-    console.log(paddingDays);
+    // console.log(paddingDays);
 }
 
 function initButtons() {
@@ -169,4 +177,4 @@ function getClickedDate(month, clickedDay, year) {
 
 
   let test = new Date();
-console.log(test.getWeek());
+// console.log(test.getWeek());

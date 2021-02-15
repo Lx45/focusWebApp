@@ -59,7 +59,7 @@ require APPROOT . '/views/inc/navigation.php';
                 <form action="">
                     <input id="new-task-input" type="text" class="new task" placeholder="new task name"
                         aria-label="new task name">
-                    <button id="new-task-btn" class="btn create" data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new task">+</button>
+                    <button id="new-task-btn" class="btn create " data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new task">+</button>
                 </form>
             </div>
             <div class="delete-stuff">

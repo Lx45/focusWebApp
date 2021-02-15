@@ -457,6 +457,10 @@ nav .disabled {
   opacity: 1;
 }
 
+#to-do-day-view {
+  visibility: visible;
+}
+
 .modal-bg {
   position: fixed;
   top: 0;
