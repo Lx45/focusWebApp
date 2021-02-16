@@ -11,8 +11,8 @@ require APPROOT . '/views/inc/navigation.php';
     <div class="buttons">
         <button class="calendar-buttons date-button"></button>
         <button class="calendar-buttons week-button"></button>
-        <!--<button class="calendar-buttons">Month</button>
-        <button class="calendar-buttons">Year</button> -->
+        <button class="calendar-buttons clear-button">Clear Inputs</button>
+        <!--<button class="calendar-buttons">Year</button> -->
     </div>
 
 
@@ -43,15 +43,15 @@ require APPROOT . '/views/inc/navigation.php';
         <div class="todo-body">
             <div class="to-do-list-tasks">
                 <div class="tasks">
-                    <?php foreach($data['toDoListOverview'] as $toDoOverview) : ?>
+                    <?php //foreach($data['toDoListOverview'] as $toDoOverview) : ?>
                     <div class="task" id="task-div">
                         <input type="checkbox" class="task-checkbox" id="task-1">
                         <label for="task-1">
                             <span class="custom-checkbox"></span>
-                            <?php echo $toDoOverview['taskname']?>
+                            <?php //echo $toDoOverview['taskname']?>
                         </label>
                     </div>
-                    <?php endforeach; ?>
+                    <?php //endforeach; ?>
                 </div>
             </div>
 

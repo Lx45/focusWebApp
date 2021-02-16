@@ -49,7 +49,7 @@
 
 			$data = [
 				'userId' => $_SESSION['user_id'],
-				// 'listId' => trim(htmlspecialchars($_POST['activeLiId'])), 
+				'listId' => trim(htmlspecialchars($_POST['activeLiId'])), 
 				'date' => json_decode(stripslashes($_POST['jsonDate'])) 
 			];
 
@@ -61,7 +61,7 @@
 			$sat = $data['date'][5];
 			$sun = $data['date'][6];
 
-			error_log($monday);
+			
 			error_log('Test'.print_r($data, 1));
 			
 			// //call model function

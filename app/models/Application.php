@@ -59,10 +59,11 @@ class Application {
 
     public function toDoListOverviewWeek($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun) {
         // PDO statement
-        $this->db->query('SELECT * FROM tasks WHERE status != 3 AND userid = :userid AND date = :mon OR date= :tue OR date= :wed OR date= :thu OR date= :fri OR date= :sat OR date= :sun' );
-
+        $this->db->query('SELECT * FROM tasks WHERE status != 3 AND userid = :userid AND listid = :listid AND (date = :mon OR date= :tue OR date= :wed OR date= :thu OR date= :fri OR date= :sat OR date= :sun)' );
+        error_log($data['listId']);
         //Bind values
         $this->db->bind(':userid', $data['userId']);
+        $this->db->bind(':listid', $data['listId']);
         $this->db->bind(':mon', $mon);
         $this->db->bind(':tue', $tue);
         $this->db->bind(':wed', $wed);

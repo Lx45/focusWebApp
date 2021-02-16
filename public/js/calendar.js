@@ -8,9 +8,10 @@ const weekBtn = $('.week-button');
 const modalCloseBtn = $('.modal-close-btn');
 let currentWeekDays = [];
 
+
 let nav = 0;
 let clicked = null;
-// let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+
 
 const calendar = document.getElementById('calendar');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -22,7 +23,7 @@ dateBtn.click(openModal);
 modalCloseBtn.click(closeModal);
 
 function openModal() {
-
+    currentWeekDays = [];
     modal.css({'visibility': 'visible'});
 }
 
@@ -42,7 +43,8 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
     let currentWeek = choosenDate.getWeek();
     // console.log('hier '+choosenDate);
 
-    
+    // Empty array, if function was already called
+    currentWeekDays= [];
     // Get Weekdays // Stackoverflow
     let first = choosenDate.getDate() - choosenDate.getDay();
     let firstDay = (new Date(choosenDate.setDate(first+1))).toString();
@@ -50,9 +52,21 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
         let next = new Date(choosenDate.getTime());
         next.setDate(first+i);
 
-        // let day = next.getDate();
-        // let month = next.getMonth();
-        // let year = next.getFullYear();
+        let day = next.getDate();
+        let month = next.getMonth();
+        let year = next.getFullYear();
+
+            //Set zero in front of day/month if 1 digit
+            if (day < 10) {
+            day = '0' + day;
+            }
+            // +1 cause cpu counts up from 0
+            month = month + 1;
+            if (month < 10){
+                month = '0' + month;
+            }
+
+        next = `${month}.${day}.${year}`;
         
 
         currentWeekDays.push(next);
@@ -60,7 +74,7 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
         // console.log(next);
         // console.log(next.toString());
     }
-    console.log(currentWeekDays);
+    console.log('fired'+currentWeekDays);
     // console.log(first);
     // console.log(firstDay);
     
@@ -82,7 +96,7 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
 
 
     dateBtn.text(`${currentMonth}.${currentDay}.${currentYear}`);
-    weekBtn.text(`${currentWeek}`);
+    weekBtn.text(`Week ${currentWeek}`);
 
     closeModal();
 };
