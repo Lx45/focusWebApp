@@ -7,6 +7,7 @@ let lastTaskList = $('.task-list .list-name:last');
 let deleteListBtn = $('#delete-btn');
 let clearBtn =$('.clear-button');
 
+
 // const weekBtn = $('.week-button');
 
 let newTaskInput = $('#new-task-input');
@@ -122,7 +123,7 @@ function addNewList(e) {
 
 /*!!!Add new Task!!!*/
 function addNewTask(e) {
-
+    console.log('addNewTask');
     // Init data
     let newTask = newTaskInput.val();
     let userId = newTaskBtn[0].dataset.userid;
@@ -335,6 +336,7 @@ function checkForNewDate(){
 }
 
 
+
 /*!!! Week overview !!!*/
 function weekOverview(e){
     e.preventDefault();
@@ -415,7 +417,7 @@ function createWeekLists() {
             <form action="">
                 <input id="new-task-input" type="text" class="new task" placeholder="new task name"
                     aria-label="new task name">
-                <button id="new-task-btn" class="btn create" data-userid=" aria-label="create new task">+</button>
+                <button  class="btn create new-task-btn" data-userid=" aria-label="create new task">+</button>
             </form>
         </div>
     </div>
@@ -458,6 +460,8 @@ function createWeekLists() {
         $(day).find('.to-do-day').text(currentWeekDayDates[index]); 
     }
     DomDay.forEach(setDayText);  
+
+    newTaskBtnWeek = $('.new-task-btn');
 
     console.log('createWeekList loaded');
     
@@ -547,12 +551,49 @@ function loadTasksWeekOverview(activeLiId){
 }
 
 function clearStuff(e){
-    console.log('test')
+    console.log($('.grid').children('.week-view'));
     e.preventDefault();
 
-    let weekView = $('.week-view');
-    let tasks = $('.tasks')
-    console.log(weekView);
-    // weekView.remove()
-    tasks.html('');
+    // let weekView = $('.week-view');
+    // let tasks = $('.tasks')
+    // console.log(weekView);
+    // // weekView.remove()
+    // tasks.html('');
+}
+
+$(document).on('click', '.new-task-btn', addNewTaskWeekView);
+
+
+function addNewTaskWeekView(e) {
+    e.preventDefault();
+    let btn = e.target;
+    let newTask = $(btn).prev().val();
+    let activeLi = $('.active-list');
+    let activeLiId = activeLi[0].dataset.listid;
+    let userId = newTaskBtn[0].dataset.userid;
+    let date = $(btn).parents('.week-view').children('.header-weekview').children('.weekday-long').children('.to-do-day').text();
+
+    $.ajax({
+        url: '/focusWebApp/Applications/addNewTask',
+		type: 'post',
+		async: true,
+		data: {
+            "newTask": newTask,
+            "userId": userId,
+            "activeLiId": activeLiId,
+            "date": date
+		},
+		statusCode: {
+			200: function(feedback){
+                $(btn).prev().val('');
+                loadTasksWeekOverview(activeLiId);
+				alert('success');
+			},
+			422: function(feedback){
+                alert('failed');
+			}
+		},
+    });
+    
+    
 }

@@ -177,6 +177,8 @@
 
 		}
 
+		
+
 		public function deleteList() {
 
 			if (isAjaxCall()) {
