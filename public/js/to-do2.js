@@ -1,31 +1,25 @@
 /*!!!Init Variables!!!*/
-// let selectedDate = $('.date-button');
 let newListInput = $('#new-list-input');
 let newListBtn = $('#new-list-btn');
 let firstTaskList = $('.task-list .list-name:first');
 let lastTaskList = $('.task-list .list-name:last');
 let deleteListBtn = $('#delete-btn');
-let clearBtn =$('.clear-button');
 
-
-// const weekBtn = $('.week-button');
-
-let newTaskInput = $('#new-task-input');
-let newTaskBtn = $('#new-task-btn');
+let newTaskInput = $('.new-task-input');
+let newTaskBtn = $('.new-task-btn');
 let checkbox = $('.task-checkbox');
 let task = $('#task.div')
+
+let selectedDate = $('.date-button');
+$(document).on('click', '.new-task-btn-week', addNewTaskWeekView);
 
 let currentWeekDayDates = [];
 
 /*!!!Eventhandler!!!*/
 newListBtn.on('click', addNewList);
 getActiveList();
-    // function get called by default on the first task list of the user
 activeList(firstTaskList);
 deleteListBtn.on('click', deleteList);
-clearBtn.click(clearStuff);
-
-
 newTaskBtn.on('click', addNewTask);
 checkbox.on('click', finishedTask);
 
@@ -34,13 +28,8 @@ function getActiveList() {
     li.on('click',activeList);
 }
 
-
-
-let selectedDate = $('.date-button');
-
 selectedDate.bind('DOMSubtreeModified', checkForNewDate)
 weekBtn.click(weekOverview);
-
 
 
 /*!!!Choose active Tasklist!!!*/
@@ -316,7 +305,6 @@ function finishedTask() {
 
 
 
-
 /*!!! If date changed reload content!!!*/
 function checkForNewDate(){
     //Init Var
@@ -336,7 +324,6 @@ function checkForNewDate(){
 }
 
 
-
 /*!!! Week overview !!!*/
 function weekOverview(e){
     e.preventDefault();
@@ -348,41 +335,28 @@ function weekOverview(e){
     toDoDayView.addClass('hide');
     // move tasklist
     taskListDayView.css({'grid-column': '1/3', 'margin-top': '30px'});
-    
-    //Get Current weekdays
-    // getCurrentWeekdays();
     // Create WeekOverview
     createWeekLists();
     // set active List
-     activeList(firstTaskList);
-    // refresh tasks
-    //  loadTasksWeekOverview()
-
-    // Clear arrays
-    // currentWeekDays= [];
-    // currentWeekDayDates = [];
-
-    // console.log($('.tasks'));
-    // $('.tasks').empty();
-    console.log('weekOverview loaded');
+    activeList(firstTaskList);
 }
 
 
-
 function getCurrentWeekdays() {
+        //Clear array if function has already been called
         currentWeekDayDates = [];
         // Change the display of the dates
         for(let i = 0; i< currentWeekDays.length; i++){
             let changedDays = currentWeekDays[i].toLocaleString('en-us', {
                           month: 'numeric',
                      day: 'numeric',
-                // weekday: 'long',
                     year: 'numeric',
         })
     
-         
+         // Change the '/' with '.'
         changedDays = changedDays.replace("/", ".");
         changedDays = changedDays.replace("/", ".");
+        // push dates in array
         currentWeekDayDates.push(changedDays);
     }
 }
@@ -394,8 +368,6 @@ function createWeekLists() {
     let DomDay = [];
     getCurrentWeekdays();
 
-
-    console.log(currentWeekDayDates);
     // Clear view if another week is already displayed
     weekView.remove();
 
@@ -415,9 +387,9 @@ function createWeekLists() {
 
         <div class="new-task-creator">
             <form action="">
-                <input id="new-task-input" type="text" class="new task" placeholder="new task name"
+                <input type="text" class="new task new-task-input" placeholder="new task name"
                     aria-label="new task name">
-                <button  class="btn create new-task-btn" data-userid=" aria-label="create new task">+</button>
+                <button  class="btn create new-task-btn-week" data-userid=" aria-label="create new task">+</button>
             </form>
         </div>
     </div>
@@ -433,7 +405,7 @@ function createWeekLists() {
     let saturday = $(dayProtoTyp).clone();
     let sunday = $(dayProtoTyp).clone();
 
-    // Set the ID's
+    // Set the ID's and dayname
     monday.find('.header-weekview').html('<p class="weekday-long">Monday, <span class="to-do-day"></span></p><p class="task-count"></p>');
     tuesday.attr('id', 'tuesday');
     tuesday.find('.header-weekview').html('<p class="weekday-long">Tuesday, <span class="to-do-day"></span></p><p class="task-count"></p>');
@@ -460,25 +432,19 @@ function createWeekLists() {
         $(day).find('.to-do-day').text(currentWeekDayDates[index]); 
     }
     DomDay.forEach(setDayText);  
-
-    newTaskBtnWeek = $('.new-task-btn');
-
-    console.log('createWeekList loaded');
     
 }
 
 function loadTasksWeekOverview(activeLiId){
-
-    console.log(activeLiId);
+    //Get the current days
     getCurrentWeekdays();
 
-    console.log(currentWeekDayDates);
+    //Convert to JSON
     let jsonDate = JSON.stringify(currentWeekDayDates);
 
-    console.log('jetzt sollte es sich leeren');
+    // Remove Task if they already have been loaded
      $('.tasks').html('');
-    // console.log($());
-    console.log(activeLiId);
+    
     $.ajax({
         url: '/focusWebApp/Applications/loadTasksWeek',
 		type: 'post',
@@ -486,7 +452,6 @@ function loadTasksWeekOverview(activeLiId){
 		data: {
             "activeLiId": activeLiId,
             "jsonDate": jsonDate
-            // "userId": userId
         },
         statusCode: {
             200: function(tasks){
@@ -496,21 +461,18 @@ function loadTasksWeekOverview(activeLiId){
                     // Tasks found
                     let listsArray = []
                     let lists = $('.week-view');
+
+                    //Get every to-do-list-elment and push into array
                     for(let i = 0; i< lists.length; i++){
-                        // console.log(lists[i]);
                         listsArray.push(lists[i]);
                     }
-                    console.log(listsArray);
+                    
+                    //display task according to their day
                     listsArray.forEach(function(list){
-                        // console.log(list);
                         let date = $(list).find('.to-do-day').text();
-                        // console.log(date);
-                        // console.log(tasks);
                         let tasksDiv = $(list).find('.tasks');
                         let toDoListTasks = $(list).find('.to-do-list-tasks');
-                        // console.log(tasksDiv);
-
-                            
+                   
                         tasks.forEach(function(task){
                             
                             if(date === task.date) {
@@ -523,9 +485,9 @@ function loadTasksWeekOverview(activeLiId){
                                 ${task.taskname}
                             </label>
                             </div>`
-                            // console.log(task.status);
+                        
                             let status = task.status;
-                            // console.log(status);
+                            
                             tasksDiv.append(toDo);
                             }
                         })
@@ -546,26 +508,10 @@ function loadTasksWeekOverview(activeLiId){
             }
         },
     })
-
-    console.log('loadtaskweekoverview loaded');
 }
-
-function clearStuff(e){
-    console.log($('.grid').children('.week-view'));
-    e.preventDefault();
-
-    // let weekView = $('.week-view');
-    // let tasks = $('.tasks')
-    // console.log(weekView);
-    // // weekView.remove()
-    // tasks.html('');
-}
-
-$(document).on('click', '.new-task-btn', addNewTaskWeekView);
-
 
 function addNewTaskWeekView(e) {
-    e.preventDefault();
+    //Init data
     let btn = e.target;
     let newTask = $(btn).prev().val();
     let activeLi = $('.active-list');
@@ -595,5 +541,6 @@ function addNewTaskWeekView(e) {
 		},
     });
     
-    
+    //Prevent default behavior
+    e.preventDefault();
 }

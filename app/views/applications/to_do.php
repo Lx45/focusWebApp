@@ -11,7 +11,7 @@ require APPROOT . '/views/inc/navigation.php';
     <div class="buttons">
         <button class="calendar-buttons date-button"></button>
         <button class="calendar-buttons week-button"></button>
-        <button class="calendar-buttons clear-button">Clear Inputs</button>
+        <!-- <button class="calendar-buttons clear-button">Clear Inputs</button> -->
         <!--<button class="calendar-buttons">Year</button> -->
     </div>
 
@@ -57,13 +57,13 @@ require APPROOT . '/views/inc/navigation.php';
 
             <div class="new-task-creator">
                 <form action="">
-                    <input id="new-task-input" type="text" class="new task" placeholder="new task name"
+                    <input type="text" class="new task new-task-input" placeholder="new task name"
                         aria-label="new task name">
-                    <button id="new-task-btn" class="btn create " data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new task">+</button>
+                    <button class="btn create new-task-btn" data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new task">+</button>
                 </form>
             </div>
             <div class="delete-stuff">
-                <button class="btn delete">Clear completed tasks</button>
+                <!-- <button class="btn delete">Clear completed tasks</button> -->
                 <button id="delete-btn" class="btn delete">Delete List</button>
             </div>
         </div>
