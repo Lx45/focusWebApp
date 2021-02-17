@@ -36,8 +36,36 @@
 				'date' => trim(htmlspecialchars($_POST['date'])) 
 			];
 
+			
 			//call model function
 			$toDoListOverview = $this->applicationModel->toDoListOverview($data);
+
+			if(isAjaxCall()){
+				$this->json($toDoListOverview);
+			}
+		}
+
+		public function loadTasksWeek(){
+
+			$data = [
+				'userId' => $_SESSION['user_id'],
+				'listId' => trim(htmlspecialchars($_POST['activeLiId'])), 
+				'date' => json_decode(stripslashes($_POST['jsonDate'])) 
+			];
+
+			$mon = $data['date'][0];
+			$tue = $data['date'][1];
+			$wed = $data['date'][2];
+			$thu = $data['date'][3];
+			$fri = $data['date'][4];
+			$sat = $data['date'][5];
+			$sun = $data['date'][6];
+
+			
+			error_log('Test'.print_r($data, 1));
+			
+			// //call model function
+			 $toDoListOverview = $this->applicationModel->toDoListOverviewWeek($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun);
 
 			if(isAjaxCall()){
 				$this->json($toDoListOverview);
@@ -148,6 +176,8 @@
 			}
 
 		}
+
+		
 
 		public function deleteList() {
 

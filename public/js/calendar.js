@@ -6,10 +6,12 @@ const calendarButtons = $('.calendar-buttons');
 const dateBtn = $('.date-button');
 const weekBtn = $('.week-button');
 const modalCloseBtn = $('.modal-close-btn');
+let currentWeekDays = [];
+
 
 let nav = 0;
 let clicked = null;
-// let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+
 
 const calendar = document.getElementById('calendar');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -17,11 +19,11 @@ const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 initButtons();
 load();
 setDateButton();
-calendarButtons.click(openModal);
+dateBtn.click(openModal);
 modalCloseBtn.click(closeModal);
 
 function openModal() {
-
+    currentWeekDays = [];
     modal.css({'visibility': 'visible'});
 }
 
@@ -39,19 +41,43 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
 
     // Get Week
     let currentWeek = choosenDate.getWeek();
-    console.log('hier '+choosenDate);
+    // console.log('hier '+choosenDate);
 
+    // Empty array, if function was already called
+    currentWeekDays= [];
     // Get Weekdays // Stackoverflow
     let first = choosenDate.getDate() - choosenDate.getDay();
     let firstDay = (new Date(choosenDate.setDate(first+1))).toString();
     for(let i = 1; i < 8; i++) {
         let next = new Date(choosenDate.getTime());
         next.setDate(first+i);
+
+        let day = next.getDate();
+        let month = next.getMonth();
+        let year = next.getFullYear();
+
+            //Set zero in front of day/month if 1 digit
+            if (day < 10) {
+            day = '0' + day;
+            }
+            // +1 cause cpu counts up from 0
+            month = month + 1;
+            if (month < 10){
+                month = '0' + month;
+            }
+
+        next = `${month}.${day}.${year}`;
+        
+
+        currentWeekDays.push(next);
+        
         // console.log(next);
         // console.log(next.toString());
     }
-    console.log(first);
-    console.log(firstDay);
+    console.log('fired'+currentWeekDays);
+    // console.log(first);
+    // console.log(firstDay);
+    
 
     //Set zero in front of day/month if 1 digit
     if (currentDay < 10) {
@@ -70,11 +96,11 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
 
 
     dateBtn.text(`${currentMonth}.${currentDay}.${currentYear}`);
-    weekBtn.text(`${currentWeek}`);
+    weekBtn.text(`Week ${currentWeek}`);
 
     closeModal();
 };
-
+// console.log(currentWeekDays);
 
 function load() {
     //Current date
@@ -108,7 +134,7 @@ function load() {
 
     // amount of blank days at the beginning of calendar
     const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
-    console.log(paddingDays);
+    // console.log(paddingDays);
     // Set name of viewed month on top of calendar
     document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
 
@@ -120,7 +146,7 @@ function load() {
         daySquare.classList.add('day');
 
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-         console.log('daystring ' + dayString);
+        //  console.log('daystring ' + dayString);
 
         if (i > paddingDays) {
             daySquare.innerText = i - paddingDays;
@@ -134,7 +160,7 @@ function load() {
 
             daySquare.addEventListener('click', (e) => {
                 clickedDay = e.target.innerText;
-                console.log(day);
+                // console.log(day);
                 getClickedDate(month, clickedDay, year)
             })
         } else {
@@ -144,7 +170,7 @@ function load() {
 
         calendar.appendChild(daySquare);
     }
-    console.log(paddingDays);
+    // console.log(paddingDays);
 }
 
 function initButtons() {
@@ -165,4 +191,4 @@ function getClickedDate(month, clickedDay, year) {
 
 
   let test = new Date();
-console.log(test.getWeek());
+// console.log(test.getWeek());

@@ -3,5 +3,6 @@
 	<script type="text/javascript" src="<?php echo URLROOT; ?>/js/calendar-week.js"></script>
 	<script type="text/javascript" src="<?php echo URLROOT; ?>/js/calendar.js"></script>
 	<script type="text/javascript" src="<?php echo URLROOT; ?>/js/to-do2.js"></script>
+	<script type="text/javascript" src="<?php echo URLROOT; ?>/js/to-do-week-view.js"></script>
 </body>
 </html>

@@ -231,6 +231,24 @@ nav .disabled {
   font-size: 14px;
 }
 
+.todo-list .header-weekview {
+  padding: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.todo-list .header-weekview .day {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 0;
+  padding-top: 0;
+}
+
 .todo-list .todo-body {
   padding: 2rem;
   position: relative;
@@ -439,6 +457,10 @@ nav .disabled {
   opacity: 1;
 }
 
+#to-do-day-view {
+  visibility: visible;
+}
+
 .modal-bg {
   position: fixed;
   top: 0;
@@ -634,6 +656,69 @@ nav .disabled {
   height: 100vh;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+#monday {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 3;
+  grid-column: 4/7;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 4;
+  grid-row: 1/5;
+}
+
+#tuesday {
+  -ms-grid-column: 7;
+  -ms-grid-column-span: 3;
+  grid-column: 7/10;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 4;
+  grid-row: 1/5;
+}
+
+#wednesday {
+  -ms-grid-column: 10;
+  -ms-grid-column-span: 3;
+  grid-column: 10/13;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 4;
+  grid-row: 1/5;
+}
+
+#thursday {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1/4;
+  -ms-grid-row: 5;
+  -ms-grid-row-span: 5;
+  grid-row: 5/10;
+}
+
+#friday {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 3;
+  grid-column: 4/7;
+  -ms-grid-row: 5;
+  -ms-grid-row-span: 5;
+  grid-row: 5/10;
+}
+
+#saturday {
+  -ms-grid-column: 7;
+  -ms-grid-column-span: 3;
+  grid-column: 7/10;
+  -ms-grid-row: 5;
+  -ms-grid-row-span: 5;
+  grid-row: 5/10;
+}
+
+#sunday {
+  -ms-grid-column: 10;
+  -ms-grid-column-span: 3;
+  grid-column: 10/13;
+  -ms-grid-row: 5;
+  -ms-grid-row-span: 5;
+  grid-row: 5/10;
 }
 
 .statistic {

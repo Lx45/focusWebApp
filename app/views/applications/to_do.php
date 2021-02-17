@@ -11,12 +11,12 @@ require APPROOT . '/views/inc/navigation.php';
     <div class="buttons">
         <button class="calendar-buttons date-button"></button>
         <button class="calendar-buttons week-button"></button>
-        <!--<button class="calendar-buttons">Month</button>
-        <button class="calendar-buttons">Year</button> -->
+        <!-- <button class="calendar-buttons clear-button">Clear Inputs</button> -->
+        <!--<button class="calendar-buttons">Year</button> -->
     </div>
 
 
-    <div class="all-tasks">
+    <div class="all-tasks" id="all-tasks-day-view">
         <h2 class="task-list-title">My lists</h2>
         <div class="all-tasks-list">
             <ul class="task-list">
@@ -34,7 +34,7 @@ require APPROOT . '/views/inc/navigation.php';
     </div>
 
 
-    <div class="todo-list">
+    <div class="todo-list" id="to-do-day-view">
         <div class="todo-header">
             <h2 class="list-title"></h2>
             <p class="task-count"></p>
@@ -43,27 +43,27 @@ require APPROOT . '/views/inc/navigation.php';
         <div class="todo-body">
             <div class="to-do-list-tasks">
                 <div class="tasks">
-                    <?php foreach($data['toDoListOverview'] as $toDoOverview) : ?>
+                    <?php //foreach($data['toDoListOverview'] as $toDoOverview) : ?>
                     <div class="task" id="task-div">
                         <input type="checkbox" class="task-checkbox" id="task-1">
                         <label for="task-1">
                             <span class="custom-checkbox"></span>
-                            <?php echo $toDoOverview['taskname']?>
+                            <?php //echo $toDoOverview['taskname']?>
                         </label>
                     </div>
-                    <?php endforeach; ?>
+                    <?php //endforeach; ?>
                 </div>
             </div>
 
             <div class="new-task-creator">
                 <form action="">
-                    <input id="new-task-input" type="text" class="new task" placeholder="new task name"
+                    <input type="text" class="new task new-task-input" placeholder="new task name"
                         aria-label="new task name">
-                    <button id="new-task-btn" class="btn create" data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new task">+</button>
+                    <button class="btn create new-task-btn" data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new task">+</button>
                 </form>
             </div>
             <div class="delete-stuff">
-                <button class="btn delete">Clear completed tasks</button>
+                <!-- <button class="btn delete">Clear completed tasks</button> -->
                 <button id="delete-btn" class="btn delete">Delete List</button>
             </div>
         </div>
