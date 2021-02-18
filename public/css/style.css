@@ -345,6 +345,11 @@ nav .disabled {
           transform-origin: left;
 }
 
+.todo-list .todo-body .green {
+  background-color: green;
+  background: green;
+}
+
 .todo-list .todo-body .new-task-creator form {
   display: -webkit-box;
   display: -ms-flexbox;

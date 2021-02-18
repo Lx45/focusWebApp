@@ -23,6 +23,7 @@ deleteListBtn.on('click', deleteList);
 newTaskBtn.on('click', addNewTask);
 checkbox.on('click', finishedTask);
 
+
 function getActiveList() {
     let li = $('li');
     li.on('click',activeList);
@@ -154,7 +155,7 @@ function loadLists(userId){
     //Init data 
     let taskList = $('.all-tasks-list');
 
-    // // // Empty task-list
+    // Empty task-list
      taskList.html('');
 
     $.ajax({
@@ -233,15 +234,26 @@ function loadTasks(activeLiId) {
                     let tasksDiv = $('<div class="tasks"></div>');
 
                     tasks.forEach(function(task){
+                            console.log(task.taskid);
 
-                        let toDo = `
+                        let toDo =`
                         <div class="task" id="task-div">
-                        <input type="checkbox" class="task-checkbox" id="task-${task.taskid}">
+                        <input type="checkbox" class="task-checkbox" id="task-${task.taskid}" data-state="${task.done}" data-taskid="${task.taskid}"` 
+                        
+                        // Check if task is already done
+                        if (task.done === '2'){
+                            toDo +=`checked`
+                        }
+
+                        toDo +=`>
                         <label for="task-${task.taskid}">
                             <span class="custom-checkbox"></span>
                             ${task.taskname}
                         </label>
                         </div>`
+                        
+
+                        
                         // console.log(task.status);
                         let status = task.status;
                         // console.log(status);
@@ -262,6 +274,11 @@ function loadTasks(activeLiId) {
 		},
     });
     console.log('loadtasks loaded');
+}
+
+function test12() {
+    console.log('run');
+    
 }
 
 /*!!!Delete list!!!*/
@@ -293,14 +310,60 @@ function deleteList() {
 }
 
 /*!!!finish task!!!*/
-function finishedTask() {
+function finishedTask(e) {
+    e.stopImmediatePropagation()
+    const dayList = $('#to-do-day-view');
+    let activeLi = $('.active-list');
+    let activeLiId = activeLi[0].dataset.listid;
+    console.log(e.target);
+    let task = e.target;
+    let taskId = task.dataset.taskid;
+    let state = task.dataset.state;
+    console.log(taskId);
+    let done;
+    console.log(state);
+    if(state === '1'){
+        done = "2"
+        console.log('checked')
 
-    console.log('heyho');
-    if(checkbox.prop('checked')){
-        console.log('checked');
     } else {
+        done = "1"
         console.log('unchecked');
     }
+    
+    task;
+     
+        $.ajax({
+            url: '/focusWebApp/Applications/finishedTask',
+            type: 'post',
+            async: true,
+            data: {
+                "taskId": taskId,
+                "done": done
+            },
+            statusCode: {
+                200: function(feedback){
+                    // newTaskInput.val('');
+                    if($(dayList).hasClass('hide')){
+                        console.log('hide')
+                        loadTasksWeekOverview(activeLiId);
+                        console.log('activeList loaded');
+                    } else {
+                        console.log('shown');
+                        loadTasks(activeLiId);
+                        console.log('activeList loaded');
+                    }
+                    alert('success');
+                    
+                },
+                422: function(feedback){
+                    // alert('failed');
+                }
+            },
+        });
+
+
+
 }
 
 
@@ -470,21 +533,28 @@ function loadTasksWeekOverview(activeLiId){
                     //display task according to their day
                     listsArray.forEach(function(list){
                         let date = $(list).find('.to-do-day').text();
-                        let tasksDiv = $(list).find('.tasks');
+                        let tasksDiv = $(list).find('.tasks')
                         let toDoListTasks = $(list).find('.to-do-list-tasks');
                    
                         tasks.forEach(function(task){
                             
                             if(date === task.date) {
 
-                            let toDo = `
-                            <div class="task" id="task-div">
-                            <input type="checkbox" class="task-checkbox" id="task-${task.taskid}">
-                            <label for="task-${task.taskid}">
-                                <span class="custom-checkbox"></span>
-                                ${task.taskname}
-                            </label>
-                            </div>`
+                                let toDo =`
+                                <div class="task" id="task-div">
+                                <input type="checkbox" class="task-checkbox" id="task-${task.taskid}" data-state="${task.done}" data-taskid="${task.taskid}"` 
+                                
+                                // Check if task is already done
+                                if (task.done === '2'){
+                                    toDo +=`checked`
+                                }
+        
+                                toDo +=`>
+                                <label for="task-${task.taskid}">
+                                    <span class="custom-checkbox"></span>
+                                    ${task.taskname}
+                                </label>
+                                </div>`
                         
                             let status = task.status;
                             
@@ -544,3 +614,7 @@ function addNewTaskWeekView(e) {
     //Prevent default behavior
     e.preventDefault();
 }
+
+
+
+
