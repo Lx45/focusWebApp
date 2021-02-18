@@ -23,6 +23,7 @@ deleteListBtn.on('click', deleteList);
 newTaskBtn.on('click', addNewTask);
 checkbox.on('click', finishedTask);
 
+
 function getActiveList() {
     let li = $('li');
     li.on('click',activeList);
@@ -154,7 +155,7 @@ function loadLists(userId){
     //Init data 
     let taskList = $('.all-tasks-list');
 
-    // // // Empty task-list
+    // Empty task-list
      taskList.html('');
 
     $.ajax({
@@ -310,6 +311,8 @@ function deleteList() {
 
 /*!!!finish task!!!*/
 function finishedTask(e) {
+    e.stopImmediatePropagation()
+    const dayList = $('#to-do-day-view');
     let activeLi = $('.active-list');
     let activeLiId = activeLi[0].dataset.listid;
     console.log(e.target);
@@ -328,7 +331,8 @@ function finishedTask(e) {
         console.log('unchecked');
     }
     
-        
+    task;
+     
         $.ajax({
             url: '/focusWebApp/Applications/finishedTask',
             type: 'post',
@@ -340,16 +344,23 @@ function finishedTask(e) {
             statusCode: {
                 200: function(feedback){
                     // newTaskInput.val('');
-                     loadTasks(activeLiId);
+                    if($(dayList).hasClass('hide')){
+                        console.log('hide')
+                        loadTasksWeekOverview(activeLiId);
+                        console.log('activeList loaded');
+                    } else {
+                        console.log('shown');
+                        loadTasks(activeLiId);
+                        console.log('activeList loaded');
+                    }
                     alert('success');
+                    
                 },
                 422: function(feedback){
                     // alert('failed');
                 }
             },
         });
-
-
 
 
 
@@ -529,14 +540,21 @@ function loadTasksWeekOverview(activeLiId){
                             
                             if(date === task.date) {
 
-                            let toDo = `
-                            <div class="task" id="task-div">
-                            <input type="checkbox" class="task-checkbox" id="task-${task.taskid}" data-taskid="${task.taskid}">
-                            <label for="task-${task.taskid}">
-                                <span class="custom-checkbox"></span>
-                                ${task.taskname}
-                            </label>
-                            </div>`
+                                let toDo =`
+                                <div class="task" id="task-div">
+                                <input type="checkbox" class="task-checkbox" id="task-${task.taskid}" data-state="${task.done}" data-taskid="${task.taskid}"` 
+                                
+                                // Check if task is already done
+                                if (task.done === '2'){
+                                    toDo +=`checked`
+                                }
+        
+                                toDo +=`>
+                                <label for="task-${task.taskid}">
+                                    <span class="custom-checkbox"></span>
+                                    ${task.taskname}
+                                </label>
+                                </div>`
                         
                             let status = task.status;
                             
