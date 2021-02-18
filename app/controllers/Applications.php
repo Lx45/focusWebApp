@@ -198,4 +198,24 @@
 			}
 		}
 
+		public function finishedTask() {
+
+			if (isAjaxCall()) {
+				//Push current productId into a variable
+				$taskId = htmlspecialchars($_POST['taskId']);
+				$done = htmlspecialchars($_POST['done']);
+				
+				//save time of delete
+    			// $deletedOn = time();
+
+    			if ($this->applicationModel->finishedTask($taskId, $done)) {
+    				//Product succsefully deleted
+    				http_response_code(200);
+    			} else {
+    				//failed 
+   					http_response_code(422);
+   				}
+			}
+		}
+
 	} 

@@ -15,7 +15,7 @@ require APPROOT . '/views/inc/navigation.php';
         <!--<button class="calendar-buttons">Year</button> -->
     </div>
 
-
+    
     <div class="all-tasks" id="all-tasks-day-view">
         <h2 class="task-list-title">My lists</h2>
         <div class="all-tasks-list">
@@ -43,6 +43,7 @@ require APPROOT . '/views/inc/navigation.php';
         <div class="todo-body">
             <div class="to-do-list-tasks">
                 <div class="tasks">
+                    //todo: clean task div out of html markup
                     <?php //foreach($data['toDoListOverview'] as $toDoOverview) : ?>
                     <div class="task" id="task-div">
                         <input type="checkbox" class="task-checkbox" id="task-1">

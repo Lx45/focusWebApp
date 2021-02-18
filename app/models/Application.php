@@ -108,4 +108,18 @@ class Application {
 		};
  	}
 
+     public function finishedTask($taskId, $done) {
+		//PDO statement
+		$this->db->query('UPDATE tasks SET done = :done WHERE taskid = :taskId');
+ 		$this->db->bind(':done', $done);
+ 		$this->db->bind(':taskId', $taskId);
+ 		// $this->db->bind(':deletedOn', $timestamp);
+
+ 		//Execute
+		if ($this->db->execute()) {
+			return true;
+		} else {
+			return false;
+		};
+ 	}
 }
