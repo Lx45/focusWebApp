@@ -23,3 +23,4 @@ function redirect(rootpath) {
     window.location.href = "/focusWebApp/app/views/" + rootpath + ".php";
 
 }
+

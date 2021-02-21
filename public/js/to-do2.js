@@ -1,14 +1,17 @@
+console.log('tod-do js')
 /*!!!Init Variables!!!*/
 let newListInput = $('#new-list-input');
 let newListBtn = $('#new-list-btn');
 let firstTaskList = $('.task-list .list-name:first');
 let lastTaskList = $('.task-list .list-name:last');
 let deleteListBtn = $('#delete-btn');
+let taskList = $('.all-tasks')
 
 let newTaskInput = $('.new-task-input');
 let newTaskBtn = $('.new-task-btn');
 let checkbox = $('.task-checkbox');
 let task = $('#task.div')
+
 
 let selectedDate = $('.date-button');
 $(document).on('click', '.new-task-btn-week', addNewTaskWeekView);
@@ -22,6 +25,7 @@ activeList(firstTaskList);
 deleteListBtn.on('click', deleteList);
 newTaskBtn.on('click', addNewTask);
 checkbox.on('click', finishedTask);
+countFinishedTasks();
 
 
 function getActiveList() {
@@ -354,18 +358,64 @@ function finishedTask(e) {
                         console.log('activeList loaded');
                     }
                     alert('success');
-                    
+                    countFinishedTasks();
                 },
                 422: function(feedback){
                     // alert('failed');
                 }
             },
         });
+}
 
+function countFinishedTasks() {
+        getCurrentWeekdays();
+        console.log(currentWeekDayDates);
+        let jsonDate = JSON.stringify(currentWeekDayDates);
 
+        $.ajax({
+            url: '/focusWebApp/Applications/countFinishedTasks',
+            type: 'post',
+            async: true,
+            data: {
+                "jsonDate": jsonDate
+            },
+            statusCode: {
+                200: function(tasks){
+                    let countedTasks = tasks.length;
+                    console.log('finshedTasks loaded')
+                    setFinishedTasks(countedTasks);              
+                },
+                422: function(){
+    
+                }
+            },
+        })
 
 }
 
+function setFinishedTasks(tasks) {
+    
+    $.ajax({
+        url: '/focusWebApp/Applications/setFinishedTasks',
+        type: 'post',
+        async: true,
+        data: {
+            "tasks": tasks
+        },
+        statusCode: {
+            200: function(){
+                // let countedTasks = tasks.length;
+                // console.log('finshedTasks loaded')
+                // setFinishedTasks(countedTasks);     
+                console.log('tasksSet');         
+            },
+            422: function(){
+
+            }
+        },
+    })
+
+}
 
 
 /*!!! If date changed reload content!!!*/
@@ -406,6 +456,7 @@ function weekOverview(e){
 
 
 function getCurrentWeekdays() {
+        console.log('fired');
         //Clear array if function has already been called
         currentWeekDayDates = [];
         // Change the display of the dates

@@ -86,8 +86,13 @@
 
 		
 		public function statistic(){
+			$userId = $_SESSION['user_id'];
+
+			$stats = $this->applicationModel->statsOverview($userId);
+
 			$data = [
 				'title' => 'Statistic',
+				'statsOverview' => $stats
 			];
 
 		
@@ -215,6 +220,49 @@
     				//failed 
    					http_response_code(422);
    				}
+			}
+		}
+
+		public function countFinishedTasks(){
+
+			$data = [
+				'userId' => $_SESSION['user_id'], 
+				'date' => json_decode(stripslashes($_POST['jsonDate'])) 
+			];
+
+			$mon = $data['date'][0];
+			$tue = $data['date'][1];
+			$wed = $data['date'][2];
+			$thu = $data['date'][3];
+			$fri = $data['date'][4];
+			$sat = $data['date'][5];
+			$sun = $data['date'][6];
+
+			
+			error_log('Test'.print_r($data, 1));
+			
+			//call model function
+			 $finishedTasks = $this->applicationModel->countFinishedTasks($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun);
+
+			if(isAjaxCall()){
+				$this->json($finishedTasks);
+			}
+		}
+
+
+		public function setFinishedTasks(){
+
+			$data = [
+				'userId' => $_SESSION['user_id'], 
+				'tasks' => htmlspecialchars($_POST['tasks'])
+			];
+
+			
+			//call model function
+			 $setTasks = $this->applicationModel->setFinishedTasks($data);
+
+			if(isAjaxCall()){
+				$this->json($finishedTasks);
 			}
 		}
 

@@ -17,7 +17,7 @@ const calendar = document.getElementById('calendar');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 initButtons();
-load();
+loadStuff();
 setDateButton();
 dateBtn.click(openModal);
 modalCloseBtn.click(closeModal);
@@ -102,7 +102,7 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
 };
 // console.log(currentWeekDays);
 
-function load() {
+function loadStuff() {
     //Current date
     const dt = new Date();
 
@@ -182,7 +182,7 @@ function initButtons() {
         nav--;
         load();
     })
-}
+ }
 
 function getClickedDate(month, clickedDay, year) {
     setDateButton(month, clickedDay, year);
