@@ -31,6 +31,7 @@ function closeModal() {
     modal.css({'visibility': 'hidden'});
 }
 
+
 // Set the date button to current or choosen Date
 function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Date().getDate(), currentYear = new Date().getFullYear(),) {
     

@@ -371,19 +371,62 @@ function countFinishedTasks() {
         getCurrentWeekdays();
         console.log(currentWeekDayDates);
         let jsonDate = JSON.stringify(currentWeekDayDates);
+        let countedDayTasks = [];
+        let mon = [];
+        let tue = [];
+        let wed = [];
+        let thu = [];
+        let fri = [];
+        let sat = [];
+        let sun = [];
+
 
         $.ajax({
             url: '/focusWebApp/Applications/countFinishedTasks',
             type: 'post',
             async: true,
             data: {
-                "jsonDate": jsonDate
+                "jsonDate": jsonDate,
+                
             },
             statusCode: {
                 200: function(tasks){
+                    console.log(tasks);
                     let countedTasks = tasks.length;
+                    tasks.forEach(function(task){
+                        console.log(task.date);
+                        if (currentWeekDayDates[0] == task.date){
+                            mon.push(task.date);
+                        } else if (currentWeekDayDates[1] == task.date){
+                            tue.push(task.date);
+                        } else if (currentWeekDayDates[2] == task.date){
+                            wed.push(task.date);
+                        } else if (currentWeekDayDates[3] == task.date){
+                            thu.push(task.date);
+                        } else if (currentWeekDayDates[4] == task.date){
+                            fri.push(task.date);
+                        } else if (currentWeekDayDates[5] == task.date){
+                            sat.push(task.date);
+                        } else if (currentWeekDayDates[6] == task.date){
+                            sun.push(task.date);
+                        }
+                    })
+                    console.log(mon);
+                    countMon = mon.length;
+                    countTue = tue.length;
+                    countWed = wed.length;
+                    countThu = thu.length;
+                    countFri = fri.length;
+                    countSat = sat.length;
+                    countSun = sun.length;
+
+                    countedDayTasks.push(countMon, countTue, countWed, countThu, countFri, countSat, countSun);
+
                     console.log('finshedTasks loaded')
-                    setFinishedTasks(countedTasks);              
+                    console.log(countedDayTasks);
+                    setFinishedTasks(countedTasks, jsonDate, countedDayTasks);
+
+
                 },
                 422: function(){
     
@@ -393,14 +436,21 @@ function countFinishedTasks() {
 
 }
 
-function setFinishedTasks(tasks) {
+function setFinishedTasks(tasks, dates, dayTasks) {
+    let week = $('.week-button').html()
+    let split = week.split(' ');
+    let weekNumber = split[1];
+    let jsonDayTasks = JSON.stringify(dayTasks);
     
     $.ajax({
         url: '/focusWebApp/Applications/setFinishedTasks',
         type: 'post',
         async: true,
         data: {
-            "tasks": tasks
+            "tasks": tasks,
+            // "dates": dates,
+            "weekNumber": weekNumber,
+            "dayTasks": jsonDayTasks
         },
         statusCode: {
             200: function(){

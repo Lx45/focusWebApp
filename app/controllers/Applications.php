@@ -254,15 +254,44 @@
 
 			$data = [
 				'userId' => $_SESSION['user_id'], 
-				'tasks' => htmlspecialchars($_POST['tasks'])
+				'tasks' => htmlspecialchars($_POST['tasks']),
+				'weekNumber' => htmlspecialchars($_POST['weekNumber']),
+				'dayTasks' => json_decode(stripslashes($_POST['dayTasks'])) 
+			];
+
+			$_SESSION['week'] = $data['weekNumber'];
+
+			$mon = $data['dayTasks'][0];
+			$tue = $data['dayTasks'][1];
+			$wed = $data['dayTasks'][2];
+			$thu = $data['dayTasks'][3];
+			$fri = $data['dayTasks'][4];
+			$sat = $data['dayTasks'][5];
+			$sun = $data['dayTasks'][6];
+
+			error_log('Test'.print_r($data, 3));
+			
+			//call model function
+			 $setTasks = $this->applicationModel->setFinishedTasks($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun);
+
+			if(isAjaxCall()){
+				$this->json($setTasks);
+			}
+		}
+
+		public function getChartValue(){
+
+			$data = [
+				'userId' => $_SESSION['user_id'], 
+				'weekNumber' => $_SESSION['week'],
 			];
 
 			
 			//call model function
-			 $setTasks = $this->applicationModel->setFinishedTasks($data);
+			 $getValue = $this->applicationModel->getChartValue($data);
 
 			if(isAjaxCall()){
-				$this->json($finishedTasks);
+				$this->json($getValue);
 			}
 		}
 

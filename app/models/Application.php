@@ -148,29 +148,58 @@ class Application {
         return $results;
     }
 
-    public function setFinishedTasks($data){
+    public function setFinishedTasks($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun){
          // PDO statement 
-         $this->db->query('SELECT * FROM finishedTasks WHERE  userid = :userid' );
+         $this->db->query('SELECT * FROM finishedTasks WHERE  userid = :userid AND calendarWeek = :cW');
+         
+         $weekNumber = $data['weekNumber'];
+         error_log('cw '.$weekNumber);
+        //  if ($data['weekNumber'] <10){
+        //     $data['weekNumber'] = '0' + $data['weekNumber'];
+        //  };
 
          $this->db->bind(':userid', $data['userId']);
+         $this->db->bind(':cW', $weekNumber);
 
          $results = $this->db->resultSet();
 
-        
-        if($results < 1) {
+        error_log(print_r($results, 1));
 
+        $count = count($results);
+
+        error_log($count);
+        
+        if($count == 0) {
+            error_log('hi');
             //PDO statement
-            $this->db->query('INSERT INTO finishedtasks (userid, tasksWeek) VALUES (:userid, :tasksWeek)');
+            $this->db->query('INSERT INTO finishedtasks (userid, calendarWeek, tasksWeek, mon, tue, wed, thu, fri, sat, sun) VALUES (:userid, :cW, :tasksWeek, :mon, :tue, :wed, :thu, :fri, :sat, :sun)');
 
             //Bind Values
             $this->db->bind(':userid', $data['userId']);
+            $this->db->bind(':cW', $weekNumber);
             $this->db->bind(':tasksWeek', $data['tasks']);
+            $this->db->bind(':mon', $mon);
+            $this->db->bind(':tue', $tue);
+            $this->db->bind(':wed', $wed);
+            $this->db->bind(':thu', $thu);
+            $this->db->bind(':fri', $fri);
+            $this->db->bind(':sat', $sat);
+            $this->db->bind(':sun', $sun);
 
         } else {
+            error_log('hier hallo');
             //PDO statement
-            $this->db->query('UPDATE finishedTasks SET tasksWeek = :tasksWeek WHERE userid = :userid');
+            $this->db->query('UPDATE finishedTasks SET tasksWeek = :tasksWeek, mon = :mon, tue = :tue, wed = :wed, thu = :thu, fri = :fri, sat = :sat, sun = :sun WHERE userid = :userid AND calendarWeek = :cW');
             $this->db->bind(':tasksWeek', $data['tasks']);
+            $this->db->bind(':mon', $mon);
+            $this->db->bind(':tue', $tue);
+            $this->db->bind(':wed', $wed);
+            $this->db->bind(':thu', $thu);
+            $this->db->bind(':fri', $fri);
+            $this->db->bind(':sat', $sat);
+            $this->db->bind(':sun', $sun);
             $this->db->bind(':userid', $data['userId']);
+            $this->db->bind(':cW', $weekNumber);
         }
 
         // Execute
@@ -187,6 +216,20 @@ class Application {
 
         //Bind values
         $this->db->bind(':userid', $userId);
+
+        $results = $this->db->resultSet();
+
+        //return data 
+        return $results;
+    }
+
+    public function getChartValue($data) {
+        // PDO statement
+        $this->db->query('SELECT mon, tue, wed, thu, fri, sat, sun FROM finishedTasks WHERE userid = :userid AND calendarWeek = :cW');
+
+        //Bind values
+        $this->db->bind(':userid', $data['userId']);
+        $this->db->bind(':cW', $data['weekNumber']);
 
         $results = $this->db->resultSet();
 
