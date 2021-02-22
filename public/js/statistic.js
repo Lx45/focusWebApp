@@ -1,5 +1,7 @@
+
 let ctx = $('#chart');
-var myChart = new Chart(ctx, {
+
+let myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -25,13 +27,15 @@ var myChart = new Chart(ctx, {
     }
 });
 
-
+setChartValue();
 
  function setChartValue() {
+     console.log('setChartValue');
 //     // console.log(myChart.config.data.datasets[0].data[0]);
    let data = myChart.config.data.datasets[0].data;
 //     let sun = 4;
 //     // data.push(sun);
+
 
 $.ajax({
     url: '/focusWebApp/Applications/getChartValue',
@@ -51,6 +55,7 @@ $.ajax({
             let sat = tasks[0].sat;    
             let sun = tasks[0].sun;   
             data.push(mon, tue, wed, thu, fri, sat, sun);
+            myChart.update();
         },
         422: function(){
 
@@ -59,4 +64,3 @@ $.ajax({
 })
  }
 
-setChartValue();
