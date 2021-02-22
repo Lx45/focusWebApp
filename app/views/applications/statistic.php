@@ -10,9 +10,13 @@ require APPROOT . '/views/inc/navigation.php';
 </div>
 
 <div class="information">
-    <?php foreach($data['statsOverview'] as $stats) :?>
+    <?php foreach($data['statsOverview'] as $stats) :
+        if($stats['calendarWeek'] == $_SESSION['week']){ ?>
     <p class="finished-tasks">You finished <?php echo $stats['tasksWeek'] ?> Tasks this week!</p>
-    <?php endforeach ?>
+    <?php 
+        };
+        error_log('hier '.$stats['calendarWeek']);
+     endforeach ?>
     <p>Current Streak: 15 Days!🔥</p>
     <p>Latest Quote: The successful warrior is the 
         Average man, with laser-like focus.  - Bruce Lee</p>

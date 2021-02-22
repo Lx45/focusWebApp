@@ -17,7 +17,7 @@ const calendar = document.getElementById('calendar');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 initButtons();
-loadStuff();
+load();
 setDateButton();
 dateBtn.click(openModal);
 modalCloseBtn.click(closeModal);
@@ -43,15 +43,21 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
     // Get Week
     let currentWeek = choosenDate.getWeek();
     // console.log('hier '+choosenDate);
-
+    console.log('week '+ currentWeek);
     // Empty array, if function was already called
     currentWeekDays= [];
-    // Get Weekdays // Stackoverflow
-    let first = choosenDate.getDate() - choosenDate.getDay();
-    let firstDay = (new Date(choosenDate.setDate(first+1))).toString();
-    for(let i = 1; i < 8; i++) {
+
+    // Get Weekdays 
+    let day = choosenDate.getDay();
+    let diff = choosenDate.getDate();
+    // Get first day and change first day of Week from sunday to monday
+    let first = diff - day + (day == 0? -6:1);
+
+    // let firstDay = (new Date(choosenDate.setDate(first+1))).toString();
+    for(let i = 0; i < 7; i++) {
         let next = new Date(choosenDate.getTime());
         next.setDate(first+i);
+
 
         let day = next.getDate();
         let month = next.getMonth();
@@ -103,7 +109,7 @@ function setDateButton(currentMonth = new Date().getMonth(), currentDay = new Da
 };
 // console.log(currentWeekDays);
 
-function loadStuff() {
+function load() {
     //Current date
     const dt = new Date();
 

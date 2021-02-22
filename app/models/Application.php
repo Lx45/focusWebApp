@@ -212,7 +212,7 @@ class Application {
 
     public function statsOverview($userId) {
         // PDO statement
-        $this->db->query('SELECT tasksWeek FROM finishedTasks WHERE userid = :userid');
+        $this->db->query('SELECT tasksWeek, calendarWeek FROM finishedTasks WHERE userid = :userid');
 
         //Bind values
         $this->db->bind(':userid', $userId);
