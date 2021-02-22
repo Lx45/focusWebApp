@@ -236,4 +236,89 @@ class Application {
         //return data 
         return $results;
     }
+
+    public function checkForFinishedTasks($data) {
+        // If quote has already been set, than die 
+        $this->db->query('SELECT * FROM quote WHERE  userid = :userid AND date = :date');
+
+        $this->db->bind(':userid', $data['userId']);
+        $this->db->bind(':date', $data['date']);
+
+        $check = $this->db->resultSet();
+
+        // error_log(print_r($results, 1));
+
+        $count = count($check);
+
+        if($count == 0) {
+        // PDO statement
+        $this->db->query('SELECT * FROM tasks WHERE status != 3 AND userid = :userid AND date = :date AND done = :done' );
+        
+        //Bind values
+        $this->db->bind(':userid', $data['userId']);
+        $this->db->bind(':date', $data['date']);
+        $this->db->bind(':done', 2);
+
+        $results = $this->db->resultSet();
+
+        // $count = count($results);
+
+        // error_log($count);
+
+        //return data 
+        return $results;
+        } else {
+            $empty = [];
+            return $empty;
+        }
+    }
+
+    public function setQuote($data){
+
+
+            //PDO statement
+            $this->db->query('INSERT INTO quote (userid, date, quote, author) VALUES (:userid, :date, :quote, :author)');
+
+            //Bind Values
+            $this->db->bind(':userid', $data['userId']);
+            $this->db->bind(':date', $data['date']);
+            $this->db->bind(':quote', $data['quote']);
+            $this->db->bind(':author', $data['author']);
+
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            };
+        
+    }
+
+    public function displayQuote($data) {
+        // PDO statement
+        $this->db->query('SELECT quote, author FROM quote WHERE userid = :userid AND date = :date');
+
+        //Bind values
+        $this->db->bind(':userid', $data['userId']);
+        $this->db->bind(':date', $data['date']);
+
+        $results = $this->db->resultSet();
+
+        $count = count($results);
+
+        // If there is no quote for today, display the last quote
+        if ($count == 0){
+            $this->db->query('SELECT quote, author FROM quote WHERE userid = :userid ORDER BY quote DESC LIMIT 1');
+
+            $this->db->bind(':userid', $data['userId']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+        } else {
+
+        //return data 
+        return $results;
+        }
+    }
 }

@@ -18,8 +18,8 @@ require APPROOT . '/views/inc/navigation.php';
         error_log('hier '.$stats['calendarWeek']);
      endforeach ?>
     <p>Current Streak: 15 Days!🔥</p>
-    <p>Latest Quote: The successful warrior is the 
-        Average man, with laser-like focus.  - Bruce Lee</p>
+    <p id="quote">Latest Quote: The successful warrior is the 
+        Average man, with laser-like focus. <span id="author"> - Bruce Lee </span></p>
 </div>
 
 </div>

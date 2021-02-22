@@ -295,4 +295,54 @@
 			}
 		}
 
+		public function checkForFinishedTasks(){
+
+			$data = [
+				'userId' => $_SESSION['user_id'], 
+				'date' => htmlspecialchars($_POST['date']),
+			];
+
+			
+			//call model function
+			 $getFinishedTasks = $this->applicationModel->checkForFinishedTasks($data);
+
+			if(isAjaxCall()){
+				$this->json($getFinishedTasks);
+			}
+		}
+
+		public function setQuote(){
+
+			$data = [
+				'userId' => $_SESSION['user_id'], 
+				'date' => htmlspecialchars($_POST['date']),
+				'quote' => htmlspecialchars($_POST['quote']),
+				'author' => htmlspecialchars($_POST['author']),
+			];
+
+			
+			//call model function
+			 $quote = $this->applicationModel->setQuote($data);
+
+			if(isAjaxCall()){
+				$this->json($quote);
+			}
+		}
+
+		public function displayQuote(){
+
+			$data = [
+				'userId' => $_SESSION['user_id'], 
+				'date' => htmlspecialchars($_POST['date']),
+			];
+
+			
+			//call model function
+			 $quote = $this->applicationModel->displayQuote($data);
+
+			if(isAjaxCall()){
+				$this->json($quote);
+			}
+		}
+
 	} 
