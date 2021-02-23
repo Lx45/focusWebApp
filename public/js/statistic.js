@@ -237,10 +237,10 @@ $.ajax({
                     
                     let streakElement = $('#streak');
                     streakElement.text('');
-                    if (streak !== 1){
-                        streakElement.text(`Current Streak: ${streak} Days!`);
-                    } else {
+                    if (streak == 1){
                         streakElement.text(`Current Streak: ${streak} Day!`);
+                    } else {
+                        streakElement.text(`Current Streak: ${streak} Days!`);
                     }
                 },
                 422: function(){
@@ -251,3 +251,6 @@ $.ajax({
         
     }
     setStreak();
+    
+
+    

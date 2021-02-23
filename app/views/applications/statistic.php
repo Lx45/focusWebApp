@@ -17,8 +17,8 @@ require APPROOT . '/views/inc/navigation.php';
         };
         error_log('hier '.$stats['calendarWeek']);
      endforeach ?>
-    <p id="streak"></p>
-    <p id="quote"></p>
+    <p id="streak" data-tooltip="You can start and maintain a streak by finishing 5 Tasks a day."></p>
+    <p id="quote" data-tooltip="If you finishe 5 Task a day you get a new inspirational Quote"></p>
 </div>
 
 </div>
