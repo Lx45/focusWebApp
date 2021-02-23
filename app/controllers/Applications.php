@@ -345,4 +345,22 @@
 			}
 		}
 
+		public function checkForStreak(){
+
+			$data = [
+				'userId' => $_SESSION['user_id'], 
+				'today' => htmlspecialchars($_POST['today']),
+				'yesterday' => htmlspecialchars($_POST['yesterday']),
+			];
+
+			
+			//call model function
+			 $streak = $this->applicationModel->checkForStreak($data);
+
+			if(isAjaxCall()){
+				error_log($streak);
+				$this->json($streak);
+			}
+		}
+
 	} 

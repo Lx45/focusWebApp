@@ -199,3 +199,55 @@ $.ajax({
 
 
     displayQuote();
+
+    function setStreak(){
+        let today = new Date;
+
+        let day = today.getDate();
+        let month = today.getMonth();
+        let year = today.getFullYear();
+    
+        //Set zero in front of day/month if 1 digit
+        if (day < 10) {
+            day = '0' + day;
+            }
+        // +1 cause cpu counts up from 0
+        month = month + 1;
+        if (month < 10){
+            month = '0' + month;
+        }
+        
+        let currentDay = `${month}.${day}.${year}`;
+        let yesterday = `${month}.${day - 1}.${year}`;
+
+        console.log(yesterday);
+
+        $.ajax({
+            url: '/focusWebApp/Applications/checkForStreak',
+            type: 'post',
+            async: true,
+            data: {
+                'today': currentDay,
+                'yesterday': yesterday,
+            },
+            statusCode: {
+                200: function(streak){  
+                    console.log(streak);
+                    console.log('200');
+                    
+                    let streakElement = $('#streak');
+                    streakElement.text('');
+                    if (streak !== 1){
+                        streakElement.text(`Current Streak: ${streak} Days!`);
+                    } else {
+                        streakElement.text(`Current Streak: ${streak} Day!`);
+                    }
+                },
+                422: function(){
+                    console.log('400');
+                }
+            },
+        })
+        
+    }
+    setStreak();

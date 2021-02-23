@@ -321,4 +321,111 @@ class Application {
         return $results;
         }
     }
+
+
+
+    public function checkForStreak($data) {
+        //todo: set row for new user in table streak
+        // Function should only run once per day, so the function check for date of today, if the current date is already set, the function should not execute further.
+        $this->db->query('SELECT * FROM streak WHERE  userid = :userid AND date = :date');
+
+        $this->db->bind(':userid', $data['userId']);
+        $this->db->bind(':date', $data['today']);
+
+        $check = $this->db->resultSet();
+
+        $count = count($check);
+
+        if ($count == 0) {
+            // Check if user finished at least 5 task the last day to keep his streak
+            // PDO statement
+            $this->db->query('SELECT * FROM tasks WHERE status != 3 AND userid = :userid AND date = :date AND done = :done' );
+            
+            //Bind values
+            $this->db->bind(':userid', $data['userId']);
+            $this->db->bind(':date', $data['yesterday']);
+            $this->db->bind(':done', 2);
+
+            $yesterday = $this->db->resultSet();
+
+            $countYesterday = count($yesterday);
+
+            error_log('Yesterday '.$countYesterday);
+   
+            if($countYesterday > 4 ) {
+                //If user finsihed more than 4 task yesterday get his current streak from database
+                //PDO statement
+                $this->db->query('SELECT streak FROM streak WHERE userid = :userid' );
+            
+                //Bind values
+                $this->db->bind(':userid', $data['userId']);
+
+                $streak = $this->db->resultSet();
+
+                // Get the Value from array
+                foreach($streak as $value){
+                    $numOfStreak = $value['streak'];
+                }
+
+                error_log($numOfStreak);
+
+                // count up the current streak
+                ++$numOfStreak;
+
+                // Update the new streak in database
+                //PDO statement
+                $this->db->query('UPDATE streak SET streak = :newStreak, date = :date WHERE userid = :userid');
+
+                // Bind values
+                $this->db->bind(':newStreak', $numOfStreak);
+                $this->db->bind(':date', $data['today']);
+                $this->db->bind(':userid', $data['userId']);
+                
+                
+                //Execute
+                if ($this->db->execute()) {
+                    error_log('here i am');
+                    return $numOfStreak;
+                } else {
+                    return false;
+                };
+
+            } else {
+                // User finished less than 5 tasks
+                error_log('No streak');
+                $this->db->query('UPDATE streak SET streak = :newStreak, date = :date WHERE userid = :userid');
+
+                // Bind values
+                $this->db->bind(':newStreak', 0);
+                $this->db->bind(':date', $data['today']);
+                $this->db->bind(':userid', $data['userId']);
+                
+                
+                //Execute
+                if ($this->db->execute()) {
+                    error_log('here i am');
+                    return 0;
+                } else {
+                    return false;
+                };
+
+            }   
+        }else {
+            // Function already checked for streak
+            error_log('function already run for this date');
+            $this->db->query('SELECT streak FROM streak WHERE userid = :userid' );
+            
+            //Bind values
+            $this->db->bind(':userid', $data['userId']);
+
+            $streak = $this->db->resultSet();
+
+            // Get the Value from array
+            foreach($streak as $value){
+                $oldStreak = $value['streak'];
+            }
+
+            return $oldStreak;
+        }
+    }
 }
