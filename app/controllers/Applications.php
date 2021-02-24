@@ -363,4 +363,23 @@
 			}
 		}
 
+		public function displayAllQuotes() {
+
+			if (isAjaxCall()) {
+				//Push current productId into a variable
+				$userId = $_SESSION['user_id'];
+				
+				$allQuotes = $this->applicationModel->displayAllQuotes($userId);
+
+    			if ($allQuotes) {
+    				//Product succsefully deleted
+					http_response_code(200);
+					$this->json($allQuotes);
+    			} else {
+    				//failed 
+   					http_response_code(422);
+   				}
+			}
+		}
+
 	} 

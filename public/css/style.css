@@ -796,6 +796,69 @@ nav .disabled {
   --scale: 1;
 }
 
+.modal {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 70%;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  max-height: 500px;
+  color: #F2EDED;
+}
+
+.modal .modal-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.modal .modal-head .modal-search {
+  margin: 8px;
+  height: 40px;
+  width: 30%;
+  border: 2px solid #1C2126;
+  border-radius: 10px;
+}
+
+.modal .modal-head .modal-close-btn {
+  cursor: pointer;
+  margin: 8px;
+}
+
+.modal .modal-body {
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.modal .modal-body .table-quotes {
+  border-collapse: collapse;
+}
+
+.modal .modal-body .th-quotes,
+.modal .modal-body .td-quotes {
+  border: 2px solid #1C2126;
+  text-align: left;
+  padding: 8px;
+}
+
+.modal .modal-body .tr-quotes:nth-child(even) {
+  background-color: #1C2126;
+}
+
 .sidebar {
   -ms-grid-column: 1;
   -ms-grid-column-span: 3;

@@ -251,6 +251,66 @@ $.ajax({
         
     }
     setStreak();
-    
 
+    let modal = $('.modal');
+    $('#quote').click(openModal);
+    let modalClsBtn = $('.modal-close-btn');
+    modalClsBtn.click(closeModal);
+    
+    function openModal() {
+        modal.css({'visibility': 'visible'});
+        insertQuoteTable();
+    }
+    
+    function closeModal() {
+        modal.css({'visibility': 'hidden'});
+    }
+
+
+
+     function insertQuoteTable() {
+         // Init var
+         let modalBody = $('.modal-body');
+
+         $.ajax({
+            url: '/focusWebApp/Applications/displayAllQuotes',
+            type: 'get',
+            async: true,
+            statusCode: {
+                200: function(quotes){  
+                    console.log(quotes);
+
+                    let table = $('<table class="table-quotes"></table>');
+                    let tableHead = $(`
+                    <tr class="tr-quotes">
+                        <th class="th-quotes">Quote</th>
+                        <th class="th-quotes">Author</th>
+                        <th class="th-quotes">Date</th>
+                    </tr>`)
+
+                    table.append(tableHead);
+
+                    quotes.forEach(function(quote){
+                        let quoteElement =`
+                        <tr class="tr-quotes">
+                        <td class="td-quotes">${quote.quote}</td>
+                        <td class="td-quotes">${quote.author}</td>
+                        <td class="td-quotes">${quote.date}</td>
+                    </tr>
+                        `
+                        table.append(quoteElement)
+                    })
+
+                    
+                    modalBody.html(table);
+
+                },
+                422: function(){
+                    console.log('400');
+
+                }
+            },
+        })
+
+     }
     

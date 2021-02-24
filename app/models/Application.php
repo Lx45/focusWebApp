@@ -308,7 +308,7 @@ class Application {
 
         // If there is no quote for today, display the last quote
         if ($count == 0){
-            $this->db->query('SELECT quote, author FROM quote WHERE userid = :userid ORDER BY quote DESC LIMIT 1');
+            $this->db->query('SELECT quote, author FROM quote WHERE userid = :userid ORDER BY id DESC LIMIT 1');
 
             $this->db->bind(':userid', $data['userId']);
 
@@ -427,5 +427,20 @@ class Application {
 
             return $oldStreak;
         }
+    }
+
+    public function displayAllQuotes($userId) {
+        // PDO statement
+        $this->db->query('SELECT quote, author, date FROM quote WHERE userid = :userid');
+
+        //Bind values
+        $this->db->bind(':userid', $userId);
+        
+
+        $results = $this->db->resultSet();
+
+        //return data 
+        return $results;
+        
     }
 }

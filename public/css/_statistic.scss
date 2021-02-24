@@ -53,4 +53,67 @@
     #streak:hover::before{
         --scale: 1;
     }
+
+}
+
+
+.modal{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: min-content;
+    max-height: 500px;
+    color: $light;
+    
+    .modal-head{
+        display: flex;
+        justify-content: space-between;
+
+        .modal-search{
+            margin: 8px;
+            height: 40px;
+            width: 30%;
+            border: 2px solid $dark;
+            border-radius: 10px;
+        }
+
+        .modal-close-btn{
+            cursor: pointer;
+            margin: 8px;
+        }
+    }
+
+    .modal-body{
+        height: auto;
+        display: flex;
+        position: relative;
+        overflow-y: scroll;
+
+        .table-quotes{
+            border-collapse: collapse;           
+        }
+
+
+        .th-quotes,
+        .td-quotes{
+            border: 2px solid $dark;
+            text-align: left;
+            padding: 8px;
+        }
+
+
+        .td-quotes{
+
+        }
+        
+        .tr-quotes:nth-child(even){
+            background-color: $dark;
+        }
+
+    }
+
+    .modal-footer{
+
+    }
 }

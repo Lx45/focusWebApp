@@ -23,6 +23,20 @@ require APPROOT . '/views/inc/navigation.php';
 
 </div>
 
+<div class="modal-bg">
+
+    <div class="modal">
+        <div class="modal-head">
+        <input type="search" class="modal-search" placeholder="Search: Quote, author...">
+            <i class="modal-close-btn">X</i>
+        </div>
+        <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+
+</div>
+</div>
+
 <script type="module" src="<?php echo URLROOT; ?>/js/statistic.js"></script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
