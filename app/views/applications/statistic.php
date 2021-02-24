@@ -27,7 +27,7 @@ require APPROOT . '/views/inc/navigation.php';
 
     <div class="modal">
         <div class="modal-head">
-        <input type="search" class="modal-search" placeholder="Search: Quote, author...">
+        <input type="search" class="modal-search" id="search-quote" placeholder="Search: Quote, author...">
             <i class="modal-close-btn">X</i>
         </div>
         <div class="modal-body">

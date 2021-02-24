@@ -382,4 +382,62 @@
 			}
 		}
 
+
+		public function quoteSearch() {
+			$output = '';
+
+			if (isset($_POST['query'])) {
+				$search = $_POST['query'];
+
+				//$userData = $this->userModel->searchUserData($search);
+
+			} else {
+
+			}
+
+			$searchData = $this->applicationModel->searchQuoteData($search);
+
+			$data = [
+				'searchData' => $searchData
+							];
+
+			if (is_array($searchData)) {
+				error_log('ok');
+			} else {
+				error_log('nicht ok');
+			}
+
+			if ($searchData) {
+				$output = "
+				<table class='table-quotes' id='table-data>
+					<tr class='tr-quotes'>
+						<th class='th-quotes'>Quote</th>
+						<th class='th-quotes'>Author</th>
+						<th class='th-quotes'>Date</th>
+					</tr>";
+				
+				
+
+        foreach($data['searchData'] as $overview) : 
+
+			$output .= "
+			<tr class='tr-quotes'>
+				<td class='td-quotes'> $overview[quote] </td>
+				<td class='td-quotes'> $overview[author] </td>
+				<td class='td-quotes'> $overview[date]</td>
+			</tr>";
+
+  		endforeach;
+
+  		$output .= '  
+		</table>';
+
+		echo $output;
+
+
+			} else {
+				echo "No Users found";
+			}
+		}
+
 	} 

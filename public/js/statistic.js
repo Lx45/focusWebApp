@@ -280,7 +280,7 @@ $.ajax({
                 200: function(quotes){  
                     console.log(quotes);
 
-                    let table = $('<table class="table-quotes"></table>');
+                    let table = $('<table class="table-quotes" id="table-data"></table>');
                     let tableHead = $(`
                     <tr class="tr-quotes">
                         <th class="th-quotes">Quote</th>
@@ -288,21 +288,25 @@ $.ajax({
                         <th class="th-quotes">Date</th>
                     </tr>`)
 
+                    console.log(table);
+
                     table.append(tableHead);
 
                     quotes.forEach(function(quote){
                         let quoteElement =`
                         <tr class="tr-quotes">
-                        <td class="td-quotes">${quote.quote}</td>
-                        <td class="td-quotes">${quote.author}</td>
-                        <td class="td-quotes">${quote.date}</td>
-                    </tr>
+                            <td class="td-quotes">${quote.quote}</td>
+                            <td class="td-quotes">${quote.author}</td>
+                            <td class="td-quotes">${quote.date}</td>
+                        </tr>
                         `
                         table.append(quoteElement)
                     })
 
                     
-                    modalBody.html(table);
+                    modalBody.append(table);
+
+                    console.log('what is going on')
 
                 },
                 422: function(){
@@ -314,3 +318,19 @@ $.ajax({
 
      }
     
+
+
+        $("#search-quote").keyup(function(){
+        console.log('test1.5');
+        var search = $(this).val();
+        console.log('test2');
+        $.ajax({
+          url:'/focusWebApp/Applications/quoteSearch',
+          method: 'post',
+          data:{query:search},
+          success:function(response){
+            console.log(response);
+            $(".modal-body").html(response);
+          }
+        });
+      });

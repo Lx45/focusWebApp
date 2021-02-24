@@ -443,4 +443,21 @@ class Application {
         return $results;
         
     }
+
+
+    public function searchQuoteData($search) {
+		//PDO statement
+		$this->db->query("SELECT * FROM quote WHERE (quote LIKE CONCAT('%',:quote,'%') OR author LIKE CONCAT('%',:author,'%'))");
+		//Bind values
+		$this->db->bind(':quote', $search);
+		$this->db->bind(':author', $search);
+
+		$results = $this->db->resultSet();
+
+ 		if ($this->db->rowCount() > 0) {
+ 			return $results;
+ 		} else {
+ 			return false;
+ 		}
+	}
 }
