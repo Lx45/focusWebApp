@@ -106,25 +106,37 @@ $.ajax({
 
  }
 
+
+
  checkForFinishedTasks();
 
     function fetchQuote(date) { 
-        let num = Math.floor(Math.random() * Math.floor(1643));
-        console.log(num);
+        // let num = Math.floor(Math.random() * Math.floor(1643));
+        // console.log(num);
+
+
         const settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://type.fit/api/quotes",
-            "method": "GET"
-        }
+            //  "url": "https://type.fit/api/quotes",
+            "url": "https://random-math-quote-api.herokuapp.com/",
+            "method": "GET",
+            
+        };
         
         $.ajax(settings).done(function (response) {
-            const data = JSON.parse(response);
-            let quote = data[num].text;
-            let author = data[num].author;
-            console.log(data[num]);
-            setQuote(date, quote, author);
+            console.log(response);
+            // const data = JSON.parse(response);
+             const data = response;
+            // let quote = data[num].text;
+            // let author = data[num].author;
+            let quote = data.quote;
+            let author = data.author;
+            // console.log(data[num]);
+             setQuote(date, quote, author);
         });
+
+
     }
 
     function setQuote(date, quote, author){
