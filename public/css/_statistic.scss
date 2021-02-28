@@ -18,11 +18,25 @@
 
     p:first-child{
         padding-top: 50px;
+        cursor: default;
     }
 
     #quote,
     #streak{
         position: relative;
+    }
+
+    #quote{
+        cursor: pointer;
+        transition: all .5s ease-in-out;
+    }
+
+    #streak{
+        cursor: default;
+    }
+
+    #quote:hover{
+        transform: scale(1.1);
     }
 
     #quote::before,
@@ -57,7 +71,7 @@
 }
 
 
-.modal{
+.modal-quote{
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -65,6 +79,8 @@
     height: min-content;
     max-height: 500px;
     color: $light;
+    background-color: $background;
+    border: 3px solid $dark;
     
     .modal-head{
         display: flex;
@@ -91,7 +107,8 @@
         overflow-y: scroll;
 
         .table-quotes{
-            border-collapse: collapse;           
+            border-collapse: collapse;   
+            border-top: none;        
         }
 
 
@@ -103,8 +120,12 @@
         }
 
 
-        .td-quotes{
+        .th-quotes{
+            border: none;
+        }
 
+        .td-quotes{
+            cursor: default;
         }
         
         .tr-quotes:nth-child(even){

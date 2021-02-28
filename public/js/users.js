@@ -61,7 +61,7 @@ function userLogin() {
             200: function() {
                 //userLogin success
                 successValidation();
-                redirect('pages/index');
+                redirect('applications/to-do');
 
             },
             422: function(errors) {

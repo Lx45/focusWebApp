@@ -77,7 +77,7 @@ require APPROOT . '/views/inc/navigation.php';
 
     <div class="modal">
         <div class="modal-head">
-            <i class="modal-close-btn">X</i>
+            <i class="far fa-times-circle fa-2x modal-close-btn"></i>
         </div>
         <div class="modal-body">
         <div id="container">

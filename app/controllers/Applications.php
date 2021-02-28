@@ -8,45 +8,40 @@
 		}
 
 		public function to_do(){
+			//Init var
 			$userId = $_SESSION['user_id'];
-			// $data = [
-			// 	'userId' => $_SESSION['user_id'],
-			// 	// 'listId' => trim(htmlspecialchars($_POST['activeLiId'])) 
-			// ];
-			// //call model function
-			$taskListOverview = $this->applicationModel->taskListOverview($userId);
 
-			// $toDoListOverview = $this->applicationModel->toDoListOverview($data);
+			//call model function
+			$taskListOverview = $this->applicationModel->taskListOverview($userId);
 
 			$data = [
 				'title' => 'To-Do-List',
 				'taskListOverview' => $taskListOverview,
-				// 'toDoListOverview' => $toDoListOverview
 			];
 
-		
+			// send data
 			$this->view('applications/to_do', $data);
 		}
 
 		public function loadTasks(){
-
+			// Init var
 			$data = [
 				'userId' => $_SESSION['user_id'],
 				'listId' => trim(htmlspecialchars($_POST['activeLiId'])), 
 				'date' => trim(htmlspecialchars($_POST['date'])) 
 			];
 
-			
 			//call model function
 			$toDoListOverview = $this->applicationModel->toDoListOverview($data);
 
+			// send data
 			if(isAjaxCall()){
 				$this->json($toDoListOverview);
 			}
 		}
 
 		public function loadTasksWeek(){
-
+			//Init var
 			$data = [
 				'userId' => $_SESSION['user_id'],
 				'listId' => trim(htmlspecialchars($_POST['activeLiId'])), 
@@ -64,21 +59,23 @@
 			
 			error_log('Test'.print_r($data, 1));
 			
-			// //call model function
+			//call model function
 			 $toDoListOverview = $this->applicationModel->toDoListOverviewWeek($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun);
 
+			//send data
 			if(isAjaxCall()){
 				$this->json($toDoListOverview);
 			}
 		}
 
 		public function loadLists(){
-
+			//Init var
 			$userId = $_SESSION['user_id'];
 
 			//call model function
 			$taskListOverview = $this->applicationModel->taskListOverview($userId);
 
+			// send data
 			if(isAjaxCall()){
 				$this->json($taskListOverview);
 			}
@@ -86,8 +83,10 @@
 
 		
 		public function statistic(){
+			// Init var
 			$userId = $_SESSION['user_id'];
 
+			//call model function
 			$stats = $this->applicationModel->statsOverview($userId);
 
 			$data = [
@@ -95,7 +94,7 @@
 				'statsOverview' => $stats
 			];
 
-		
+			//send data
 			$this->view('applications/statistic', $data);
 		}
 
@@ -190,9 +189,7 @@
 				//Push current productId into a variable
 				$listId = htmlspecialchars($_POST['activeLiId']);
 
-				//save time of delete
-    			// $deletedOn = time();
-
+				//call model function
     			if ($this->applicationModel->deleteList($listId)) {
     				//Product succsefully deleted
     				http_response_code(200);
@@ -209,10 +206,8 @@
 				//Push current productId into a variable
 				$taskId = htmlspecialchars($_POST['taskId']);
 				$done = htmlspecialchars($_POST['done']);
-				
-				//save time of delete
-    			// $deletedOn = time();
-
+		
+				//call model function
     			if ($this->applicationModel->finishedTask($taskId, $done)) {
     				//Product succsefully deleted
     				http_response_code(200);
@@ -224,7 +219,7 @@
 		}
 
 		public function countFinishedTasks(){
-
+			//init data
 			$data = [
 				'userId' => $_SESSION['user_id'], 
 				'date' => json_decode(stripslashes($_POST['jsonDate'])) 
@@ -244,6 +239,7 @@
 			//call model function
 			 $finishedTasks = $this->applicationModel->countFinishedTasks($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun);
 
+			 //send data
 			if(isAjaxCall()){
 				$this->json($finishedTasks);
 			}
@@ -251,7 +247,7 @@
 
 
 		public function setFinishedTasks(){
-
+			//init var
 			$data = [
 				'userId' => $_SESSION['user_id'], 
 				'tasks' => htmlspecialchars($_POST['tasks']),
@@ -274,63 +270,77 @@
 			//call model function
 			 $setTasks = $this->applicationModel->setFinishedTasks($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun);
 
+			//send data
 			if(isAjaxCall()){
 				$this->json($setTasks);
 			}
 		}
 
 		public function getChartValue(){
-
+			//Init data
 			$data = [
 				'userId' => $_SESSION['user_id'], 
 				'weekNumber' => $_SESSION['week'],
 			];
-
 			
 			//call model function
 			 $getValue = $this->applicationModel->getChartValue($data);
 
-			if(isAjaxCall()){
+			if ($getValue) {
+				//Chartvalue succsefully fetched
+				http_response_code(200);
 				$this->json($getValue);
+			} else {
+				//failed 
+				http_response_code(422);
 			}
+
 		}
 
 		public function checkForFinishedTasks(){
-
+			//Init data
 			$data = [
 				'userId' => $_SESSION['user_id'], 
 				'date' => htmlspecialchars($_POST['date']),
 			];
 
-			
 			//call model function
 			 $getFinishedTasks = $this->applicationModel->checkForFinishedTasks($data);
 
-			if(isAjaxCall()){
+			 if ($getFinishedTasks) {
+				//FinishedTasks succsefully fetched
+				http_response_code(200);
 				$this->json($getFinishedTasks);
+			} else {
+				//failed 
+				http_response_code(422);
 			}
 		}
 
 		public function setQuote(){
-
+			//Init data
 			$data = [
 				'userId' => $_SESSION['user_id'], 
 				'date' => htmlspecialchars($_POST['date']),
 				'quote' => htmlspecialchars($_POST['quote']),
 				'author' => htmlspecialchars($_POST['author']),
 			];
-
-			
+	
 			//call model function
-			 $quote = $this->applicationModel->setQuote($data);
+			$quote = $this->applicationModel->setQuote($data);
 
-			if(isAjaxCall()){
+			if ($quote) {
+				//FetchedQuote succsefully set
+				http_response_code(200);
 				$this->json($quote);
+			} else {
+				//failed 
+				http_response_code(422);
 			}
 		}
 
 		public function displayQuote(){
-
+			// Init data
 			$data = [
 				'userId' => $_SESSION['user_id'], 
 				'date' => htmlspecialchars($_POST['date']),
@@ -340,13 +350,18 @@
 			//call model function
 			 $quote = $this->applicationModel->displayQuote($data);
 
-			if(isAjaxCall()){
+			 if ($quote) {
+				//Succsefully fetched quote from database
+				http_response_code(200);
 				$this->json($quote);
+			} else {
+				//failed 
+				http_response_code(422);
 			}
 		}
 
 		public function checkForStreak(){
-
+			//Init data
 			$data = [
 				'userId' => $_SESSION['user_id'], 
 				'today' => htmlspecialchars($_POST['today']),
@@ -357,8 +372,7 @@
 			//call model function
 			 $streak = $this->applicationModel->checkForStreak($data);
 
-			if(isAjaxCall()){
-				error_log($streak);
+			 if(isAjaxCall()){
 				$this->json($streak);
 			}
 		}
@@ -366,13 +380,15 @@
 		public function displayAllQuotes() {
 
 			if (isAjaxCall()) {
-				//Push current productId into a variable
+				//Init var
 				$userId = $_SESSION['user_id'];
 				
+				//call model function
 				$allQuotes = $this->applicationModel->displayAllQuotes($userId);
 
+
     			if ($allQuotes) {
-    				//Product succsefully deleted
+    				//succesfully fetched all quotes
 					http_response_code(200);
 					$this->json($allQuotes);
     			} else {
@@ -384,30 +400,20 @@
 
 
 		public function quoteSearch() {
+			//Init var
 			$output = '';
+			$search = $_POST['query'];
 
-			if (isset($_POST['query'])) {
-				$search = $_POST['query'];
-
-				//$userData = $this->userModel->searchUserData($search);
-
-			} else {
-
-			}
-
+			//Call model function
 			$searchData = $this->applicationModel->searchQuoteData($search);
 
 			$data = [
 				'searchData' => $searchData
-							];
+			];
 
-			if (is_array($searchData)) {
-				error_log('ok');
-			} else {
-				error_log('nicht ok');
-			}
-
+			// If data found display
 			if ($searchData) {
+				//Create table elment
 				$output = "
 				<table class='table-quotes' id='table-data>
 					<tr class='tr-quotes'>
@@ -416,27 +422,26 @@
 						<th class='th-quotes'>Date</th>
 					</tr>";
 				
+				//Insert data
+        		foreach($data['searchData'] as $overview) : 
+
+				$output .= "
+				<tr class='tr-quotes'>
+					<td class='td-quotes'> $overview[quote] </td>
+					<td class='td-quotes'> $overview[author] </td>
+					<td class='td-quotes'> $overview[date]</td>
+				</tr>";
+
+  				endforeach;
+
+				$output .= '  
+				</table>';
 				
-
-        foreach($data['searchData'] as $overview) : 
-
-			$output .= "
-			<tr class='tr-quotes'>
-				<td class='td-quotes'> $overview[quote] </td>
-				<td class='td-quotes'> $overview[author] </td>
-				<td class='td-quotes'> $overview[date]</td>
-			</tr>";
-
-  		endforeach;
-
-  		$output .= '  
-		</table>';
-
-		echo $output;
-
+				//dsiplay data
+				echo $output;
 
 			} else {
-				echo "No Users found";
+				echo "No quote found";
 			}
 		}
 

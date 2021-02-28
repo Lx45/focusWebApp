@@ -1,12 +1,18 @@
+//Init var
+const ctx = $('#chart'), 
+modal = $('.modal-quote'),
+modalClsBtn = $('.modal-close-btn'),
+quote = $('#quote'),
+searchField = $("#search-quote");
 
-let ctx = $('#chart');
 
+//Init new Chart
 let myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         datasets: [{
-            label: 'Week overview',
+            label: 'Finished Tasks',
             data: [],
             backgroundColor: 'rgb(69, 37, 242, 02)',
             borderColor: 'rgb(69, 37, 242, 1)',
@@ -27,42 +33,64 @@ let myChart = new Chart(ctx, {
     }
 });
 
+//Call functions
 setChartValue();
+checkForFinishedTasks();
+displayQuote();
+setStreak();
 
- function setChartValue() {
+quote.click(openModal);
+modalClsBtn.click(closeModal);
+searchField.keyup(searchQuotes);
 
+
+function openModal() {
+    modal.css({'visibility': 'visible'});
+    insertQuoteTable();
+}
+
+function closeModal() {
+    modal.css({'visibility': 'hidden'});
+}
+
+
+
+function setChartValue() {
+    //Init var
    let data = myChart.config.data.datasets[0].data;
 
+    $.ajax({
+        url: '/focusWebApp/Applications/getChartValue',
+        type: 'get',
+        async: true,
+        statusCode: {
+            200: function(tasks){  
+                // Set the fetched taks to ech specific day
+                console.log(tasks[0].mon)   
+                let mon = tasks[0].mon;    
+                let tue = tasks[0].tue;    
+                let wed = tasks[0].wed;    
+                let thu = tasks[0].thu;    
+                let fri = tasks[0].fri;    
+                let sat = tasks[0].sat;    
+                let sun = tasks[0].sun;   
 
+                //Push the day var into the cahrt data
+                data.push(mon, tue, wed, thu, fri, sat, sun);
 
-$.ajax({
-    url: '/focusWebApp/Applications/getChartValue',
-    type: 'post',
-    async: true,
-    data: {
-
-    },
-    statusCode: {
-        200: function(tasks){  
-            console.log(tasks[0].mon)   
-            let mon = tasks[0].mon;    
-            let tue = tasks[0].tue;    
-            let wed = tasks[0].wed;    
-            let thu = tasks[0].thu;    
-            let fri = tasks[0].fri;    
-            let sat = tasks[0].sat;    
-            let sun = tasks[0].sun;   
-            data.push(mon, tue, wed, thu, fri, sat, sun);
-            myChart.update();
+                //Update the chart
+                myChart.update();
+            },
+            422: function(){
+                //failed
+                console.log('error');
+            }
         },
-        422: function(){
-
-        }
-    },
-})
- }
+    })
+    }
 
  function checkForFinishedTasks() {
+     // Get current date
     let today = new Date;
 
     let day = today.getDate();
@@ -93,256 +121,245 @@ $.ajax({
         statusCode: {
             200: function(tasks){  
                 console.log(tasks.length)
+                // If User finished more than 4 task fetch new quote
                 if (tasks.length > 4){
-                    console.log('test')
+                // Call fetchquote function
                 fetchQuote(date);
                 }
+            },
+            422: function(){
+                console.log('Quote has already been set');
+            }
+        },
+    })
+ }
+
+
+
+function fetchQuote(date) { 
+    // Fetch quote-data from Rest API
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        //  "url": "https://type.fit/api/quotes",
+        "url": "https://random-math-quote-api.herokuapp.com/",
+        "method": "GET",
+         };
+    
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        // Set response into var
+        const data = response;
+        let quote = data.quote;
+        let author = data.author;
+        
+        // Call setquote function with fetched data as parameter
+        setQuote(date, quote, author);
+    });
+
+}
+
+function setQuote(date, quote, author){
+    //Set fetched quote into database
+    $.ajax({
+        url: '/focusWebApp/Applications/setQuote',
+        type: 'post',
+        async: true,
+        data: {
+            'date': date,
+            'quote': quote,
+            'author': author,
+        },
+        statusCode: {
+            200: function(tasks){  
+                //Call display Quote function
+                displayQuote(date);
             },
             422: function(){
     
             }
         },
     })
-
- }
-
-
-
- checkForFinishedTasks();
-
-    function fetchQuote(date) { 
-        // let num = Math.floor(Math.random() * Math.floor(1643));
-        // console.log(num);
-
-
-        const settings = {
-            "async": true,
-            "crossDomain": true,
-            //  "url": "https://type.fit/api/quotes",
-            "url": "https://random-math-quote-api.herokuapp.com/",
-            "method": "GET",
-            
-        };
-        
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-            // const data = JSON.parse(response);
-             const data = response;
-            // let quote = data[num].text;
-            // let author = data[num].author;
-            let quote = data.quote;
-            let author = data.author;
-            // console.log(data[num]);
-             setQuote(date, quote, author);
-        });
-
-
-    }
-
-    function setQuote(date, quote, author){
-
-        $.ajax({
-            url: '/focusWebApp/Applications/setQuote',
-            type: 'post',
-            async: true,
-            data: {
-                'date': date,
-                'quote': quote,
-                'author': author,
-            },
-            statusCode: {
-                200: function(tasks){  
-                    console.log(tasks)
-                    displayQuote();
-                },
-                422: function(){
-        
-                }
-            },
-        })
-    }
+}
 
     function displayQuote() {
-        let today = new Date;
 
-        let day = today.getDate();
-        let month = today.getMonth();
-        let year = today.getFullYear();
-    
-        //Set zero in front of day/month if 1 digit
-        if (day < 10) {
-            day = '0' + day;
-            }
-        // +1 cause cpu counts up from 0
-        month = month + 1;
-        if (month < 10){
-            month = '0' + month;
+             // Get current date
+    let today = new Date;
+
+    let day = today.getDate();
+    let month = today.getMonth();
+    let year = today.getFullYear();
+
+    //Set zero in front of day/month if 1 digit
+    if (day < 10) {
+        day = '0' + day;
         }
-    
-        let date = `${month}.${day}.${year}`;
-
-        $.ajax({
-            url: '/focusWebApp/Applications/displayQuote',
-            type: 'post',
-            async: true,
-            data: {
-                'date': date,
-            },
-            statusCode: {
-                200: function(quoteData){  
-                    console.log(quoteData)
-                    let quote = quoteData[0].quote;
-                    let author = quoteData[0].author;
-                    let quoteElement = $('#quote');
-                    quoteElement.text('');
-                    quoteElement.text(
-                        `Latest Quote: ${quote}  - ${author}`
-                    )
-                    
-                },
-                422: function(){
-        
-                }
-            },
-        })
-
+    // +1 cause cpu counts up from 0
+    month = month + 1;
+    if (month < 10){
+        month = '0' + month;
     }
 
+    let date = `${month}.${day}.${year}`;
 
+    // Get quote from database
+    $.ajax({
+        url: '/focusWebApp/Applications/displayQuote',
+        type: 'post',
+        async: true,
+        data: {
+            'date': date,
+        },
+        statusCode: {
+            200: function(quoteData){  
+                console.log(quoteData)
+                // Set fetched data into var
+                let quote = quoteData[0].quote;
+                let author = quoteData[0].author;
 
-    displayQuote();
+                // Get HTML element
+                let quoteElement = $('#quote');
 
-    function setStreak(){
-        let today = new Date;
+                // Clear element 
+                quoteElement.text('');
 
-        let day = today.getDate();
-        let month = today.getMonth();
-        let year = today.getFullYear();
-    
-        //Set zero in front of day/month if 1 digit
-        if (day < 10) {
-            day = '0' + day;
+                // Display the quote
+                quoteElement.text(
+                    `Latest Quote: ${quote}  - ${author}`
+                )
+                
+            },
+            422: function(){
+                console.log('error');
             }
-        // +1 cause cpu counts up from 0
-        month = month + 1;
-        if (month < 10){
-            month = '0' + month;
+        },
+    })
+
+}
+
+
+function setStreak(){
+    // Get current date
+    let today = new Date;
+
+    let day = today.getDate();
+    let month = today.getMonth();
+    let year = today.getFullYear();
+
+    //Set zero in front of day/month if 1 digit
+    if (day < 10) {
+        day = '0' + day;
         }
+    // +1 cause cpu counts up from 0
+    month = month + 1;
+    if (month < 10){
+        month = '0' + month;
+    }
+    
+    let currentDay = `${month}.${day}.${year}`;
+    let yesterday = `${month}.${day - 1}.${year}`;
+
+
+    $.ajax({
+        url: '/focusWebApp/Applications/checkForStreak',
+        type: 'post',
+        async: true,
+        dataTyp: "json",
+        data: {
+            'today': currentDay,
+            'yesterday': yesterday,
+        }
+    })
+    .done (function(streak){  
+        //Get HTML element
+        let streakElement = $('#streak');
         
-        let currentDay = `${month}.${day}.${year}`;
-        let yesterday = `${month}.${day - 1}.${year}`;
+        //Clear element
+        streakElement.text('');
 
-        console.log(yesterday);
-
-        $.ajax({
-            url: '/focusWebApp/Applications/checkForStreak',
-            type: 'post',
-            async: true,
-            data: {
-                'today': currentDay,
-                'yesterday': yesterday,
-            },
-            statusCode: {
-                200: function(streak){  
-                    console.log(streak);
-                    console.log('200');
-                    
-                    let streakElement = $('#streak');
-                    streakElement.text('');
-                    if (streak == 1){
-                        streakElement.text(`Current Streak: ${streak} Day!`);
-                    } else {
-                        streakElement.text(`Current Streak: ${streak} Days!`);
-                    }
-                },
-                422: function(){
-                    console.log('400');
-                }
-            },
-        })
-        
-    }
-    setStreak();
-
-    let modal = $('.modal');
-    $('#quote').click(openModal);
-    let modalClsBtn = $('.modal-close-btn');
-    modalClsBtn.click(closeModal);
-    
-    function openModal() {
-        modal.css({'visibility': 'visible'});
-        insertQuoteTable();
-    }
-    
-    function closeModal() {
-        modal.css({'visibility': 'hidden'});
-    }
-
-
-
-     function insertQuoteTable() {
-         // Init var
-         let modalBody = $('.modal-body');
-
-         $.ajax({
-            url: '/focusWebApp/Applications/displayAllQuotes',
-            type: 'get',
-            async: true,
-            statusCode: {
-                200: function(quotes){  
-                    console.log(quotes);
-
-                    let table = $('<table class="table-quotes" id="table-data"></table>');
-                    let tableHead = $(`
-                    <tr class="tr-quotes">
-                        <th class="th-quotes">Quote</th>
-                        <th class="th-quotes">Author</th>
-                        <th class="th-quotes">Date</th>
-                    </tr>`)
-
-                    console.log(table);
-
-                    table.append(tableHead);
-
-                    quotes.forEach(function(quote){
-                        let quoteElement =`
-                        <tr class="tr-quotes">
-                            <td class="td-quotes">${quote.quote}</td>
-                            <td class="td-quotes">${quote.author}</td>
-                            <td class="td-quotes">${quote.date}</td>
-                        </tr>
-                        `
-                        table.append(quoteElement)
-                    })
-
-                    
-                    modalBody.append(table);
-
-                    console.log('what is going on')
-
-                },
-                422: function(){
-                    console.log('400');
-
-                }
-            },
-        })
-
-     }
+        //Display streak
+        if (streak == 1){
+            streakElement.text(`Current Streak: ${streak} Day!`);
+        } else {
+            streakElement.text(`Current Streak: ${streak} Days!`);
+        }
+    })  
+}
     
 
 
-        $("#search-quote").keyup(function(){
-        console.log('test1.5');
-        var search = $(this).val();
-        console.log('test2');
-        $.ajax({
-          url:'/focusWebApp/Applications/quoteSearch',
-          method: 'post',
-          data:{query:search},
-          success:function(response){
-            console.log(response);
+function insertQuoteTable() {
+    // Init var
+    let modalBody = $('.modal-body');
+
+    //Clear element
+    modalBody.html('')
+
+
+    $.ajax({
+    url: '/focusWebApp/Applications/displayAllQuotes',
+    type: 'get',
+    async: true,
+    statusCode: {
+        200: function(quotes){  
+            console.log(quotes);
+
+            //Get HTML element
+            let table = $('<table class="table-quotes" id="table-data"></table>');
+
+            //Create table head
+            let tableHead = $(`
+            <tr class="tr-quotes">
+                <th class="th-quotes">Quote</th>
+                <th class="th-quotes">Author</th>
+                <th class="th-quotes">Date</th>
+            </tr>`)
+
+            console.log(table);
+
+            //append elements
+            table.append(tableHead);
+
+            //Insert quotes
+            quotes.forEach(function(quote){
+                let quoteElement =`
+                <tr class="tr-quotes">
+                    <td class="td-quotes">${quote.quote}</td>
+                    <td class="td-quotes">${quote.author}</td>
+                    <td class="td-quotes">${quote.date}</td>
+                </tr>
+                `
+                //append quotes
+                table.append(quoteElement)
+            })
+
+            // display table         
+            modalBody.append(table);
+        },
+        422: function(){
+            console.log('400');
+
+        }
+    },
+})
+
+}
+    
+
+function searchQuotes(){
+    //Init var
+    var search = $(this).val();
+    
+    $.ajax({
+        url:'/focusWebApp/Applications/quoteSearch',
+        method: 'post',
+        data:{
+            query:search
+        },
+        success:function(response){
+            //Searched output
             $(".modal-body").html(response);
-          }
-        });
-      });
+        }
+    });
+};

@@ -497,8 +497,19 @@ nav .disabled {
   background-color: #414141;
 }
 
+.modal-bg .modal .modal-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
 .modal-bg .modal .modal-head .modal-close-btn {
   cursor: pointer;
+  margin: 8px;
+  color: #F2EDED;
 }
 
 .modal-bg .modal .modal-body {
@@ -752,11 +763,27 @@ nav .disabled {
 
 .information p:first-child {
   padding-top: 50px;
+  cursor: default;
 }
 
 .information #quote,
 .information #streak {
   position: relative;
+}
+
+.information #quote {
+  cursor: pointer;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+
+.information #streak {
+  cursor: default;
+}
+
+.information #quote:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .information #quote::before,
@@ -796,7 +823,7 @@ nav .disabled {
   --scale: 1;
 }
 
-.modal {
+.modal-quote {
   position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -811,9 +838,11 @@ nav .disabled {
   height: min-content;
   max-height: 500px;
   color: #F2EDED;
+  background-color: #414141;
+  border: 3px solid #1C2126;
 }
 
-.modal .modal-head {
+.modal-quote .modal-head {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -822,7 +851,7 @@ nav .disabled {
           justify-content: space-between;
 }
 
-.modal .modal-head .modal-search {
+.modal-quote .modal-head .modal-search {
   margin: 8px;
   height: 40px;
   width: 30%;
@@ -830,12 +859,12 @@ nav .disabled {
   border-radius: 10px;
 }
 
-.modal .modal-head .modal-close-btn {
+.modal-quote .modal-head .modal-close-btn {
   cursor: pointer;
   margin: 8px;
 }
 
-.modal .modal-body {
+.modal-quote .modal-body {
   height: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -844,18 +873,27 @@ nav .disabled {
   overflow-y: scroll;
 }
 
-.modal .modal-body .table-quotes {
+.modal-quote .modal-body .table-quotes {
   border-collapse: collapse;
+  border-top: none;
 }
 
-.modal .modal-body .th-quotes,
-.modal .modal-body .td-quotes {
+.modal-quote .modal-body .th-quotes,
+.modal-quote .modal-body .td-quotes {
   border: 2px solid #1C2126;
   text-align: left;
   padding: 8px;
 }
 
-.modal .modal-body .tr-quotes:nth-child(even) {
+.modal-quote .modal-body .th-quotes {
+  border: none;
+}
+
+.modal-quote .modal-body .td-quotes {
+  cursor: default;
+}
+
+.modal-quote .modal-body .tr-quotes:nth-child(even) {
   background-color: #1C2126;
 }
 
