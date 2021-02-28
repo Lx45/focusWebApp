@@ -254,9 +254,10 @@
 				'weekNumber' => htmlspecialchars($_POST['weekNumber']),
 				'dayTasks' => json_decode(stripslashes($_POST['dayTasks'])) 
 			];
-
+			// Set Session id for the current week
 			$_SESSION['week'] = $data['weekNumber'];
 
+			//Set var for each day
 			$mon = $data['dayTasks'][0];
 			$tue = $data['dayTasks'][1];
 			$wed = $data['dayTasks'][2];
@@ -265,7 +266,6 @@
 			$sat = $data['dayTasks'][5];
 			$sun = $data['dayTasks'][6];
 
-			error_log('Test'.print_r($data, 3));
 			
 			//call model function
 			 $setTasks = $this->applicationModel->setFinishedTasks($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun);

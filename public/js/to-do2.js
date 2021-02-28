@@ -1,20 +1,16 @@
-console.log('tod-do js')
-/*!!!Init Variables!!!*/
-let newListInput = $('#new-list-input');
-let newListBtn = $('#new-list-btn');
-let firstTaskList = $('.task-list .list-name:first');
-let lastTaskList = $('.task-list .list-name:last');
-let deleteListBtn = $('#delete-btn');
-let taskList = $('.all-tasks')
+//Init var
+let newListInput = $('#new-list-input'),
+    newListBtn = $('#new-list-btn'),
+    firstTaskList = $('.task-list .list-name:first'),
+    lastTaskList = $('.task-list .list-name:last'),
+    deleteListBtn = $('#delete-btn'),
+    taskList = $('.all-tasks'),
+    newTaskInput = $('.new-task-input'),
+    newTaskBtn = $('.new-task-btn'),
+    checkbox = $('.task-checkbox'),
+    task = $('#task.div'),
+    selectedDate = $('.date-button');
 
-let newTaskInput = $('.new-task-input');
-let newTaskBtn = $('.new-task-btn');
-let checkbox = $('.task-checkbox');
-let task = $('#task.div')
-
-
-let selectedDate = $('.date-button');
-$(document).on('click', '.new-task-btn-week', addNewTaskWeekView);
 
 let currentWeekDayDates = [];
 
@@ -26,6 +22,7 @@ deleteListBtn.on('click', deleteList);
 newTaskBtn.on('click', addNewTask);
 checkbox.on('click', finishedTask);
 countFinishedTasks();
+$(document).on('click', '.new-task-btn-week', addNewTaskWeekView);
 
 
 function getActiveList() {
@@ -39,25 +36,21 @@ weekBtn.click(weekOverview);
 
 /*!!!Choose active Tasklist!!!*/
 function activeList(event) {
-    console.log(currentWeekDayDates);
     //Init data
     let activeLi;
     const dayList = $('#to-do-day-view');
     const tasks = $('.tasks')
 
     // Check if function was called by onclick or by default
-        if(event == firstTaskList || event == lastTaskList) {
-            activeLi = $(event);
-        } else {
-            activeLi = $(event.target);
-        }
+    if(event == firstTaskList || event == lastTaskList) {
+        activeLi = $(event);
+    } else {
+        activeLi = $(event.target);
+    }
 
     let activeLiId = activeLi[0].dataset.listid;
     let listname = activeLi.html();
     let listTitle = $('.list-title');
-
-    // console.log(listname);
-    // console.log(activeLiId);
 
     //Set list-title
     listTitle.html(listname);
@@ -70,13 +63,11 @@ function activeList(event) {
 
     //load the current Tasklist
     if($(dayList).hasClass('hide')){
-        console.log('hide')
+        //Call function
         loadTasksWeekOverview(activeLiId);
-        console.log('activeList loaded');
     } else {
-        console.log('shown');
-        loadTasks(activeLiId);
-        console.log('activeList loaded');
+        //Call function
+        loadTasks(activeLiId); 
     }
 
 }
@@ -88,8 +79,6 @@ function addNewList(e) {
     let newList = newListInput.val();
     let userId = newListBtn[0].dataset.userid;
 
-    console.log(userId);
-
     $.ajax({
         url: '/focusWebApp/Applications/addNewList',
 		type: 'post',
@@ -100,12 +89,12 @@ function addNewList(e) {
 		},
 		statusCode: {
 			200: function(feedback){
-                alert('success');
+                //Clear input
                 newListInput.val('');
+                //call loadlist function
                 loadLists(userId);
 			},
 			422: function(feedback){
-                alert('failed');
 			}
 		},
     });
@@ -117,16 +106,13 @@ function addNewList(e) {
 
 /*!!!Add new Task!!!*/
 function addNewTask(e) {
-    console.log('addNewTask');
     // Init data
     let newTask = newTaskInput.val();
     let userId = newTaskBtn[0].dataset.userid;
     let activeLi = $('.active-list');
     let activeLiId = activeLi[0].dataset.listid;
     let date = $('.date-button').text();
-    console.log(date);
 
-    console.log(userId);
 
     $.ajax({
         url: '/focusWebApp/Applications/addNewTask',
@@ -140,12 +126,13 @@ function addNewTask(e) {
 		},
 		statusCode: {
 			200: function(feedback){
+                //Clear Input
                 newTaskInput.val('');
+                //call loadTasks function
                 loadTasks(activeLiId);
-				alert('success');
 			},
 			422: function(feedback){
-                alert('failed');
+
 			}
 		},
     });
@@ -171,25 +158,29 @@ function loadLists(userId){
 		},
 		statusCode: {
 			200: function(lists){
-                console.log(lists);
                 // Check if there are tasks in the list
                 if(lists.length > 0){
                     // Tasks found
                     let listUl = $('<ul class="task-list"></ul>');
 
+                    //Insets lists
                     lists.forEach(function(list){
 
                         let taskList = `
                         <li class="list-name" data-listid="${list.listid}">${list.listname}</li>
                         `
-
+                        //Append list
                         listUl.append(taskList);
                     })
-                    console.log('????');
+                    
+                    //append lists
                     $('.all-tasks-list').append(listUl);
 
+                    // call function
                     getActiveList();
+                    // set var
                     lastTaskList = $('.task-list .list-name:last');
+                    //call function
                     activeList(lastTaskList);
                     
                 } else {
@@ -210,9 +201,8 @@ function loadTasks(activeLiId) {
     let toDoList = $('.tasks');
     let taskCount = $('.task-count');
     let date = $('.date-button').text();
-    // console.log(date);
-    // console.log('fix this')
-    console.log(activeLiId);
+
+
     // Empty To-Do-List 
     toDoList.html('');
 
@@ -223,22 +213,22 @@ function loadTasks(activeLiId) {
 		data: {
             "activeLiId": activeLiId,
             "date": date
-            // "userId": userId
 		},
 		statusCode: {
 			200: function(tasks){
-                // console.log(tasks);
-                // console.log(tasks.status);
+
                 let tasksRemaining = tasks.length;
-                // console.log(tasksRemaining);
+
                 taskCount.text(tasksRemaining + ' tasks remaining');
                 // Check if there are tasks in the list
                 if(tasks.length > 0){
                     // Tasks found
+
+                    //Get HTML element
                     let tasksDiv = $('<div class="tasks"></div>');
 
+                    // Insert tasks
                     tasks.forEach(function(task){
-                            console.log(task.taskid);
 
                         let toDo =`
                         <div class="task" id="task-div">
@@ -257,14 +247,16 @@ function loadTasks(activeLiId) {
                         </div>`
                         
 
-                        
-                        // console.log(task.status);
                         let status = task.status;
-                        // console.log(status);
+
+                        //append task
                         tasksDiv.append(toDo);
                     })
 
+                    //append tasks 
                     $('.to-do-list-tasks').append(tasksDiv);
+
+                    //init var
                     checkbox = $('.task-checkbox');
                     task = $('#task.div')
                     checkbox.on('click', finishedTask);
@@ -277,13 +269,9 @@ function loadTasks(activeLiId) {
 			}
 		},
     });
-    console.log('loadtasks loaded');
 }
 
-function test12() {
-    console.log('run');
-    
-}
+
 
 /*!!!Delete list!!!*/
 function deleteList() {
@@ -302,12 +290,13 @@ function deleteList() {
 		},
 		statusCode: {
 			200: function(feedback){
+                //Clear input
                 newTaskInput.val('');
+                //Call function
                 loadLists(userId);
-				alert('success');
 			},
 			422: function(feedback){
-                alert('failed');
+
 			}
 		},
     });
@@ -315,24 +304,26 @@ function deleteList() {
 
 /*!!!finish task!!!*/
 function finishedTask(e) {
-    e.stopImmediatePropagation()
+    //stop even bubbling
+    e.stopImmediatePropagation();
+
+    //Init var
     const dayList = $('#to-do-day-view');
-    let activeLi = $('.active-list');
-    let activeLiId = activeLi[0].dataset.listid;
-    console.log(e.target);
-    let task = e.target;
-    let taskId = task.dataset.taskid;
-    let state = task.dataset.state;
-    console.log(taskId);
-    let done;
-    console.log(state);
+    let activeLi = $('.active-list'),
+        activeLiId = activeLi[0].dataset.listid,
+        task = e.target,
+        taskId = task.dataset.taskid,
+        state = task.dataset.state,
+        done;
+    
+    // Check state
     if(state === '1'){
+        //Checked
         done = "2"
-        console.log('checked')
 
     } else {
+        //Unchecked
         done = "1"
-        console.log('unchecked');
     }
     
     task;
@@ -347,38 +338,38 @@ function finishedTask(e) {
             },
             statusCode: {
                 200: function(feedback){
-                    // newTaskInput.val('');
+                    //Check wich overview should be loaded
                     if($(dayList).hasClass('hide')){
-                        console.log('hide')
+                        //Call function
                         loadTasksWeekOverview(activeLiId);
-                        console.log('activeList loaded');
                     } else {
-                        console.log('shown');
+                        //Call function
                         loadTasks(activeLiId);
-                        console.log('activeList loaded');
                     }
-                    alert('success');
+                    //Call function
                     countFinishedTasks();
                 },
                 422: function(feedback){
-                    // alert('failed');
+                    
                 }
             },
         });
 }
 
 function countFinishedTasks() {
+        //Call function to get current weekdays
         getCurrentWeekdays();
-        console.log(currentWeekDayDates);
-        let jsonDate = JSON.stringify(currentWeekDayDates);
-        let countedDayTasks = [];
-        let mon = [];
-        let tue = [];
-        let wed = [];
-        let thu = [];
-        let fri = [];
-        let sat = [];
-        let sun = [];
+
+        //Init var
+        let jsonDate = JSON.stringify(currentWeekDayDates),
+            countedDayTasks = [],
+            mon = [],
+            tue = [],
+            wed = [],
+            thu = [],
+            fri = [],
+            sat = [],
+            sun = [];
 
 
         $.ajax({
@@ -391,10 +382,11 @@ function countFinishedTasks() {
             },
             statusCode: {
                 200: function(tasks){
-                    console.log(tasks);
+                    
                     let countedTasks = tasks.length;
+                    // Set how may tasks have been done for each day
                     tasks.forEach(function(task){
-                        console.log(task.date);
+                        
                         if (currentWeekDayDates[0] == task.date){
                             mon.push(task.date);
                         } else if (currentWeekDayDates[1] == task.date){
@@ -411,7 +403,8 @@ function countFinishedTasks() {
                             sun.push(task.date);
                         }
                     })
-                    console.log(mon);
+                    
+                    // Get the length
                     countMon = mon.length;
                     countTue = tue.length;
                     countWed = wed.length;
@@ -420,26 +413,26 @@ function countFinishedTasks() {
                     countSat = sat.length;
                     countSun = sun.length;
 
+                    //all days kumulated
                     countedDayTasks.push(countMon, countTue, countWed, countThu, countFri, countSat, countSun);
 
-                    console.log('finshedTasks loaded')
-                    console.log(countedDayTasks);
-                    setFinishedTasks(countedTasks, jsonDate, countedDayTasks);
-
-
+                    //Call function with parameters
+                    setFinishedTasks(countedTasks, countedDayTasks);
                 },
                 422: function(){
-    
+
                 }
             },
         })
-
 }
 
-function setFinishedTasks(tasks, dates, dayTasks) {
+function setFinishedTasks(tasks, dayTasks) {
+    //Init var
+    // Get Num of current week
     let week = $('.week-button').html()
     let split = week.split(' ');
     let weekNumber = split[1];
+    // Strigify array
     let jsonDayTasks = JSON.stringify(dayTasks);
     
     $.ajax({
@@ -448,19 +441,16 @@ function setFinishedTasks(tasks, dates, dayTasks) {
         async: true,
         data: {
             "tasks": tasks,
-            // "dates": dates,
             "weekNumber": weekNumber,
             "dayTasks": jsonDayTasks
         },
         statusCode: {
             200: function(){
-                // let countedTasks = tasks.length;
-                // console.log('finshedTasks loaded')
-                // setFinishedTasks(countedTasks);     
-                console.log('tasksSet');         
+                //database updated
+       
             },
             422: function(){
-
+                //failed
             }
         },
     })
@@ -506,7 +496,6 @@ function weekOverview(e){
 
 
 function getCurrentWeekdays() {
-        console.log('fired');
         //Clear array if function has already been called
         currentWeekDayDates = [];
         // Change the display of the dates
@@ -619,8 +608,7 @@ function loadTasksWeekOverview(activeLiId){
         },
         statusCode: {
             200: function(tasks){
-                 console.log(tasks);
-
+                //Check for tasks
                 if(tasks.length > 0){
                     // Tasks found
                     let listsArray = []

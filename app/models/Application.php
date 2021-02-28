@@ -98,7 +98,6 @@ class Application {
 		$this->db->query('UPDATE tasklists SET status = :status WHERE listid = :listId');
  		$this->db->bind(':status', 2);
  		$this->db->bind(':listId', $listId);
- 		// $this->db->bind(':deletedOn', $timestamp);
 
  		//Execute
 		if ($this->db->execute()) {
@@ -113,7 +112,6 @@ class Application {
 		$this->db->query('UPDATE tasks SET done = :done WHERE taskid = :taskId');
  		$this->db->bind(':done', $done);
  		$this->db->bind(':taskId', $taskId);
- 		// $this->db->bind(':deletedOn', $timestamp);
 
  		//Execute
 		if ($this->db->execute()) {
@@ -125,6 +123,7 @@ class Application {
      
      public function countFinishedTasks($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun) {
         // PDO statement
+        // Get all finished tasks
         $this->db->query('SELECT * FROM tasks WHERE status != 3 AND userid = :userid AND (date = :mon OR date= :tue OR date= :wed OR date= :thu OR date= :fri OR date= :sat OR date= :sun) AND done = :done' );
         
         //Bind values
@@ -140,9 +139,6 @@ class Application {
 
         $results = $this->db->resultSet();
 
-        // $count = count($results);
-
-        // error_log($count);
 
         //return data 
         return $results;
@@ -150,28 +146,24 @@ class Application {
 
     public function setFinishedTasks($data, $mon, $tue, $wed, $thu, $fri, $sat, $sun){
          // PDO statement 
+         // Check if there is already an entry for the current week
          $this->db->query('SELECT * FROM finishedTasks WHERE  userid = :userid AND calendarWeek = :cW');
-         
+
+        // Init var
          $weekNumber = $data['weekNumber'];
-         error_log('cw '.$weekNumber);
-        //  if ($data['weekNumber'] <10){
-        //     $data['weekNumber'] = '0' + $data['weekNumber'];
-        //  };
 
-         $this->db->bind(':userid', $data['userId']);
-         $this->db->bind(':cW', $weekNumber);
+        // Bind values
+        $this->db->bind(':userid', $data['userId']);
+        $this->db->bind(':cW', $weekNumber);
 
-         $results = $this->db->resultSet();
-
-        error_log(print_r($results, 1));
+        $results = $this->db->resultSet();
 
         $count = count($results);
-
-        error_log($count);
         
+        // Check if there is already an entry for the current week
         if($count == 0) {
-            error_log('hi');
             //PDO statement
+            //If there is no entry insert a new one with all finished tasks per day
             $this->db->query('INSERT INTO finishedtasks (userid, calendarWeek, tasksWeek, mon, tue, wed, thu, fri, sat, sun) VALUES (:userid, :cW, :tasksWeek, :mon, :tue, :wed, :thu, :fri, :sat, :sun)');
 
             //Bind Values
@@ -187,9 +179,11 @@ class Application {
             $this->db->bind(':sun', $sun);
 
         } else {
-            error_log('hier hallo');
             //PDO statement
+            // If there is already an entry update it 
             $this->db->query('UPDATE finishedTasks SET tasksWeek = :tasksWeek, mon = :mon, tue = :tue, wed = :wed, thu = :thu, fri = :fri, sat = :sat, sun = :sun WHERE userid = :userid AND calendarWeek = :cW');
+
+            // Bind values
             $this->db->bind(':tasksWeek', $data['tasks']);
             $this->db->bind(':mon', $mon);
             $this->db->bind(':tue', $tue);

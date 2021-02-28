@@ -1,4 +1,5 @@
 //Init var
+let date;
 const ctx = $('#chart'), 
 modal = $('.modal-quote'),
 modalClsBtn = $('.modal-close-btn'),
@@ -34,10 +35,12 @@ let myChart = new Chart(ctx, {
 });
 
 //Call functions
+getCurrentDay();
 setChartValue();
 checkForFinishedTasks();
 displayQuote();
 setStreak();
+
 
 quote.click(openModal);
 modalClsBtn.click(closeModal);
@@ -52,6 +55,28 @@ function openModal() {
 function closeModal() {
     modal.css({'visibility': 'hidden'});
 }
+
+function getCurrentDay() {
+        // Get current date
+        let today = new Date;
+
+        let day = today.getDate();
+        let month = today.getMonth();
+        let year = today.getFullYear();
+    
+        //Set zero in front of day/month if 1 digit
+        if (day < 10) {
+            day = '0' + day;
+            }
+        // +1 cause cpu counts up from 0
+        month = month + 1;
+        if (month < 10){
+            month = '0' + month;
+        }
+    
+        date = `${month}.${day}.${year}`;
+}
+
 
 
 
@@ -90,26 +115,6 @@ function setChartValue() {
     }
 
  function checkForFinishedTasks() {
-     // Get current date
-    let today = new Date;
-
-    let day = today.getDate();
-    let month = today.getMonth();
-    let year = today.getFullYear();
-
-    //Set zero in front of day/month if 1 digit
-    if (day < 10) {
-        day = '0' + day;
-        }
-    // +1 cause cpu counts up from 0
-    month = month + 1;
-    if (month < 10){
-        month = '0' + month;
-    }
-
-    let date = `${month}.${day}.${year}`;
-
-    console.log(date);
     
     $.ajax({
         url: '/focusWebApp/Applications/checkForFinishedTasks',
@@ -124,7 +129,7 @@ function setChartValue() {
                 // If User finished more than 4 task fetch new quote
                 if (tasks.length > 4){
                 // Call fetchquote function
-                fetchQuote(date);
+                fetchQuote();
                 }
             },
             422: function(){
@@ -136,7 +141,7 @@ function setChartValue() {
 
 
 
-function fetchQuote(date) { 
+function fetchQuote() { 
     // Fetch quote-data from Rest API
     const settings = {
         "async": true,
@@ -154,12 +159,12 @@ function fetchQuote(date) {
         let author = data.author;
         
         // Call setquote function with fetched data as parameter
-        setQuote(date, quote, author);
+        setQuote(quote, author);
     });
 
 }
 
-function setQuote(date, quote, author){
+function setQuote(quote, author){
     //Set fetched quote into database
     $.ajax({
         url: '/focusWebApp/Applications/setQuote',
@@ -173,7 +178,7 @@ function setQuote(date, quote, author){
         statusCode: {
             200: function(tasks){  
                 //Call display Quote function
-                displayQuote(date);
+                displayQuote();
             },
             422: function(){
     
@@ -182,27 +187,7 @@ function setQuote(date, quote, author){
     })
 }
 
-    function displayQuote() {
-
-             // Get current date
-    let today = new Date;
-
-    let day = today.getDate();
-    let month = today.getMonth();
-    let year = today.getFullYear();
-
-    //Set zero in front of day/month if 1 digit
-    if (day < 10) {
-        day = '0' + day;
-        }
-    // +1 cause cpu counts up from 0
-    month = month + 1;
-    if (month < 10){
-        month = '0' + month;
-    }
-
-    let date = `${month}.${day}.${year}`;
-
+function displayQuote() {
     // Get quote from database
     $.ajax({
         url: '/focusWebApp/Applications/displayQuote',
