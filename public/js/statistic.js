@@ -140,28 +140,26 @@ function setChartValue() {
  }
 
 
-
-function fetchQuote() { 
-    // Fetch quote-data from Rest API
-    const settings = {
-        "async": true,
-        "crossDomain": true,
-        //  "url": "https://type.fit/api/quotes",
-        "url": "https://random-math-quote-api.herokuapp.com/",
-        "method": "GET",
-         };
-    
-    $.ajax(settings).done(function (response) {
-        console.log(response);
-        // Set response into var
-        const data = response;
-        let quote = data.quote;
-        let author = data.author;
-        
-        // Call setquote function with fetched data as parameter
-        setQuote(quote, author);
-    });
-
+function fetchQuote() {
+    //Get data from quote Api
+    $.ajax({
+        jsonp: "jsonp",
+        dataType: "jsonp",
+        url: "http://api.forismatic.com/api/1.0/",
+        contentType: "application/jsonp",
+        data: {
+          lang: "en",
+          method: "getQuote",
+          format: 'jsonp'
+        },
+        success(data){
+            //Insert data into var
+            const quote = data.quoteText;
+            const author = data.quoteAuthor;
+            // Call function with quote data
+            setQuote(quote, author);
+        }
+    })
 }
 
 function setQuote(quote, author){
