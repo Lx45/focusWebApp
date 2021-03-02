@@ -15,7 +15,7 @@ require APPROOT . '/views/inc/navigation.php';
 
     
     <div class="all-tasks" id="all-tasks-day-view">
-        <h2 class="task-list-title">My lists</h2>
+        <h2 class="task-list-title">Lists</h2>
         <div class="all-tasks-list">
             <ul class="task-list">
                 <?php foreach($data['taskListOverview'] as $taskOverview) : ?>
@@ -25,7 +25,7 @@ require APPROOT . '/views/inc/navigation.php';
         </div>
 
         <form action="">
-            <input id="new-list-input" type="text" class="new list input input1" placeholder="new list name" aria-label="new list name">
+            <input id="new-list-input" type="text" class="new list input input1" placeholder="New list name" aria-label="new list name">
             <button id="new-list-btn" class="btn create" data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new list">+</button>
         </form>
         <p class="error alert1"></p>
@@ -44,7 +44,7 @@ require APPROOT . '/views/inc/navigation.php';
 
             <div class="new-task-creator">
                 <form action="">
-                    <input type="text" class="new task new-task-input input input2" placeholder="new task name" aria-label="new task name">
+                    <input type="text" class="new task new-task-input input input2" placeholder="New task name" aria-label="new task name">
                     <button class="btn create new-task-btn" data-userid="<?php echo $_SESSION['user_id']?>" aria-label="create new task">+</button>
                 </form>
                 <p class="error alert2"></p>

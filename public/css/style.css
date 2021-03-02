@@ -1,3 +1,15 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #414141 inset !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #F2EDED !important;
+  -webkit-border-after: 1px solid lightgray !important;
+}
+
 nav {
   width: 100%;
   margin: 0;

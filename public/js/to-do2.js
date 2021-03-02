@@ -559,7 +559,7 @@ function createWeekLists() {
 
         <div class="new-task-creator">
             <form action="">
-                <input type="text" class="new task new-task-input input input2" placeholder="new task name" aria-label="new task name">
+                <input type="text" class="new task new-task-input input input2" placeholder="New task name" aria-label="new task name">
                 <button  class="btn create new-task-btn-week" data-userid=" aria-label="create new task">+</button>
             </form>
             <p class="error alert2"></p>

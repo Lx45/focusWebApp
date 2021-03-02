@@ -3,6 +3,22 @@ $light: #F2EDED;
 $purple:#4525F2;
 $background: #414141;
 
+// Disable white background on autofill
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px $background inset !important;
+}
+
+// Disable color change on autofill
+input:-webkit-autofill
+{
+ -webkit-text-fill-color: $light !important;
+ -webkit-border-after: 1px solid lightgray !important;
+}
+
 @mixin inputWithLabel {
     .btn {
         cursor: pointer;
