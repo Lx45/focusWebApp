@@ -47,12 +47,12 @@ class Users extends Controller
             if (empty($data['email'])) {
                 $tmp_email = array(5, "*Please enter your email");
                 array_push($errorsArray, $tmp_email);
-                // }elseif ($this->userModel->findUserByEmail($data['email'])) {
-                //     // User found
-                //     $tmp_email = array(1, "*Email already registered");
-                //     array_push($errorsArray, $tmp_email);
-                // } else {
-                //     // User not found
+            }
+            elseif ($this->userModel->findUserByEmail($data['email'])) {
+                    // User found
+                    $tmp_email = array(5, "*Email already registered");
+                    array_push($errorsArray, $tmp_email);
+                    // User not found
             }
 
             if (empty($data['password'])) {
@@ -120,12 +120,12 @@ class Users extends Controller
             if (empty($data['email'])) {
                 $tmp_email = array(1, "*Please enter email");
                 array_push($errorsArray, $tmp_email);
-                // }elseif ($this->userModel->findUserByEmail($data['email'])) {
-                //     // User found
-                // } else {
-                //     // User not found
-                //     $tmp_email = array(1, "*No user found");
-                //     array_push($errorsArray, $tmp_email);
+                }elseif ($this->userModel->findUserByEmail($data['email'])) {
+                    // User found
+                } else {
+                    // User not found
+                    $tmp_email = array(1, "*No user found");
+                    array_push($errorsArray, $tmp_email);
             }
 
             if (empty($data['password'])) {

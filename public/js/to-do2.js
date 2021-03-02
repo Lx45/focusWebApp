@@ -89,12 +89,18 @@ function addNewList(e) {
 		},
 		statusCode: {
 			200: function(feedback){
+                successValidation(newListInput);
+                setTimeout(function(){
                 //Clear input
                 newListInput.val('');
                 //call loadlist function
                 loadLists(userId);
+                $(newListInput).css({ "border-bottom": '1px solid lightgray' });
+                }, 1000)
+
 			},
-			422: function(feedback){
+			422: function(errors){
+                failedValidation(errors, newListInput);
 			}
 		},
     });
@@ -126,13 +132,18 @@ function addNewTask(e) {
 		},
 		statusCode: {
 			200: function(feedback){
-                //Clear Input
-                newTaskInput.val('');
-                //call loadTasks function
-                loadTasks(activeLiId);
+                successValidation(newTaskInput);
+                setTimeout(function(){
+                    //Clear Input
+                    newTaskInput.val('');
+                    //call loadTasks function
+                    loadTasks(activeLiId);
+                    // Set border beack to default
+                    $(newTaskInput).css({ "border-bottom": '1px solid lightgray' });
+                }, 1000)
 			},
-			422: function(feedback){
-
+			422: function(errors){
+                failedValidation(errors, newTaskInput);
 			}
 		},
     });
@@ -540,10 +551,10 @@ function createWeekLists() {
 
         <div class="new-task-creator">
             <form action="">
-                <input type="text" class="new task new-task-input" placeholder="new task name"
-                    aria-label="new task name">
+                <input type="text" class="new task new-task-input input input2" placeholder="new task name" aria-label="new task name">
                 <button  class="btn create new-task-btn-week" data-userid=" aria-label="create new task">+</button>
             </form>
+            <p class="error alert2"></p>
         </div>
     </div>
 </div>`
@@ -671,7 +682,10 @@ function loadTasksWeekOverview(activeLiId){
 
 function addNewTaskWeekView(e) {
     //Init data
+    e.stopImmediatePropagation();
     let btn = e.target;
+    let newTaskField = $(btn).prev();
+    let errorText = $(btn).parent().next();
     let newTask = $(btn).prev().val();
     let activeLi = $('.active-list');
     let activeLiId = activeLi[0].dataset.listid;
@@ -690,12 +704,16 @@ function addNewTaskWeekView(e) {
 		},
 		statusCode: {
 			200: function(feedback){
-                $(btn).prev().val('');
-                loadTasksWeekOverview(activeLiId);
-				alert('success');
+                successValidation(newTaskField);
+                setTimeout(function(){
+                    $(btn).prev().val('');
+                    loadTasksWeekOverview(activeLiId);
+                    $(newTaskField).css({ "border-bottom": '1px solid lightgray' });
+            }, 1000)
 			},
-			422: function(feedback){
-                alert('failed');
+			422: function(errors){
+                failedValidationWeekView(errors, newTaskField, errorText);
+                // alert('you cant add a empty task');
 			}
 		},
     });

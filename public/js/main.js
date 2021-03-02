@@ -1,12 +1,12 @@
-function successValidation() {
-    $('.input').css({ border: '3px solid green' });
+function successValidation(input = '.input') {
+    $(input).css({ 'border-bottom': '3px solid green' });
     $('.error').css({ display: 'none' });
 }
 
-function failedValidation(v) {
+function failedValidation(v, input = '.input',) {
     console.log(v.responseText);
     let errors = JSON.parse(v.responseText);
-    $('.input').css({ "border-bottom": '3px solid green' });
+    $(input).css({ "border-bottom": '3px solid green' });
     $('.error').css({ display: 'none' });
 
     for (var i = 0; i < errors.length; i++) {
@@ -14,6 +14,22 @@ function failedValidation(v) {
         let text = errors[i][1];
         $('.input' + alert).css({ "border-bottom": '3px solid crimson' });
         $('.alert' + alert)
+            .css({ display: 'block' })
+            .html(text);
+    }
+}
+
+function failedValidationWeekView(v, input = '.input', errorElement) {
+    console.log(v.responseText);
+    let errors = JSON.parse(v.responseText);
+    $(input).css({ "border-bottom": '3px solid green' });
+    $('.error').css({ display: 'none' });
+
+    for (var i = 0; i < errors.length; i++) {
+        let alert = errors[i][0];
+        let text = errors[i][1];
+        $(input).css({ "border-bottom": '3px solid crimson' });
+        $(errorElement)
             .css({ display: 'block' })
             .html(text);
     }

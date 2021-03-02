@@ -110,6 +110,10 @@
 				];
 
 				// Validate data
+				if (empty($data['newList'])) {
+					$tmp_list = array(1, "*Please enter your list");
+					array_push($errorsArray, $tmp_list);
+				}
 
 				//Check for errors
 				if (count($errorsArray) === 0) {
@@ -153,6 +157,11 @@
 				];
 
 				// Validate data
+				if (empty($data['newTask'])) {
+					$tmp_task = array(2, "*Please enter your task");
+					array_push($errorsArray, $tmp_task);
+				}
+
 
 				//Check for errors
 				if (count($errorsArray) === 0) {
