@@ -227,10 +227,10 @@ function loadTasks(activeLiId) {
 		},
 		statusCode: {
 			200: function(tasks){
-
-                let tasksRemaining = tasks.length;
-
-                taskCount.text(tasksRemaining + ' tasks remaining');
+                console.log(tasks)
+                // Set remaining task var
+                let tasksRemaining = 0;
+                
                 // Check if there are tasks in the list
                 if(tasks.length > 0){
                     // Tasks found
@@ -240,6 +240,11 @@ function loadTasks(activeLiId) {
 
                     // Insert tasks
                     tasks.forEach(function(task){
+
+                        if (task.done == 1){
+                            //If task is not finish count up
+                            tasksRemaining++
+                        }
 
                         let toDo =`
                         <div class="task" id="task-div">
@@ -263,6 +268,9 @@ function loadTasks(activeLiId) {
                         //append task
                         tasksDiv.append(toDo);
                     })
+
+                    //Display amount of not finished tasks
+                    taskCount.text(tasksRemaining + ' tasks remaining');
 
                     //append tasks 
                     $('.to-do-list-tasks').append(tasksDiv);
