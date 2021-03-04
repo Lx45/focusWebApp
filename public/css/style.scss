@@ -138,14 +138,14 @@ input:-webkit-autofill
         input:focus {
             border-bottom-width: 3px;
         }
-
-        .error {
-            margin: 5px 0px 0px 20px;
-            display: none;
-            color: crimson;
-        }
     }
 
+}
+
+.error {
+    margin: 5px 0px 0px 20px;
+    display: none;
+    color: crimson;
 }
 
 @import "./navigation";

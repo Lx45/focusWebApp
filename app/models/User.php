@@ -11,9 +11,10 @@ class User {
 
     public function user_add($data){
         // PDO statement
-        $this->db->query('INSERT INTO users (firstname, lastname, username, birthdate, email, password) VALUES (:firstname, :lastname, :username, :birthdate, :email, :password)');
+        $this->db->query('INSERT INTO users (gender, firstname, lastname, username, birthdate, email, password) VALUES (:gender, :firstname, :lastname, :username, :birthdate, :email, :password)');
 
         //Bind values
+        $this->db->bind(':gender', $data['gender']);
         $this->db->bind(':firstname', $data['name']);
         $this->db->bind(':lastname', $data['lastname']);
         $this->db->bind(':username', $data['username']);

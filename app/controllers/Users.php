@@ -13,6 +13,7 @@ class Users extends Controller
         if (isAjaxCall()) {
             // Init data
             $data = [
+                'gender' => trim(htmlspecialchars($_POST['gender'])),
                 'name' => trim(htmlspecialchars($_POST['name'])),
                 'lastname' => trim(htmlspecialchars($_POST['lastname'])),
                 'username' => trim(htmlspecialchars($_POST['username'])),
@@ -24,6 +25,11 @@ class Users extends Controller
             $errorsArray = array();
 
             // Validate data
+            if (empty($data['gender'])) {
+                $tmp_gender = array(8, "*Please choose your gender");
+                array_push($errorsArray, $tmp_gender);
+            }
+
             if (empty($data['name'])) {
                 $tmp_name = array(1, "*Please enter your name");
                 array_push($errorsArray, $tmp_name);
@@ -142,7 +148,7 @@ class Users extends Controller
                 if ($loggedInUser) {
                     // login successfull
                     // Create session
-                    error_log($loggedInUser[email]);
+                    // error_log($loggedInUser[email]);
                     $this->createUserSession($loggedInUser);
 
                     //Stauts code success

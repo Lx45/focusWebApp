@@ -1,12 +1,53 @@
-$('#btn-su').on('click', userAdd);
-$('#btn-si').on('click', userLogin);
-$('#btn-lo').on('click', logout);
+//Init var
+let genderDiv = $('.gender-div-body-small'),
+     card = $('.register-card'),
+     signUpBtn =$('#btn-su'),
+     signInBtn =$('#btn-si'),
+     logOutBtn =$('#btn-lo');
 
+
+//Call functions
+genderDiv.click(changeColor);
+genderDiv.click(chooseGender);
+card.click(activateCircle);
+signUpBtn.click(userAdd);
+signInBtn.click(userLogin);
+logOutBtn.click(logout);
 checkSessionState();
+
+//Change color of gender Img
+function changeColor(e){
+    let currentDiv = e.target;
+    let genderImg = $('.gender-img')
+
+    $(genderImg).removeClass('active-img');
+    $(currentDiv).addClass('active-img');
+}
+
+// Set value for gender
+function chooseGender(e){
+    var val = $(this).attr('data-value');
+    $(this).parent().find('input').val(val);  
+}
+
+//Set circle to active
+function activateCircle(){
+    if($(this).hasClass('gender-card')){
+        $('#circle-gender').addClass('circle-active');
+    } else if($(this).hasClass('personal-info-card')){
+        $('#circle-info').addClass('circle-active');
+    } else if ($(this).hasClass('contact-card')){
+        $('#circle-passwort').addClass('circle-active'); 
+    }
+}
+
+
+
 
 function userAdd() {
     // Init data
-    let name = $('#name-su').val(),
+    let genderVal = $('#gender').val(),
+        name = $('#name-su').val(),
         lastname = $('#lastname-su').val(),
         username = $('#username-su').val(),
         birthdate = $('#birthdate-su').val(),
@@ -19,6 +60,7 @@ function userAdd() {
         type: 'post',
         async: true,
         data: {
+            gender: genderVal,
             name: name,
             lastname: lastname,
             username: username,
@@ -31,13 +73,11 @@ function userAdd() {
             200: function() {
                 //userAdd success
                 successValidation();
-                alert('success');
                 redirect('users/login');
             },
             422: function(errors) {
                 //userAdd failed
                 failedValidation(errors);
-                alert('fail');
             }
         }
     });

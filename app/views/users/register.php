@@ -6,7 +6,7 @@ require APPROOT . '/views/inc/navigation.php';
 <div class="grid">
 
 <div class="input-section">
-        <div class="gender-card">
+        <div class="gender-card register-card">
             <div class="card-header">
                 <h1>Gender</h1>
                 <hr>
@@ -21,10 +21,11 @@ require APPROOT . '/views/inc/navigation.php';
                 <div class="gender-div-body-small" data-value="Trans">
                     <img class="gender-img third" src="../img/trans.svg">
                 </div>
-                <!-- <input type="text" id="gender" name="radio-value"> -->
+                 <input type="text" id="gender" class="input input8" name="radio-value"> 
             </div>
         </div>
-        <div class="personal-info-card">
+        <p class="error alert8"></p>
+        <div class="personal-info-card register-card">
             <div class="card-header">
                 <h1>Personal information</h1>
                 <hr>
@@ -65,7 +66,7 @@ require APPROOT . '/views/inc/navigation.php';
             </div>
         </div>
 
-        <div class="contact-card">
+        <div class="contact-card register-card">
             <div class="card-header">
                 <h1>Email / Password</h1>
                 <hr>
@@ -102,23 +103,23 @@ require APPROOT . '/views/inc/navigation.php';
 
 
     <div class="info-section">
-        <div class="circle-flex" id="circle-gender">
-            <div class="circle">
+        <div class="circle-flex" >
+            <div class="circle" id="circle-gender">
                 <p class="circle-p">1</p>
             </div>
             <p class="circle-flex-p">Gender</p>
         </div>
 
-        <div class="circle-flex" id="circle-info">
-            <div class="circle">
+        <div class="circle-flex">
+            <div class="circle" id="circle-info">
                 <p class="circle-p">2</p>
             </div>
             <p class="circle-flex-p">Info</p>
         </div>
 
 
-        <div class="circle-flex" id="circle-passwort">
-            <div class="circle">
+        <div class="circle-flex">
+            <div class="circle" id="circle-passwort">
                 <p class="circle-p">3</p>
             </div>
             <p class="circle-flex-p">Password</p>

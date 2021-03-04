@@ -10,6 +10,12 @@ input:-webkit-autofill {
   -webkit-border-after: 1px solid lightgray !important;
 }
 
+.error {
+  margin: 5px 0px 0px 20px;
+  display: none;
+  color: crimson;
+}
+
 nav {
   width: 100%;
   margin: 0;
@@ -1070,7 +1076,7 @@ nav .disabled {
   margin-top: 20px;
 }
 
-.input-section .gender-card .card-body div img {
+.input-section .gender-card .card-body div .gender-img {
   height: 150px;
   width: 150px;
   display: block;
@@ -1079,6 +1085,15 @@ nav .disabled {
   margin-top: 10px;
   -webkit-filter: invert(100%) sepia(0%) saturate(7486%) hue-rotate(54deg) brightness(123%) contrast(65%);
           filter: invert(100%) sepia(0%) saturate(7486%) hue-rotate(54deg) brightness(123%) contrast(65%);
+}
+
+.input-section .gender-card .card-body div .active-img {
+  -webkit-filter: invert(19%) sepia(85%) saturate(7375%) hue-rotate(252deg) brightness(93%) contrast(105%);
+          filter: invert(19%) sepia(85%) saturate(7375%) hue-rotate(252deg) brightness(93%) contrast(105%);
+}
+
+.input-section .gender-card .card-body #gender {
+  display: none;
 }
 
 .input-section .personal-info-card {
@@ -1143,12 +1158,6 @@ nav .disabled {
 
 .input-section .personal-info-card .card-body .inputfield div input:focus {
   border-bottom-width: 3px;
-}
-
-.input-section .personal-info-card .card-body .inputfield div .error {
-  margin: 5px 0px 0px 20px;
-  display: none;
-  color: crimson;
 }
 
 .input-section .personal-info-card .card-body .inputfield:last-child {
@@ -1219,12 +1228,6 @@ nav .disabled {
   border-bottom-width: 3px;
 }
 
-.input-section .contact-card .card-body .inputfield div .error {
-  margin: 5px 0px 0px 20px;
-  display: none;
-  color: crimson;
-}
-
 .input-section .contact-card .card-body .inputfield:last-child {
   margin-bottom: 20px;
 }
@@ -1263,9 +1266,12 @@ nav .disabled {
 
 .info-section .circle-flex .circle {
   background-color: #4525F2;
+  opacity: .5;
   height: 70px;
   border-radius: 70%;
   width: 70px;
+  -webkit-transition: ease 2s;
+  transition: ease 2s;
 }
 
 .info-section .circle-flex .circle p {
@@ -1274,6 +1280,10 @@ nav .disabled {
   font-weight: 700;
   text-align: center;
   margin: 10px auto 0 5px;
+}
+
+.info-section .circle-flex .circle-active {
+  opacity: 1;
 }
 
 .info-section .circle-flex p:nth-child(2) {
@@ -1361,12 +1371,6 @@ nav .disabled {
 
 .sign-in-card .card-body .inputfield div input:focus {
   border-bottom-width: 3px;
-}
-
-.sign-in-card .card-body .inputfield div .error {
-  margin: 5px 0px 0px 20px;
-  display: none;
-  color: crimson;
 }
 
 .sign-in-card .card-body .inputfield:last-child {

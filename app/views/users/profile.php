@@ -2,6 +2,8 @@
 require APPROOT . '/views/inc/header.php';
 
 require APPROOT . '/views/inc/navigation.php';
+
+
 ?>
 
 <div class="grid">
