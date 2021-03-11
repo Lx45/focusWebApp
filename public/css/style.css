@@ -1417,8 +1417,12 @@ nav .disabled {
   margin-top: 10px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .background-homepage {
-  background: url(/focusWebApp/public/img/background.png);
+  background: url(/focusWebApp/public/img/laptop-background.jpg);
   background-size: cover;
   height: 100vh;
   height: 100vh;
@@ -1446,7 +1450,7 @@ html, body {
   margin: 0 auto;
 }
 
-.homepage-p {
+.homepage-quote {
   -ms-grid-column: 4;
   -ms-grid-column-span: 6;
   grid-column: 4/10;
@@ -1460,17 +1464,69 @@ html, body {
       align-self: center;
 }
 
-.homepage-p p {
+.homepage-quote p {
   font-size: 25px;
   text-align: center;
   color: #F2EDED;
 }
 
-.homepage-p p span {
+.homepage-quote p span {
   opacity: 0.5;
 }
 
-.homepage-p p span:last-child {
+.homepage-quote p span:last-child {
   font-size: 20px;
+}
+
+#arrow-down {
+  -ms-grid-column: 6;
+  -ms-grid-column-span: 2;
+  grid-column: 6/8;
+  -ms-grid-row: 7;
+  -ms-grid-row-span: 3;
+  grid-row: 7/10;
+  margin-left: auto;
+  margin-right: auto;
+  color: #F2EDED;
+  opacity: 0.2;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+  cursor: pointer;
+}
+
+#arrow-down:hover {
+  opacity: 1;
+}
+
+.homepage-p {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 8;
+  grid-column: 3/11;
+  -ms-grid-row: 9;
+  -ms-grid-row-span: 2;
+  grid-row: 9/11;
+  font-size: 25px;
+  text-align: center;
+  color: #F2EDED;
+}
+
+.homepage-a {
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 4;
+  grid-column: 5/9;
+  -ms-grid-row: 12;
+  -ms-grid-row-span: 3;
+  grid-row: 12/15;
+  margin-bottom: 255px;
+}
+
+.homepage-btn {
+  width: 100%;
+  height: 100px;
+  border: solid 1px grey;
+  background: none;
+  font-size: 40px;
+  color: #F2EDED;
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */
