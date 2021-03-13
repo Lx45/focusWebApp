@@ -218,9 +218,9 @@ html, body{
     cursor: pointer;
 }
 
-#arrow-down:hover{
-    opacity: 1;
-}
+// #arrow-down:hover{
+//     opacity: 1;
+// }
 
 .homepage-p{
     grid-column: 3/11;
@@ -244,5 +244,10 @@ html, body{
     font-size: 40px;
     color: $light;
     cursor: pointer;
+}
+
+.slider-background{
+    width: 100vw;
+    
 }
 

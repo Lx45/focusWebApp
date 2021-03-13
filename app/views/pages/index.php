@@ -14,6 +14,8 @@ print_r($_SESSION);
         </div>
 
         <i id="arrow-down" class="fas fa-arrow-down fa-4x"></i>
+        
+        <!-- <div class="slider-background"></div> -->
 
         <p class="homepage-p">Focus is an application, wich will boost your productivity and wich will help you to maintain mental clarity. Within this app you have the option to create short-term and also longterm To-Dos. Through absolving To-dos you will build a streak and unlock motivational quotes to boost your motivation.</p>
 

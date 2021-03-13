@@ -1494,10 +1494,6 @@ html, body {
   cursor: pointer;
 }
 
-#arrow-down:hover {
-  opacity: 1;
-}
-
 .homepage-p {
   -ms-grid-column: 3;
   -ms-grid-column-span: 8;
@@ -1528,5 +1524,9 @@ html, body {
   font-size: 40px;
   color: #F2EDED;
   cursor: pointer;
+}
+
+.slider-background {
+  width: 100vw;
 }
 /*# sourceMappingURL=style.css.map */
