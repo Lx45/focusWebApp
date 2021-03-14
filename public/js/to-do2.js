@@ -20,7 +20,7 @@ getActiveList();
 activeList(firstTaskList);
 deleteListBtn.on('click', deleteList);
 newTaskBtn.on('click', addNewTask);
-checkbox.on('click', finishedTask);
+// checkbox.on('click', finishedTask);
 countFinishedTasks();
 $(document).on('click', '.new-task-btn-week', addNewTaskWeekView);
 
@@ -247,6 +247,7 @@ function loadTasks(activeLiId) {
                         }
 
                         let toDo =`
+                        <div class="line-through"></div>
                         <div class="task" id="task-div">
                         <input type="checkbox" class="task-checkbox" id="task-${task.taskid}" data-state="${task.done}" data-taskid="${task.taskid}"` 
                         
@@ -358,13 +359,13 @@ function finishedTask(e) {
             statusCode: {
                 200: function(feedback){
                     //Check wich overview should be loaded
-                    if($(dayList).hasClass('hide')){
-                        //Call function
-                        loadTasksWeekOverview(activeLiId);
-                    } else {
-                        //Call function
-                        loadTasks(activeLiId);
-                    }
+                    // if($(dayList).hasClass('hide')){
+                    //     //Call function
+                    //     loadTasksWeekOverview(activeLiId);
+                    // } else {
+                    //     //Call function
+                    //     loadTasks(activeLiId);
+                    // }
                     //Call function
                     countFinishedTasks();
                 },

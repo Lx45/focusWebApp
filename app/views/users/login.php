@@ -3,7 +3,7 @@ require APPROOT . '/views/inc/header.php';
 require APPROOT . '/views/inc/navigation.php';
 ?>
 
-<div class="grid">
+<div class="grid animate-grid">
 
 <div class="sign-in-card">
         <div class="card-header">

@@ -95,6 +95,10 @@ nav .disabled {
   opacity: 0.7;
 }
 
+.new {
+  cursor: pointer;
+}
+
 .all-tasks {
   -ms-grid-column: 5;
   -ms-grid-column-span: 3;
@@ -108,6 +112,7 @@ nav .disabled {
 .all-tasks .task-list-title {
   font-weight: 700;
   font-size: 40px;
+  cursor: default;
 }
 
 .all-tasks .task-list {
@@ -242,6 +247,7 @@ nav .disabled {
   margin: 0 1rem 0 0;
   font-weight: 900;
   font-size: 40px;
+  cursor: default;
 }
 
 .todo-list .todo-header .task-count {
@@ -350,10 +356,12 @@ nav .disabled {
   border-color: var(--clr-primary);
   -webkit-box-shadow: inset 0 0 0px 2px white;
           box-shadow: inset 0 0 0px 2px white;
+  pointer-events: none;
 }
 
 .todo-list .todo-body [type="checkbox"]:checked + label {
   opacity: 0.5;
+  pointer-events: none;
 }
 
 .todo-list .todo-body [type="checkbox"]:checked + label::after {
@@ -361,6 +369,11 @@ nav .disabled {
           transform: scaleX(1);
   -webkit-transform-origin: left;
           transform-origin: left;
+  pointer-events: none;
+}
+
+.todo-list .todo-body .task-checkbox:checked {
+  pointer-events: none;
 }
 
 .todo-list .todo-body .green {
@@ -468,11 +481,14 @@ nav .disabled {
 
 .todo-list .todo-body .delete-stuff .btn.delete {
   opacity: 0.7;
-  font-size: 1rem;
+  font-size: 20px;
+  font-weight: 400;
   -webkit-transition: color 200ms;
   transition: color 200ms;
   background: none;
   border: none;
+  color: #F2EDED;
+  cursor: pointer;
 }
 
 .todo-list .todo-body .delete-stuff .btn.delete:hover {
@@ -699,6 +715,7 @@ nav .disabled {
   -ms-grid-row: 1;
   -ms-grid-row-span: 4;
   grid-row: 1/5;
+  margin-top: 50px;
 }
 
 #tuesday {
@@ -708,6 +725,7 @@ nav .disabled {
   -ms-grid-row: 1;
   -ms-grid-row-span: 4;
   grid-row: 1/5;
+  margin-top: 50px;
 }
 
 #wednesday {
@@ -717,6 +735,7 @@ nav .disabled {
   -ms-grid-row: 1;
   -ms-grid-row-span: 4;
   grid-row: 1/5;
+  margin-top: 50px;
 }
 
 #thursday {
@@ -753,6 +772,10 @@ nav .disabled {
   -ms-grid-row: 5;
   -ms-grid-row-span: 5;
   grid-row: 5/10;
+}
+
+.weekday-long {
+  cursor: default;
 }
 
 .statistic {

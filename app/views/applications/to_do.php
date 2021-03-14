@@ -6,7 +6,7 @@ require APPROOT . '/views/inc/header.php';
 require APPROOT . '/views/inc/navigation.php';
 ?>
 
-<div class="grid">
+<div class="grid animate-grid">
 
     <div class="buttons">
         <button class="calendar-buttons date-button"></button>
@@ -15,7 +15,10 @@ require APPROOT . '/views/inc/navigation.php';
 
     
     <div class="all-tasks" id="all-tasks-day-view">
-        <h2 class="task-list-title">Lists</h2>
+        <div class="test-divv">
+        <div class="line-through"></div>
+        <h2 class="task-list-title">List</h2>
+        </div>
         <div class="all-tasks-list">
             <ul class="task-list">
                 <?php foreach($data['taskListOverview'] as $taskOverview) : ?>

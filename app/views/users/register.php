@@ -3,7 +3,7 @@ require APPROOT . '/views/inc/header.php';
 require APPROOT . '/views/inc/navigation.php';
 ?>
 
-<div class="grid">
+<div  class="grid animate-grid">
 
 <div class="input-section">
         <div class="gender-card register-card">

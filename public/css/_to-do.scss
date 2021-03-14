@@ -13,6 +13,10 @@ grid-row: 1/3;
     }
 }
 
+.new{
+  cursor: pointer;
+}
+
 .all-tasks {
     // background-color: red;
     grid-column: 5/8;
@@ -22,6 +26,7 @@ grid-row: 1/3;
     .task-list-title {
         font-weight: 700;
         font-size: 40px;
+        cursor: default;
     }
 
     .task-list{
@@ -68,6 +73,7 @@ grid-row: 1/3;
             margin: 0 1rem 0 0;
             font-weight: 900;
             font-size: 40px;
+            cursor: default;
         }
 
         .task-count {
@@ -156,15 +162,22 @@ grid-row: 1/3;
             background: var(--clr-primary);
             border-color: var(--clr-primary);
             box-shadow: inset 0 0 0px 2px white;
+            pointer-events: none;
         }
 
         [type="checkbox"]:checked + label {
             opacity: 0.5;
+            pointer-events: none;
         }
 
         [type="checkbox"]:checked + label::after {
             transform: scaleX(1);
             transform-origin: left;
+            pointer-events: none;
+        }
+
+        .task-checkbox:checked{
+          pointer-events: none;
         }
 
         .green{
@@ -190,10 +203,13 @@ grid-row: 1/3;
 
             .btn.delete{
                 opacity: 0.7;
-                font-size: 1rem;
+                font-size: 20px;
+                font-weight: 400;
                 transition: color 200ms;
                 background: none;
                 border: none;
+                color: $light;
+                cursor: pointer;
             }
             
             .btn.delete:hover {
@@ -363,16 +379,19 @@ button {
 #monday{
   grid-column: 4/7;
   grid-row: 1/5;
+  margin-top: 50px;
 }
 
 #tuesday{
   grid-column: 7/10;
   grid-row: 1/5;
+  margin-top: 50px;
 }
 
 #wednesday{
   grid-column: 10/13;
   grid-row: 1/5;
+  margin-top: 50px;
 }
 
 #thursday{
@@ -395,3 +414,19 @@ button {
   grid-row: 5/10;
 }
 
+.weekday-long{
+  cursor: default;
+}
+
+// .line-through
+// {
+//   position: relative;
+//   top: 10px;
+//   background-color:white;
+//   width: 100px;
+//   height:1px;
+// }
+
+// .test-divv{
+//   width: min-content;
+// }

@@ -4,15 +4,26 @@ $(document).ready(function(){
 
     //Init var
     const arrow = $('#arrow-down'),
-    btn = $('.homepage-btn');
+    btn = $('.homepage-btn'),
+    btnWeekView = $('.week-button')
     
 
     //call function
     animateHomeScreen();
     scrollAnimationHomeScreen();
+    animateGrid();
+    btnWeekView.click(animateWeekView);
     
+    //Animate Grid
+    function animateGrid() {
+        //Init var
+        const grid = $('.animate-grid');
 
-    //animate on pageload
+        //Animate
+        gsap.from(grid, {opacity: 0, duration: 2, delay: 1.5})
+    }
+
+    //animate Homescreen on pageload
     function animateHomeScreen() {
         
         //Init var
@@ -70,7 +81,7 @@ $(document).ready(function(){
         })
     }
 
-    //Hover effect
+    //Hover effects Homescreen
     arrow.hover(function(){
         gsap.to(arrow, {opacity: 1, duration: .2})
     },function(){
@@ -87,5 +98,19 @@ $(document).ready(function(){
         gsap.to(btn, {fontSize: 40, duration: .5})
     })
 
+    // Animation of to-do-list
+    function animateWeekView(){
+        //Init var
+        const weekView = $('.week-view');
+
+        //Animate
+        gsap.from(weekView, {opacity:0, duration: 3.5, delay: 1, stagger: .5})
+    }
+
+    $('.all-tasks').click(function(){
+        const line = $('.line-through');
+
+        gsap.to(line, {width: '100%'})
+    })
 })
 
