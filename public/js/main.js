@@ -44,3 +44,20 @@ $('#arrow-down').click(function() {
     $("html, body").animate({ scrollTop: $(document).height() });
     return false;
   });
+
+  $(document).ready(function(){
+    $(".owl-carousel").owlCarousel({
+        loop:true,
+        center: true,
+        // margin:10,
+        items: 1,
+        // nav: true,
+        // responsive:{
+        //     1000:{
+        //         items:1
+        //     }
+        // }    
+    });
+  });
+
+  

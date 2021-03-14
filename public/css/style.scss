@@ -209,7 +209,7 @@ html, body{
 
 #arrow-down{
     grid-column: 6/8;
-    grid-row: 7/10;
+    grid-row: 7/8;
     margin-left: auto;
     margin-right: auto;
     color: $light;
@@ -222,18 +222,66 @@ html, body{
 //     opacity: 1;
 // }
 
+.slider-background{
+    background-color: #394046;
+    width: 100vw;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .owl-carousel{
+
+
+
+        .item{
+            height: 330px;
+            width: 40%;
+            margin: auto;
+
+            .p-item{
+                color: $light;
+                font-size: 20px;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+
+            .img-item{
+                height: 90%;
+                width: auto;
+                display: block;
+                border: 2px solid $dark;
+                z-index: 100;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 5px;
+            }
+        }
+
+        .owl-dot{
+            color: $dark;
+            z-index: 99;
+        }
+
+        
+    }
+}
+
 .homepage-p{
     grid-column: 3/11;
-    grid-row: 9/11;
+    grid-row: 12/14;
     font-size: 25px;
     text-align: center;
     color: $light;
+    margin-top: -20px;
 }
 
 .homepage-a{
     grid-column: 5/9;
-    grid-row: 12/15;
-    margin-bottom: 255px;
+    grid-row: 14/15;
+    // margin-bottom: 255px;
+    margin-bottom: 50px;
 }
 
 .homepage-btn{
@@ -246,8 +294,5 @@ html, body{
     cursor: pointer;
 }
 
-.slider-background{
-    width: 100vw;
-    
-}
+
 
