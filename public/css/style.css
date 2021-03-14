@@ -1462,6 +1462,7 @@ html, body {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  cursor: default;
 }
 
 .homepage-quote p {
@@ -1479,12 +1480,7 @@ html, body {
 }
 
 #arrow-down {
-  -ms-grid-column: 6;
-  -ms-grid-column-span: 2;
-  grid-column: 6/8;
-  -ms-grid-row: 7;
-  -ms-grid-row-span: 1;
-  grid-row: 7/8;
+  position: absolute;
   margin-left: auto;
   margin-right: auto;
   color: #F2EDED;
@@ -1492,6 +1488,14 @@ html, body {
   -webkit-transition: 1s ease-in-out;
   transition: 1s ease-in-out;
   cursor: pointer;
+  bottom: 20px;
+  left: 50%;
+}
+
+.container-2 {
+  height: 100vh;
+  width: 100vw;
+  background: transparent;
 }
 
 .slider-background {
@@ -1513,6 +1517,7 @@ html, body {
   height: 330px;
   width: 40%;
   margin: auto;
+  cursor: pointer;
 }
 
 .slider-background .owl-carousel .item .p-item {
@@ -1534,41 +1539,30 @@ html, body {
   margin-top: 5px;
 }
 
-.slider-background .owl-carousel .owl-dot {
-  color: #1C2126;
-  z-index: 99;
-}
-
 .homepage-p {
-  -ms-grid-column: 3;
-  -ms-grid-column-span: 8;
-  grid-column: 3/11;
-  -ms-grid-row: 12;
-  -ms-grid-row-span: 2;
-  grid-row: 12/14;
+  width: 60%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 25px;
   text-align: center;
   color: #F2EDED;
-  margin-top: -20px;
-}
-
-.homepage-a {
-  -ms-grid-column: 5;
-  -ms-grid-column-span: 4;
-  grid-column: 5/9;
-  -ms-grid-row: 14;
-  -ms-grid-row-span: 1;
-  grid-row: 14/15;
-  margin-bottom: 50px;
+  margin-top: 50px;
+  cursor: default;
 }
 
 .homepage-btn {
-  width: 100%;
+  width: 30%;
   height: 100px;
-  border: solid 1px grey;
+  position: relative;
+  left: 35%;
+  margin: 50px 0;
+  border: 1px solid grey;
   background: none;
   font-size: 40px;
   color: #F2EDED;
   cursor: pointer;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 /*# sourceMappingURL=style.css.map */

@@ -49,6 +49,8 @@ $('#arrow-down').click(function() {
     $(".owl-carousel").owlCarousel({
         loop:true,
         center: true,
+        animateOut: 'fadeOut',
+        autoplay: true,
         // margin:10,
         items: 1,
         // nav: true,
@@ -60,4 +62,3 @@ $('#arrow-down').click(function() {
     });
   });
 
-  
