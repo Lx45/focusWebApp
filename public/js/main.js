@@ -36,7 +36,7 @@ function failedValidationWeekView(v, input = '.input', errorElement) {
 }
 
 function redirect(rootpath) {
-    window.location.href = "/focusWebApp/app/views/" + rootpath + ".php";
+    window.location.href = "/focusWebApp/" + rootpath ;
 
 }
 
