@@ -53,7 +53,11 @@ function openModal() {
 }
 
 function closeModal() {
+    //Delay for animation
+    setTimeout(function(){
+    //Close Modal
     modal.css({'visibility': 'hidden'});
+    }, 2000)
 }
 
 function getCurrentDay() {

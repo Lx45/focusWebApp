@@ -9,13 +9,21 @@ let newListInput = $('#new-list-input'),
     newTaskBtn = $('.new-task-btn'),
     checkbox = $('.task-checkbox'),
     task = $('#task.div'),
-    selectedDate = $('.date-button');
+    selectedDate = $('.date-button'),
+    calendarBtn = $('.day');
 
 
 let currentWeekDayDates = [];
 
 /*!!!Eventhandler!!!*/
-newListBtn.on('click', addNewList);
+newListInput.keydown(function(e){
+    console.log('ddddd')
+    if (e.keyCode == 13){
+        console.log('fired');
+        addNewList(e);
+    }
+})
+newListBtn.click(addNewList);
 getActiveList();
 activeList(firstTaskList);
 deleteListBtn.on('click', deleteList);
@@ -30,7 +38,7 @@ function getActiveList() {
     li.on('click',activeList);
 }
 
-selectedDate.bind('DOMSubtreeModified', checkForNewDate)
+calendarBtn.click(checkForNewDate);
 weekBtn.click(weekOverview);
 
 
@@ -60,13 +68,15 @@ function activeList(event) {
 
     // Set active class
     activeLi.addClass('active-list');
-
+    console.log(dayList);
     //load the current Tasklist
     if($(dayList).hasClass('hide')){
         //Call function
+        console.log('right');
         loadTasksWeekOverview(activeLiId);
     } else {
         //Call function
+        console.log('wrong');
         loadTasks(activeLiId); 
     }
 
@@ -74,6 +84,7 @@ function activeList(event) {
 
 /*!!!Add new list!!!*/
 function addNewList(e) {
+    console.log('addneeeewww')
 
     // Init data
     let newList = newListInput.val();
@@ -480,6 +491,7 @@ function setFinishedTasks(tasks, dayTasks) {
 
 /*!!! If date changed reload content!!!*/
 function checkForNewDate(){
+    console.log('youiaesufbiwcqas');
     //Init Var
     const toDoDayView = $('#to-do-day-view');
     const taskListDayView = $('#all-tasks-day-view');

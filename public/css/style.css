@@ -882,6 +882,7 @@ nav .disabled {
   color: #F2EDED;
   background-color: #414141;
   border: 3px solid #1C2126;
+  opacity: 0;
 }
 
 .modal-quote .modal-head {

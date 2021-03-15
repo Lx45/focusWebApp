@@ -7,7 +7,9 @@ $(document).ready(function(){
     btn = $('.homepage-btn'),
     btnWeekView = $('.week-button'),
     calendarBtn = $('.day'),
-    lists = $('.all-tasks')
+    lists = $('.all-tasks'),
+    quote = $('#quote'),
+    modalClsBtn =$('.modal-close-btn')
     
 
     //call function
@@ -16,6 +18,8 @@ $(document).ready(function(){
     animateGrid();
     calendarBtn.click(animateDayView);
     btnWeekView.click(animateWeekView);
+    quote.click(animateModal);
+    modalClsBtn.click(closeModal);
     
     //Animate Grid
     function animateGrid() {
@@ -119,6 +123,22 @@ $(document).ready(function(){
         gsap.from(dayView, {opacity:0, duration: 1, delay: 1})
         gsap.to(lists, {x:0, duration: 1, delay: .5})
 
+    }
+
+    function animateModal() {
+        //Init var
+        const modal = $('.modal-quote');
+
+        //Animate
+        gsap.to(modal, {opacity:1, duration: 1, delay: .5})
+    }
+
+    function closeModal() {
+        //Init var
+        const modal = $('.modal-quote');
+
+        //Animate
+        gsap.to(modal, {opacity:0, duration: 1})
     }
 
 
