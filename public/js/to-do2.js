@@ -507,7 +507,7 @@ function weekOverview(e){
     toDoDayView.hide();
     toDoDayView.addClass('hide');
     // move tasklist
-    taskListDayView.css({'grid-column': '1/3', 'margin-top': '30px'});
+    // taskListDayView.css({'grid-column': '1/3', 'margin-top': '30px'});
     // Create WeekOverview
     createWeekLists();
     // set active List

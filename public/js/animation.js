@@ -5,13 +5,16 @@ $(document).ready(function(){
     //Init var
     const arrow = $('#arrow-down'),
     btn = $('.homepage-btn'),
-    btnWeekView = $('.week-button')
+    btnWeekView = $('.week-button'),
+    calendarBtn = $('.day'),
+    lists = $('.all-tasks')
     
 
     //call function
     animateHomeScreen();
     scrollAnimationHomeScreen();
     animateGrid();
+    calendarBtn.click(animateDayView);
     btnWeekView.click(animateWeekView);
     
     //Animate Grid
@@ -105,12 +108,19 @@ $(document).ready(function(){
 
         //Animate
         gsap.from(weekView, {opacity:0, duration: 3.5, delay: 1, stagger: .5})
+        gsap.to(lists, {x:-350, duration: 1, delay: .5})
     }
 
-    $('.all-tasks').click(function(){
-        const line = $('.line-through');
+    function animateDayView(){
+        //Init var
+        const dayView = $('.todo-list');
 
-        gsap.to(line, {width: '100%'})
-    })
+        //Animate
+        gsap.from(dayView, {opacity:0, duration: 1, delay: 1})
+        gsap.to(lists, {x:0, duration: 1, delay: .5})
+
+    }
+
+
 })
 

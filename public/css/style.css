@@ -107,6 +107,7 @@ nav .disabled {
   -ms-grid-row-span: 3;
   grid-row: 2/5;
   color: #F2EDED;
+  margin-top: 30px;
 }
 
 .all-tasks .task-list-title {
