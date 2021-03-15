@@ -270,8 +270,6 @@ html, body{
 }
 
 .homepage-p{
-    // grid-column: 3/11;
-    // grid-row: 12/14;
     width: 60%;
     text-align: center;
     margin-left: auto;
@@ -283,24 +281,24 @@ html, body{
     cursor: default;
 }
 
-.homepage-a{
-    // grid-column: 5/9;
-    // grid-row: 14/15;
-    // margin-bottom: 255px;
-}
+
 
 .homepage-btn{
     width: 30%;
     height: 100px;
     position: relative;
     left: 35%;
-    margin: 50px 0;
+    margin: 30px 0 70px;
     border: 1px solid grey;
     background: none;
     font-size: 40px;
     color: $light;
     cursor: pointer;
     box-sizing: border-box;
+}
+
+.animate-grid{
+    opacity: 0;
 }
 
 

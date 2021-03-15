@@ -27,7 +27,7 @@ $(document).ready(function(){
         const grid = $('.animate-grid');
 
         //Animate
-        gsap.from(grid, {opacity: 0, duration: 2, delay: 1.5})
+        gsap.to(grid, {opacity: 1, duration: 1, delay: 1})
     }
 
     //animate Homescreen on pageload
@@ -46,10 +46,10 @@ $(document).ready(function(){
                 duration:1.5,
                 delay: 1,
             })
-            .from(navigation, {
-                opacity: '0',
-                duration:1.5
-            },'<')
+            // .from(navigation, {
+            //     opacity: '0',
+            //     duration:1.5
+            // },'<')
             .from(arrow, {
                 opacity: '0',
                 duration: 1,

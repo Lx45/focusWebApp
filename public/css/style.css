@@ -1581,7 +1581,7 @@ html, body {
   height: 100px;
   position: relative;
   left: 35%;
-  margin: 50px 0;
+  margin: 30px 0 70px;
   border: 1px solid grey;
   background: none;
   font-size: 40px;
@@ -1589,5 +1589,9 @@ html, body {
   cursor: pointer;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.animate-grid {
+  opacity: 0;
 }
 /*# sourceMappingURL=style.css.map */
