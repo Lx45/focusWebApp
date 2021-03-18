@@ -127,7 +127,16 @@ function addNewTask(e) {
     let newTask = newTaskInput.val();
     let userId = newTaskBtn[0].dataset.userid;
     let activeLi = $('.active-list');
-    let activeLiId = activeLi[0].dataset.listid;
+    let activeLiId;
+
+    //Check if a list is choosen
+    if (activeLi[0] == undefined){
+        //No list is choosen, set an empty var and create the error message
+        activeLiId = '';
+    } else {
+        // List is found, bind the task to the active list
+        activeLiId = activeLi[0].dataset.listid;
+    }
     let date = $('.date-button').text();
 
 
@@ -201,7 +210,8 @@ function loadLists(userId){
                     // call function
                     getActiveList();
                     // set var
-                    lastTaskList = $('.task-list .list-name:last');
+                    lastTaskList = $('.list-name:last');
+                    console.log(lastTaskList)
                     //call function
                     activeList(lastTaskList);
                     
@@ -709,9 +719,20 @@ function addNewTaskWeekView(e) {
     let errorText = $(btn).parent().next();
     let newTask = $(btn).prev().val();
     let activeLi = $('.active-list');
-    let activeLiId = activeLi[0].dataset.listid;
+    let activeLiId;
+    
+    //Check if a list is choosen
+    if (activeLi[0] == undefined){
+        //No list is choosen, set an empty var and create the error message
+        activeLiId = '';
+    } else {
+        // List is found, bind the task to the active list
+        activeLiId = activeLi[0].dataset.listid;
+    }
+
     let userId = newTaskBtn[0].dataset.userid;
     let date = $(btn).parents('.week-view').children('.header-weekview').children('.weekday-long').children('.to-do-day').text();
+    console.log(activeLiId)
 
     $.ajax({
         url: '/focusWebApp/Applications/addNewTask',
