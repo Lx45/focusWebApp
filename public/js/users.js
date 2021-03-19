@@ -2,8 +2,8 @@
 let genderDiv = $('.gender-div-body-small'),
      card = $('.register-card'),
      signUpBtn =$('#btn-su'),
-     signInBtn =$('#btn-si'),
-     logOutBtn =$('#btn-lo');
+     signInBtn =$('#btn-si');
+    //  logOutBtn =$('#btn-lo');
 
 
 //Call functions
@@ -12,8 +12,9 @@ genderDiv.click(chooseGender);
 card.click(activateCircle);
 signUpBtn.click(userAdd);
 signInBtn.click(userLogin);
-logOutBtn.click(logout);
-checkSessionState();
+// logOutBtn.click(logout);
+// checkSessionState();
+animateGrid();
 
 //Change color of gender Img
 function changeColor(e){
@@ -112,29 +113,12 @@ function userLogin() {
     });
 }
 
-function logout() {
 
-    $.ajax({
-        url: '/focusWebApp/Users/logout',
-        type: 'post',
-        async: true,
-        statusCode: {
-            200: function() {
-                //logout successfull
-                redirect('pages/index');
-            },
-            422: function(errors) {
-                //userLogin failed
-                // failedValidation(errors);
-            }
-        }
-    });
-}
 
-// Shows the navigation according to logged out or logged in user
-function checkSessionState() {
-    let logoutBtn = $('#btn-lo');
-    if (logoutBtn.hasClass('active')) {
-       $("li a").removeClass('disabled');
-    }
-}
+// // Shows the navigation according to logged out or logged in user
+// function checkSessionState() {
+//     let logoutBtn = $('#btn-lo');
+//     if (logoutBtn.hasClass('active')) {
+//        $("li a").removeClass('disabled');
+//     }
+// }

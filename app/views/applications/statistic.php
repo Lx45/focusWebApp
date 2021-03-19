@@ -37,6 +37,6 @@ require APPROOT . '/views/inc/navigation.php';
 </div>
 </div>
 
-<script type="module" src="<?php echo URLROOT; ?>/js/statistic.js"></script>
+<script defer type="module" src="<?php echo URLROOT; ?>/js/statistic.js"></script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

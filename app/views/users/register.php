@@ -125,8 +125,8 @@ require APPROOT . '/views/inc/navigation.php';
             <p class="circle-flex-p">Password</p>
         </div>
     </div>
-
-
 </div>
+
+<script defer type="text/javascript" src="<?php echo URLROOT; ?>/js/users.js"></script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

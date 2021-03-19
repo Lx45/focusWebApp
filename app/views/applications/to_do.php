@@ -98,8 +98,8 @@ require APPROOT . '/views/inc/navigation.php';
 
 
 
-<script type="text/javascript" src="<?php echo URLROOT; ?>/js/calendar-week.js"></script>
-<script type="text/javascript" src="<?php echo URLROOT; ?>/js/calendar.js"></script>
-<script type="text/javascript" src="<?php echo URLROOT; ?>/js/to-do2.js"></script>
+<script defer type="text/javascript" src="<?php echo URLROOT; ?>/js/calendar-week.js"></script>
+<script defer type="text/javascript" src="<?php echo URLROOT; ?>/js/calendar.js"></script>
+<script defer type="text/javascript" src="<?php echo URLROOT; ?>/js/to-do.js"></script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

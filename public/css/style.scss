@@ -142,29 +142,6 @@ input:-webkit-autofill
 
 }
 
-.error {
-    margin: 5px 0px 0px 20px;
-    display: none;
-    color: crimson;
-}
-
-@import "./navigation";
-@import "./to-do";
-@import "./statistic";
-@import "./profile";
-@import "./register-login";
-
-html{
-    scroll-behavior: smooth;
-}
-
-.background-homepage{
-    background: url(/focusWebApp/public/img/laptop-background.jpg);
-    background-size: cover;
-    height: 100vh;
-    height: 100vh;
-    width: 100vw;
-}
 
 html, body{
     box-sizing: border-box;
@@ -185,121 +162,31 @@ html, body{
     margin: 0 auto;
 }
 
-
-// Homepage
-.homepage-quote{
-    grid-column: 4/10;
-    grid-row: 3/4;
-    justify-self: center;
-    align-self: center;
-    cursor: default;
-    p{
-        font-size: 25px;
-        text-align: center;
-        color: $light;
-
-        span {
-            opacity: 0.5;
-        }
-
-        span:last-child{
-            font-size: 20px;
-        }
-    }
-}
-
-#arrow-down{
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    color: $light;
-    opacity: 0.2;
-    transition: 1s ease-in-out;
-    cursor: pointer;
-    bottom: 20px;
-    left:50%
-}
-
-
-.container-2{
-    height: 100vh;
-    width: 100vw;
-    background: transparent;
-}
-
-.slider-background{
-    background-color: #394046;
-    width: 100vw;
-    height: 420px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .owl-carousel{
-
-
-
-        .item{
-            height: 330px;
-            width: 40%;
-            margin: auto;
-            cursor: pointer;
-
-            .p-item{
-                color: $light;
-                font-size: 20px;
-                text-align: center;
-                margin: 0;
-                padding: 0;
-            }
-
-            .img-item{
-                height: 90%;
-                width: auto;
-                display: block;
-                border: 2px solid $dark;
-                z-index: 100;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 5px;
-            }
-        }
-
-        
-    }
-}
-
-.homepage-p{
-    width: 60%;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 25px;
-    text-align: center;
-    color: $light;
-    margin-top: 50px;
-    cursor: default;
-}
-
-
-
-.homepage-btn{
-    width: 30%;
-    height: 100px;
-    position: relative;
-    left: 35%;
-    margin: 30px 0 70px;
-    border: 1px solid grey;
-    background: none;
-    font-size: 40px;
-    color: $light;
-    cursor: pointer;
-    box-sizing: border-box;
+.error {
+    margin: 5px 0px 0px 20px;
+    display: none;
+    color: crimson;
 }
 
 .animate-grid{
     opacity: 0;
 }
+
+html{
+    scroll-behavior: smooth;
+}
+
+@import "./navigation";
+@import "./index";
+@import "./to-do";
+@import "./statistic";
+@import "./profile";
+@import "./register-login";
+
+
+
+
+
 
 
 

@@ -10,10 +10,39 @@ input:-webkit-autofill {
   -webkit-border-after: 1px solid lightgray !important;
 }
 
+html, body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #414141;
+  font-family: 'Inter', sans-serif;
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[12];
+      grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 10px;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
 .error {
   margin: 5px 0px 0px 20px;
   display: none;
   color: crimson;
+}
+
+.animate-grid {
+  opacity: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 nav {
@@ -68,6 +97,130 @@ nav .btn-lo-active {
 nav .disabled {
   pointer-events: none;
   opacity: 0.4;
+}
+
+.background-homepage {
+  background: url(/focusWebApp/public/img/laptop-background.jpg);
+  background-size: cover;
+  height: 100vh;
+  height: 100vh;
+  width: 100vw;
+}
+
+.homepage-quote {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 6;
+  grid-column: 4/10;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  cursor: default;
+}
+
+.homepage-quote p {
+  font-size: 25px;
+  text-align: center;
+  color: #F2EDED;
+}
+
+.homepage-quote p span {
+  opacity: 0.5;
+}
+
+.homepage-quote p span:last-child {
+  font-size: 20px;
+}
+
+#arrow-down {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  color: #F2EDED;
+  opacity: 0.2;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+  cursor: pointer;
+  bottom: 20px;
+  left: 50%;
+}
+
+.container-2 {
+  height: 100vh;
+  width: 100vw;
+  background: transparent;
+}
+
+.container-2 .slider-background {
+  background-color: #394046;
+  width: 100vw;
+  height: 420px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container-2 .slider-background .owl-carousel .item {
+  height: 330px;
+  width: 40%;
+  margin: auto;
+  cursor: pointer;
+}
+
+.container-2 .slider-background .owl-carousel .item .p-item {
+  color: #F2EDED;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container-2 .slider-background .owl-carousel .item .img-item {
+  height: 90%;
+  width: auto;
+  display: block;
+  border: 2px solid #1C2126;
+  z-index: 100;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}
+
+.container-2 .homepage-p {
+  width: 60%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 25px;
+  text-align: center;
+  color: #F2EDED;
+  margin-top: 50px;
+  cursor: default;
+}
+
+.container-2 .homepage-btn {
+  width: 30%;
+  height: 100px;
+  position: relative;
+  left: 35%;
+  margin: 30px 0 70px;
+  border: 1px solid grey;
+  background: none;
+  font-size: 40px;
+  color: #F2EDED;
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .buttons {
@@ -1440,158 +1593,5 @@ nav .disabled {
   -ms-grid-column-align: center;
       justify-self: center;
   margin-top: 10px;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.background-homepage {
-  background: url(/focusWebApp/public/img/laptop-background.jpg);
-  background-size: cover;
-  height: 100vh;
-  height: 100vh;
-  width: 100vw;
-}
-
-html, body {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #414141;
-  font-family: 'Inter', sans-serif;
-}
-
-.grid {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[12];
-      grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(100px, auto);
-  grid-gap: 10px;
-  max-width: 80%;
-  margin: 0 auto;
-}
-
-.homepage-quote {
-  -ms-grid-column: 4;
-  -ms-grid-column-span: 6;
-  grid-column: 4/10;
-  -ms-grid-row: 3;
-  -ms-grid-row-span: 1;
-  grid-row: 3/4;
-  -ms-grid-column-align: center;
-      justify-self: center;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  cursor: default;
-}
-
-.homepage-quote p {
-  font-size: 25px;
-  text-align: center;
-  color: #F2EDED;
-}
-
-.homepage-quote p span {
-  opacity: 0.5;
-}
-
-.homepage-quote p span:last-child {
-  font-size: 20px;
-}
-
-#arrow-down {
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  color: #F2EDED;
-  opacity: 0.2;
-  -webkit-transition: 1s ease-in-out;
-  transition: 1s ease-in-out;
-  cursor: pointer;
-  bottom: 20px;
-  left: 50%;
-}
-
-.container-2 {
-  height: 100vh;
-  width: 100vw;
-  background: transparent;
-}
-
-.slider-background {
-  background-color: #394046;
-  width: 100vw;
-  height: 420px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.slider-background .owl-carousel .item {
-  height: 330px;
-  width: 40%;
-  margin: auto;
-  cursor: pointer;
-}
-
-.slider-background .owl-carousel .item .p-item {
-  color: #F2EDED;
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
-.slider-background .owl-carousel .item .img-item {
-  height: 90%;
-  width: auto;
-  display: block;
-  border: 2px solid #1C2126;
-  z-index: 100;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5px;
-}
-
-.homepage-p {
-  width: 60%;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 25px;
-  text-align: center;
-  color: #F2EDED;
-  margin-top: 50px;
-  cursor: default;
-}
-
-.homepage-btn {
-  width: 30%;
-  height: 100px;
-  position: relative;
-  left: 35%;
-  margin: 30px 0 70px;
-  border: 1px solid grey;
-  background: none;
-  font-size: 40px;
-  color: #F2EDED;
-  cursor: pointer;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-.animate-grid {
-  opacity: 0;
 }
 /*# sourceMappingURL=style.css.map */

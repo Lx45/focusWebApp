@@ -10,8 +10,9 @@ let newListInput = $('#new-list-input'),
     checkbox = $('.task-checkbox'),
     task = $('#task.div'),
     selectedDate = $('.date-button'),
-    calendarBtn = $('.day');
-
+    calendarBtn = $('.day'),
+    lists = $('.all-tasks'),
+    btnWeekView = $('.week-button');
 
 let currentWeekDayDates = [];
 
@@ -33,6 +34,7 @@ countFinishedTasks();
 $(document).on('click', '.new-task-btn-week', addNewTaskWeekView);
 
 
+
 function getActiveList() {
     let li = $('li');
     li.on('click',activeList);
@@ -41,6 +43,9 @@ function getActiveList() {
 calendarBtn.click(checkForNewDate);
 weekBtn.click(weekOverview);
 
+animateGrid();
+calendarBtn.click(animateDayView);
+btnWeekView.click(animateWeekView);
 
 /*!!!Choose active Tasklist!!!*/
 function activeList(event) {
@@ -762,6 +767,28 @@ function addNewTaskWeekView(e) {
     
     //Prevent default behavior
     e.preventDefault();
+}
+
+// Animation of to-do-list
+function animateWeekView(){
+    //Init var
+    const weekView = $('.week-view');
+
+    console.log(weekView);
+
+    //Animate
+    gsap.from(weekView, {opacity:0, duration: 3.5, delay: 1, stagger: .5})
+    gsap.to(lists, {x:-350, duration: 1, delay: .5})
+}
+
+function animateDayView(){
+    //Init var
+    const dayView = $('.todo-list');
+
+    //Animate
+    gsap.from(dayView, {opacity:0, duration: 1, delay: 1})
+    gsap.to(lists, {x:0, duration: 1, delay: .5})
+
 }
 
 

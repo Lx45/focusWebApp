@@ -1,3 +1,9 @@
+let logOutBtn =$('#btn-lo');
+
+logOutBtn.click(logout);
+
+checkSessionState();
+
 function successValidation(input = '.input') {
     $(input).css({ 'border-bottom': '3px solid green' });
     $('.error').css({ display: 'none' });
@@ -40,25 +46,43 @@ function redirect(rootpath) {
 
 }
 
-$('#arrow-down').click(function() {
-    $("html, body").animate({ scrollTop: $(document).height() });
-    return false;
-  });
 
-  $(document).ready(function(){
-    $(".owl-carousel").owlCarousel({
-        loop:true,
-        center: true,
-        animateOut: 'fadeOut',
-        autoplay: true,
-        // margin:10,
-        items: 1,
-        // nav: true,
-        // responsive:{
-        //     1000:{
-        //         items:1
-        //     }
-        // }    
+//Animate Grid
+function animateGrid() {
+//Init var
+const grid = $('.animate-grid');
+
+//Animate
+gsap.to(grid, {opacity: 1, duration: 1, delay: 1})
+}
+
+
+// Shows the navigation according to logged out or logged in user
+function checkSessionState() {
+    let logoutBtn = $('#btn-lo');
+    if (logoutBtn.hasClass('active')) {
+       $("li a").removeClass('disabled');
+    }
+}
+
+function logout() {
+
+    $.ajax({
+        url: '/focusWebApp/Users/logout',
+        type: 'post',
+        async: true,
+        statusCode: {
+            200: function() {
+                //logout successfull
+                redirect('pages/index');
+            },
+            422: function(errors) {
+                //userLogin failed
+                // failedValidation(errors);
+            }
+        }
     });
-  });
+}
+
+
 

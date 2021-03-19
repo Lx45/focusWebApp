@@ -40,6 +40,7 @@ setChartValue();
 checkForFinishedTasks();
 displayQuote();
 setStreak();
+animateGrid();
 
 
 quote.click(openModal);
@@ -50,6 +51,8 @@ searchField.keyup(searchQuotes);
 function openModal() {
     modal.css({'visibility': 'visible'});
     insertQuoteTable();
+    //Animate
+    gsap.to(modal, {opacity:1, duration: 1, delay: .5})
 }
 
 function closeModal() {
@@ -58,6 +61,8 @@ function closeModal() {
     //Close Modal
     modal.css({'visibility': 'hidden'});
     }, 2000)
+    //Animate
+    gsap.to(modal, {opacity:0, duration: 1})
 }
 
 function getCurrentDay() {

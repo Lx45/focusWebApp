@@ -166,7 +166,7 @@
 					$tmp_activeList = array(2, "*Please choose a List");
 					array_push($errorsArray, $tmp_activeList);
 				}
-				error_log('asDXWasd '.$data['activeLiId']);
+				
 
 				//Check for errors
 				if (count($errorsArray) === 0) {

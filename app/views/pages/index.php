@@ -47,5 +47,10 @@ require APPROOT . '/views/inc/navigation.php';
         <button class="homepage-btn">Start Now!</button>
     </a>
 
+
+    <script src="<?php echo URLROOT; ?>/js//owl.carousel.min.js"></script>
+	<script src="<?php echo URLROOT; ?>/js/featherlight.min.js"></script>
+	<script defer src="<?php echo URLROOT; ?>/js/index.js"></script>
+
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

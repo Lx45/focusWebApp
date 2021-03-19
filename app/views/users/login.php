@@ -39,4 +39,6 @@ require APPROOT . '/views/inc/navigation.php';
 
 </div>
 
+<script defer type="text/javascript" src="<?php echo URLROOT; ?>/js/users.js"></script>
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>
