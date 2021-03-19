@@ -3,7 +3,6 @@ let genderDiv = $('.gender-div-body-small'),
      card = $('.register-card'),
      signUpBtn =$('#btn-su'),
      signInBtn =$('#btn-si');
-    //  logOutBtn =$('#btn-lo');
 
 
 //Call functions
@@ -12,8 +11,6 @@ genderDiv.click(chooseGender);
 card.click(activateCircle);
 signUpBtn.click(userAdd);
 signInBtn.click(userLogin);
-// logOutBtn.click(logout);
-// checkSessionState();
 animateGrid();
 
 //Change color of gender Img
@@ -112,13 +109,3 @@ function userLogin() {
         }
     });
 }
-
-
-
-// // Shows the navigation according to logged out or logged in user
-// function checkSessionState() {
-//     let logoutBtn = $('#btn-lo');
-//     if (logoutBtn.hasClass('active')) {
-//        $("li a").removeClass('disabled');
-//     }
-// }

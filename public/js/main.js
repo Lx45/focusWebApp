@@ -1,9 +1,12 @@
+//Init var
 let logOutBtn =$('#btn-lo');
 
+// Call functions
 logOutBtn.click(logout);
-
 checkSessionState();
 
+
+//Input validation functions
 function successValidation(input = '.input') {
     $(input).css({ 'border-bottom': '3px solid green' });
     $('.error').css({ display: 'none' });
@@ -41,11 +44,11 @@ function failedValidationWeekView(v, input = '.input', errorElement) {
     }
 }
 
+//redirect
 function redirect(rootpath) {
     window.location.href = "/focusWebApp/" + rootpath ;
 
 }
-
 
 //Animate Grid
 function animateGrid() {

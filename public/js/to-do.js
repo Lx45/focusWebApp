@@ -18,9 +18,7 @@ let currentWeekDayDates = [];
 
 /*!!!Eventhandler!!!*/
 newListInput.keydown(function(e){
-    console.log('ddddd')
     if (e.keyCode == 13){
-        console.log('fired');
         addNewList(e);
     }
 })
@@ -29,7 +27,6 @@ getActiveList();
 activeList(firstTaskList);
 deleteListBtn.on('click', deleteList);
 newTaskBtn.on('click', addNewTask);
-// checkbox.on('click', finishedTask);
 countFinishedTasks();
 $(document).on('click', '.new-task-btn-week', addNewTaskWeekView);
 
