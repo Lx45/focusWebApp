@@ -8,7 +8,7 @@
 	define('APPROOT', dirname(dirname(__FILE__)));
 
 	// URL Root
-	define('URLROOT', 'https://focus-web-app.herokuapp.com/focusWebApp');
+	define('URLROOT', 'https://focus-web-app.herokuapp.com/');
 
 	// Site Name
 	define('SITENAME', 'Focus');
