@@ -29,6 +29,24 @@ class User {
         };
     }
 
+    public function createStreakRow($email) {
+        //PDO statement
+        //Get userid
+        $this->db->query('SELECT id FROM users WHERE email = :email');
+
+        //Bind values
+        $this->db->bind(':email', $email);
+        $row = $this->db->single();
+
+        //PDO Statement
+        //Create row for new user in streak table
+        $this->db->query('INSERT INTO streak (userid) VALUES (:userid)');
+        //Bind values
+        $this->db->bind(':userid', $row['id']);
+
+        $this->db->execute();
+    }
+
     public function login($email, $password) {
          		//PDO statement
  		$this->db->query('SELECT * FROM users WHERE email = :email');

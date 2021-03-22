@@ -82,6 +82,8 @@ class Users extends Controller
                 // Call model function
                 if ($this->userModel->user_add($data)) {
                     // user add success
+                    // Call function which creates a row in the streaks table
+                    $this->userModel->createStreakRow($data['email']);
                     http_response_code(200);
                 } else {
                     // model function failed

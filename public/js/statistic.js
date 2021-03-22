@@ -234,10 +234,15 @@ function displayQuote() {
 function setStreak(){
     // Get current date
     let today = new Date;
+    let dayBefore = new Date();
+    dayBefore.setDate(dayBefore.getDate() - 1);
 
     let day = today.getDate();
     let month = today.getMonth();
     let year = today.getFullYear();
+    let yesterdayDay = dayBefore.getDate();
+    let yesterdayMonth = dayBefore.getMonth();
+    let yesterdayYear = dayBefore.getFullYear();
 
     //Set zero in front of day/month if 1 digit
     if (day < 10) {
@@ -248,9 +253,20 @@ function setStreak(){
     if (month < 10){
         month = '0' + month;
     }
+
+    //Set zero in front of day/month if 1 digit
+    if (yesterdayDay < 10) {
+        yesterdayDay = '0' + yesterdayDay;
+        }
+    // +1 cause cpu counts up from 0
+    yesterdayMonth = yesterdayMonth + 1;
+    if (yesterdayMonth < 10){
+        yesterdayMonth = '0' + yesterdayMonth;
+    }
     
     let currentDay = `${month}.${day}.${year}`;
-    let yesterday = `${month}.${day - 1}.${year}`;
+    let yesterday = `${yesterdayMonth}.${yesterdayDay}.${yesterdayYear}`;
+    
 
 
     $.ajax({

@@ -49,7 +49,8 @@ function activeList(event) {
     //Init data
     let activeLi;
     const dayList = $('#to-do-day-view');
-    const tasks = $('.tasks')
+    const tasks = $('.tasks');
+    let activeLiId;
 
     // Check if function was called by onclick or by default
     if(event == firstTaskList || event == lastTaskList) {
@@ -58,7 +59,17 @@ function activeList(event) {
         activeLi = $(event.target);
     }
 
-    let activeLiId = activeLi[0].dataset.listid;
+    
+    //Check if a list is choosen
+    if (activeLi[0] == undefined){
+        //No list is choosen, set an empty var and create the error message
+        activeLiId = '';
+    } else {
+        // List is found, bind the task to the active list
+        activeLiId = activeLi[0].dataset.listid;
+    }
+
+    
     let listname = activeLi.html();
     let listTitle = $('.list-title');
 
