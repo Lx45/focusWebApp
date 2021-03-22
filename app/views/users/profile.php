@@ -15,7 +15,7 @@ require APPROOT . '/views/inc/navigation.php';
 
     <div class="profile-content">
         <div class="profile-div">
-            <img src="/focusWebApp/public/img/user.svg" alt="user">
+            <img src="https://focus-web-app.herokuapp.com/public/img/user.svg" alt="user">
             <div class="profile-div-small" id="first-div">
                 <h2>Gender</h2>
                 <p>Sir</p>
@@ -31,7 +31,7 @@ require APPROOT . '/views/inc/navigation.php';
             <button>Edit</button>
         </div>
         <div class="profile-div">
-            <img src="/focusWebApp/public/img/mail.svg" alt="mail">
+            <img src="https://focus-web-app.herokuapp.com/public/img/mail.svg" alt="mail">
             <div class="profile-div-small" id="email-div">
                 <h2>Email</h2>
                 <p>JDoe@googlemail.com</p>
@@ -39,7 +39,7 @@ require APPROOT . '/views/inc/navigation.php';
             <button>Edit</button>
         </div>
         <div class="profile-div">
-        <img src="/focusWebApp/public/img/lock.svg" alt="lock">
+        <img src="https://focus-web-app.herokuapp.com/public/img/lock.svg" alt="lock">
         <div class="profile-div-small" id="pw-div">
             <h2>Password</h2>
             <p>************</p>

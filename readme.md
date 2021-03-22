@@ -38,7 +38,7 @@ function addNewTask(e) {
 
 
     $.ajax({
-        url: '/focusWebApp/Applications/addNewTask',
+        url: 'https://focus-web-app.herokuapp.com/Applications/addNewTask',
 		type: 'post',
 		async: true,
 		data: {

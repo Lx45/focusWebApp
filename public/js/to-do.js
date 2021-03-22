@@ -59,7 +59,7 @@ function activeList(event) {
         activeLi = $(event.target);
     }
 
-    
+
     //Check if a list is choosen
     if (activeLi[0] == undefined){
         //No list is choosen, set an empty var and create the error message
@@ -104,7 +104,7 @@ function addNewList(e) {
     let userId = newListBtn[0].dataset.userid;
 
     $.ajax({
-        url: '/focusWebApp/Applications/addNewList',
+        url: 'https://focus-web-app.herokuapp.com/Applications/addNewList',
 		type: 'post',
 		async: true,
 		data: {
@@ -154,7 +154,7 @@ function addNewTask(e) {
 
 
     $.ajax({
-        url: '/focusWebApp/Applications/addNewTask',
+        url: 'https://focus-web-app.herokuapp.com/Applications/addNewTask',
 		type: 'post',
 		async: true,
 		data: {
@@ -194,7 +194,7 @@ function loadLists(userId){
      taskList.html('');
 
     $.ajax({
-        url: '/focusWebApp/Applications/loadLists',
+        url: 'https://focus-web-app.herokuapp.com/Applications/loadLists',
 		type: 'post',
 		async: true,
 		data: {
@@ -252,7 +252,7 @@ function loadTasks(activeLiId) {
     toDoList.html('');
 
     $.ajax({
-        url: '/focusWebApp/Applications/loadTasks',
+        url: 'https://focus-web-app.herokuapp.com/Applications/loadTasks',
 		type: 'post',
 		async: true,
 		data: {
@@ -336,7 +336,7 @@ function deleteList() {
     let userId = newListBtn[0].dataset.userid;
 
     $.ajax({
-        url: '/focusWebApp/Applications/deleteList',
+        url: 'https://focus-web-app.herokuapp.com/Applications/deleteList',
 		type: 'post',
 		async: true,
 		data: {
@@ -383,7 +383,7 @@ function finishedTask(e) {
     task;
      
         $.ajax({
-            url: '/focusWebApp/Applications/finishedTask',
+            url: 'https://focus-web-app.herokuapp.com/Applications/finishedTask',
             type: 'post',
             async: true,
             data: {
@@ -427,7 +427,7 @@ function countFinishedTasks() {
 
 
         $.ajax({
-            url: '/focusWebApp/Applications/countFinishedTasks',
+            url: 'https://focus-web-app.herokuapp.com/Applications/countFinishedTasks',
             type: 'post',
             async: true,
             data: {
@@ -490,7 +490,7 @@ function setFinishedTasks(tasks, dayTasks) {
     let jsonDayTasks = JSON.stringify(dayTasks);
     
     $.ajax({
-        url: '/focusWebApp/Applications/setFinishedTasks',
+        url: 'https://focus-web-app.herokuapp.com/Applications/setFinishedTasks',
         type: 'post',
         async: true,
         data: {
@@ -654,7 +654,7 @@ function loadTasksWeekOverview(activeLiId){
      $('.tasks').html('');
     
     $.ajax({
-        url: '/focusWebApp/Applications/loadTasksWeek',
+        url: 'https://focus-web-app.herokuapp.com/Applications/loadTasksWeek',
 		type: 'post',
 		async: true,
 		data: {
@@ -748,7 +748,7 @@ function addNewTaskWeekView(e) {
     console.log(activeLiId)
 
     $.ajax({
-        url: '/focusWebApp/Applications/addNewTask',
+        url: 'https://focus-web-app.herokuapp.com/Applications/addNewTask',
 		type: 'post',
 		async: true,
 		data: {

@@ -100,7 +100,7 @@ nav .disabled {
 }
 
 .background-homepage {
-  background: url(/focusWebApp/public/img/laptop-background.jpg);
+  background: url(https://focus-web-app.herokuapp.com/public/img/laptop-background.jpg);
   background-size: cover;
   height: 100vh;
   height: 100vh;

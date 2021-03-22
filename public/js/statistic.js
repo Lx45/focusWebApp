@@ -94,7 +94,7 @@ function setChartValue() {
    let data = myChart.config.data.datasets[0].data;
 
     $.ajax({
-        url: '/focusWebApp/Applications/getChartValue',
+        url: 'https://focus-web-app.herokuapp.com/Applications/getChartValue',
         type: 'get',
         async: true,
         statusCode: {
@@ -126,7 +126,7 @@ function setChartValue() {
  function checkForFinishedTasks() {
     
     $.ajax({
-        url: '/focusWebApp/Applications/checkForFinishedTasks',
+        url: 'https://focus-web-app.herokuapp.com/Applications/checkForFinishedTasks',
         type: 'post',
         async: true,
         data: {
@@ -174,7 +174,7 @@ function fetchQuote() {
 function setQuote(quote, author){
     //Set fetched quote into database
     $.ajax({
-        url: '/focusWebApp/Applications/setQuote',
+        url: 'https://focus-web-app.herokuapp.com/Applications/setQuote',
         type: 'post',
         async: true,
         data: {
@@ -197,7 +197,7 @@ function setQuote(quote, author){
 function displayQuote() {
     // Get quote from database
     $.ajax({
-        url: '/focusWebApp/Applications/displayQuote',
+        url: 'https://focus-web-app.herokuapp.com/Applications/displayQuote',
         type: 'post',
         async: true,
         data: {
@@ -270,7 +270,7 @@ function setStreak(){
 
 
     $.ajax({
-        url: '/focusWebApp/Applications/checkForStreak',
+        url: 'https://focus-web-app.herokuapp.com/Applications/checkForStreak',
         type: 'post',
         async: true,
         dataTyp: "json",
@@ -306,7 +306,7 @@ function insertQuoteTable() {
 
 
     $.ajax({
-    url: '/focusWebApp/Applications/displayAllQuotes',
+    url: 'https://focus-web-app.herokuapp.com/Applications/displayAllQuotes',
     type: 'get',
     async: true,
     statusCode: {
@@ -360,7 +360,7 @@ function searchQuotes(){
     var search = $(this).val();
     
     $.ajax({
-        url:'/focusWebApp/Applications/quoteSearch',
+        url:'https://focus-web-app.herokuapp.com/Applications/quoteSearch',
         method: 'post',
         data:{
             query:search

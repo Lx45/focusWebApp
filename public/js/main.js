@@ -46,7 +46,7 @@ function failedValidationWeekView(v, input = '.input', errorElement) {
 
 //redirect
 function redirect(rootpath) {
-    window.location.href = "/focusWebApp/" + rootpath ;
+    window.location.href = "https://focus-web-app.herokuapp.com/" + rootpath ;
 
 }
 
@@ -71,7 +71,7 @@ function checkSessionState() {
 function logout() {
 
     $.ajax({
-        url: '/focusWebApp/Users/logout',
+        url: 'https://focus-web-app.herokuapp.com/Users/logout',
         type: 'post',
         async: true,
         statusCode: {

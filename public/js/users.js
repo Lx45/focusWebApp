@@ -54,7 +54,7 @@ function userAdd() {
         passwordConf = $('#passwordconf-su').val();
 
     $.ajax({
-        url: '/focusWebApp/Users/register',
+        url: 'https://focus-web-app.herokuapp.com/Users/register',
         type: 'post',
         async: true,
         data: {
@@ -88,7 +88,7 @@ function userLogin() {
         password = $('#password-si').val();
 
     $.ajax({
-        url: '/focusWebApp/Users/login',
+        url: 'https://focus-web-app.herokuapp.com/Users/login',
         type: 'post',
         async: true,
         data: {
