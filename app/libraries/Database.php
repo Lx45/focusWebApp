@@ -8,10 +8,19 @@
 	 */
 
 	class Database {
-		private $host = DB_HOST;
-		private $user = DB_USER;
-		private $pass = DB_PASS;
-		private $dbname = DB_NAME;
+		// private $host = DB_HOST;
+		// private $user = DB_USER;
+		// private $pass = DB_PASS;
+		// private $dbname = DB_NAME;
+		//Get Heroku ClearDB connection information
+	    private $cleardb_url;
+		private $cleardb_server;
+		private $cleardb_username;
+		private $cleardb_password;
+		private $cleardb_db; 
+
+		private $active_group = 'default';
+		private $query_builder = TRUE;
 
 		private $dbh;
 		private $stmt;
@@ -19,7 +28,14 @@
 
 		public function __construct(){
 			//Set DSN
-			$dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+			$this->cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+			$this->cleardb_server = $cleardb_url["host"];
+			$this->cleardb_username = $cleardb_url["user"];
+			$this->cleardb_password = $cleardb_url["pass"];
+			$this->cleardb_db = substr($cleardb_url["path"],1);
+
+			
+			$dsn = 'mysql:host=' . $this->$cleardb_server . ';dbname=' . $this->cleardb_db;
 			$options = array(
 				PDO::ATTR_PERSISTENT => true,
 				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -28,7 +44,7 @@
 
 			// Create PDO instance
 			try {
-				$this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
+				$this->dbh = new PDO($dsn, $this->cleardb_username, $this->cleardb_password, $options);
 			} catch (PDOException $e) {
 				$this->error = $e->getMessage();
 				echo $this->error;
