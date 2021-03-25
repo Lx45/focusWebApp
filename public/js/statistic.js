@@ -195,6 +195,13 @@ function setQuote(quote, author){
 }
 
 function displayQuote() {
+    //Init var
+    // Get HTML element
+    let quoteElement = $('#quote');
+
+    // Clear element 
+    quoteElement.text('');
+
     // Get quote from database
     $.ajax({
         url: 'https://focus-web-app.herokuapp.com/Applications/displayQuote',
@@ -210,12 +217,6 @@ function displayQuote() {
                 let quote = quoteData[0].quote;
                 let author = quoteData[0].author;
 
-                // Get HTML element
-                let quoteElement = $('#quote');
-
-                // Clear element 
-                quoteElement.text('');
-
                 // Display the quote
                 quoteElement.text(
                     `Latest Quote: ${quote}  - ${author}`
@@ -223,7 +224,10 @@ function displayQuote() {
                 
             },
             422: function(){
-                console.log('error');
+                // User haven't earned a task yet
+                quoteElement.text(
+                    `Latest Quote: You have not earned a quote yet`
+                )
             }
         },
     })

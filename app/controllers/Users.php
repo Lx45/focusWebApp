@@ -48,6 +48,9 @@ class Users extends Controller
             if (empty($data['birthdate'])) {
                 $tmp_birthdate = array(4, "*Please enter yourbirthdate");
                 array_push($errorsArray, $tmp_birthdate);
+            }elseif(strlen($data['birthdate']) !== 10){
+                $tmp_birthdate = array(4, "*MM.DD.YYYY");
+                array_push($errorsArray, $tmp_birthdate);
             }
 
             if (empty($data['email'])) {
