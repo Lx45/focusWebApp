@@ -41,7 +41,7 @@ require APPROOT . '/views/inc/navigation.php';
     </div>
 
 
-    <p class="homepage-p">Focus is an application, wich will boost your productivity and wich will help you to maintain mental clarity. Within this app you have the option to create short-term and also longterm To-Dos. Through absolving To-dos you will build a streak and unlock motivational quotes to boost your motivation.</p>
+    <p class="homepage-p">Focus is an application, which will boost your productivity and which will help you to maintain mental clarity. Within this app you have the option to create short-term and also longterm To-Dos. Through absolving To-dos you will build a streak and unlock motivational quotes to boost your motivation.</p>
 
     <a class="homepage-a" href="<?php echo URLROOT; ?>/users/register">
         <button class="homepage-btn">Start Now!</button>
